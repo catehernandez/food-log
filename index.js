@@ -1,15 +1,25 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
+const db = require('./db');
 
-const db = require('./queries');
+const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
-app.get('/users', db.getUsers);
+/* testing */
+const getUsers = (req, res) => {
+  db.query('SELECT * FROM users', (error, results) => {
+    if (error) {
+      throw error;
+    }
+    res.status(200).json(results.rows);
+  });
+};
+
+app.get('/users', getUsers);
 
 const PORT = process.env.PORT || 5000;
 
