@@ -3,13 +3,14 @@ const router = express.Router();
 
 const validator = require('validator');
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const passport = require('passport');
 
 const db = require('../db');
 
 //all routes prepended by auth
 router.post('/signup', (req, res) => {
-  const { email } = req.body;
+  const { email, password } = req.body;
   const isEmailValid = validator.isEmail(email);
 
   if (!isEmailValid) {
@@ -25,9 +26,12 @@ router.post('/signup', (req, res) => {
             .status(400)
             .send('A user is already registered with this address');
         }
-        //email not in use--free to sign-up
+        //email not in use
         else {
-          res.status(201).send('sign up');
+          //hash password
+          bcrypt.hash(password, saltRounds).then((hashedpass) => {
+            res.status(200).send(hashedpass);
+          });
         }
       })
       .catch((e) => console.log(e));
