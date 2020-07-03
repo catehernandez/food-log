@@ -4,10 +4,11 @@ const bodyParser = require('body-parser');
 const mountRoutes = require('./routes');
 
 const app = express();
-mountRoutes(app);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+mountRoutes(app);
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
