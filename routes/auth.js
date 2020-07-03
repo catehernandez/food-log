@@ -30,7 +30,16 @@ router.post('/signup', (req, res) => {
         else {
           //hash password
           bcrypt.hash(password, saltRounds).then((hashedpass) => {
-            res.status(200).send(hashedpass);
+            //Add to db
+            db.query('INSERT INTO users (email, hashedpass) VALUES ($1, $2)', [
+              email,
+              hashedpass,
+            ])
+              .then((result) => res.status(201).send(result))
+              .catch((e) => {
+                res.status(500).send('internal error');
+                console.error(e);
+              });
           });
         }
       })
