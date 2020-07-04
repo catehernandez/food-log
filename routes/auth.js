@@ -12,9 +12,14 @@ const UserDB = require('../db/user');
 router.post('/signup', async (req, res) => {
   const { email, password } = req.body;
   const isEmailValid = validator.isEmail(email);
+  const isPWValid = validator.isLength(password, { min: 8 });
 
   if (!isEmailValid) {
     res.status(400).send('Invalid email');
+  }
+
+  if (!isPWValid) {
+    res.status(400).send('Password must be at least 8 characters');
   }
 
   //proceed to signup
