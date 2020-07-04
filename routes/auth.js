@@ -6,10 +6,10 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const passport = require('passport');
 
-const db = require('../db');
+const UserDB = require('../db/user');
 
 //all routes prepended by auth
-router.post('/signup', (req, res) => {
+router.post('/signup', async (req, res) => {
   const { email, password } = req.body;
   const isEmailValid = validator.isEmail(email);
 
@@ -19,31 +19,21 @@ router.post('/signup', (req, res) => {
 
   //proceed to signup
   else {
-    db.query('SELECT user_id FROM users WHERE email=$1', [email])
-      .then((results) => {
-        if (results.rowCount > 0) {
-          res
-            .status(400)
-            .send('A user is already registered with this address');
-        }
-        //email not in use
-        else {
-          //hash password
-          bcrypt.hash(password, saltRounds).then((hashedpass) => {
-            //Add to db
-            db.query('INSERT INTO users (email, hashedpass) VALUES ($1, $2)', [
-              email,
-              hashedpass,
-            ])
-              .then((result) => res.status(201).send(result))
-              .catch((e) => {
-                res.status(500).send('internal error');
-                console.error(e);
-              });
-          });
-        }
-      })
-      .catch((e) => console.log(e));
+    const user = await UserDB.findUserByEmail(email);
+
+    if (user != null) {
+      res.status(400).send('A user is already registered with this address');
+    }
+    //create new user in db
+    else {
+      //hash password
+      bcrypt.hash(password, saltRounds).then((hashedpass) => {
+        //Add to db
+        UserDB.createUser(email, hashedpass)
+          .then((results) => res.status(201).json({ userid: results }))
+          .catch((e) => res.status(500).send(e));
+      });
+    }
   }
 });
 
