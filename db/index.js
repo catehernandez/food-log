@@ -18,10 +18,12 @@ const pool = new Pool({
   host: process.env.DB_HOST,
   database: process.env.DB_DATABASE,
   port: process.env.DB_PORT,
-}); //testing auto populate with env data?
+});
 
+//both pool and query objects used elsewhere
 module.exports = {
   query: (text, params, callback) => {
     return pool.query(text, params, callback);
   },
+  pool,
 };
