@@ -3,7 +3,7 @@ const router = express.Router();
 
 const validator = require('validator');
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const saltRounds = 12;
 const passport = require('passport');
 
 const UserDB = require('../db/user');
