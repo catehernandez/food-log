@@ -33,11 +33,39 @@ router.post('/signup', async (req, res) => {
     else {
       //hash password
       bcrypt.hash(password, saltRounds).then((hashedpass) => {
-        //Add to db
         UserDB.createUser(email, hashedpass)
           .then((results) => res.status(201).json({ userid: results }))
           .catch((e) => res.status(500).send(e));
       });
+    }
+  }
+});
+
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await UserDB.findUserByEmail(email);
+
+  if (!user) {
+    res.status(400).send('No user found with that email/password combination');
+  }
+  //user exists in db
+  else {
+    const { hashedpass } = user;
+
+    const result = await bcrypt.compare(password, hashedpass);
+
+    if (result === true) {
+      res.status(200).send('OK');
+      //set the session in passport
+      //redirect to homepage w user info
+    }
+    //wrong password
+    else {
+      res
+        .status(400)
+        .send('No user found with that email/password combination');
+      //Redirect back to /login
     }
   }
 });
