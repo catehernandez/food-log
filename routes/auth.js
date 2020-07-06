@@ -41,33 +41,24 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+/* Renders login page */
+router.get('/login', async (req, res) => {
+  res.status(200).send('login page');
+});
 
-  const user = await UserDB.findUserByEmail(email);
+/* passport.authenticate executes login flow defined in services/passport */
+router.post(
+  '/login',
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/auth/login',
+  })
+);
 
-  if (!user) {
-    res.status(400).send('No user found with that email/password combination');
-  }
-  //user exists in db
-  else {
-    const { hashedpass } = user;
-
-    const result = await bcrypt.compare(password, hashedpass);
-
-    if (result === true) {
-      res.status(200).send('OK');
-      //set the session in passport
-      //redirect to homepage w user info
-    }
-    //wrong password
-    else {
-      res
-        .status(400)
-        .send('No user found with that email/password combination');
-      //Redirect back to /login
-    }
-  }
+router.get('/logout', (req, res) => {
+  req.session.destroy();
+  req.logout();
+  res.redirect('/');
 });
 
 module.exports = router;
