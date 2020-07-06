@@ -1,6 +1,24 @@
 const db = require('../db');
 
 /**
+ * Searches usrs table and finds user by user_id.
+ *
+ * @param {Integer}   user_id
+ * @return {Object}   JSON object representing a user or NULL if no user
+ *                    is found.
+ */
+const findUser = (user_id) => {
+  return db
+    .query('SELECT * FROM users WHERE user_id=$1', [user_id])
+    .then((results) => {
+      //if no user was found
+      if (results.rowCount === 0) return null;
+
+      return results.rows[0];
+    });
+};
+
+/**
  * Searches users table and finds user by email.
  *
  * @param {String} email    unique user email.
@@ -40,4 +58,4 @@ const createUser = (email, hashedpass) => {
     .catch((e) => console.log(e));
 };
 
-module.exports = { findUserByEmail, createUser };
+module.exports = { findUser, findUserByEmail, createUser };
