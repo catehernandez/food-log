@@ -34,7 +34,7 @@ router.post('/signup', async (req, res) => {
       //hash password
       bcrypt.hash(password, saltRounds).then((hashedpass) => {
         UserDB.createUser(email, hashedpass)
-          .then((results) => res.status(201).json({ userid: results }))
+          .then((results) => res.status(201).json({ user: results }))
           .catch((e) => res.status(500).send(e));
       });
     }

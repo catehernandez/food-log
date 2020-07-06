@@ -4,8 +4,8 @@ const db = require('../db');
  * Searches users table and finds user by email.
  *
  * @param {String} email    unique user email.
- * @return {Object}         returns a JSON object representing a user or NULL if
- *                          no user is found.
+ * @return {Object}         JSON object representing a user or NULL if no user
+ *                          is found.
  */
 const findUserByEmail = (email) => {
   return db
@@ -20,22 +20,22 @@ const findUserByEmail = (email) => {
 };
 
 /**
- * Inserts new user into the database and returns the user_id for the new entry.
+ * Inserts new user into the database and returns the inserted row.
  *
  * @param   {String}    email       user email.
  * @param   {String}    hashedpass  user's hashed password.
- * @return  {Integer}   user_id     user_id for the newly inserted entry.
+ * @return  {Object}    user        JSON object representing the created user.
  */
 const createUser = (email, hashedpass) => {
   return db
     .query(
-      'INSERT INTO users (email, hashedpass) VALUES ($1, $2) RETURNING user_id',
+      'INSERT INTO users (email, hashedpass) VALUES ($1, $2) RETURNING *',
       [email, hashedpass]
     )
     .then((results) => {
-      let user_id = results.rows[0].user_id;
-      console.log('userid', user_id);
-      return user_id;
+      let user = results.rows[0];
+      console.log('user', user);
+      return user;
     })
     .catch((e) => console.log(e));
 };
