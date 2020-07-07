@@ -11,14 +11,14 @@ const UserDB = require('../db/user');
 //all routes prepended by auth
 router.post('/signup', async (req, res) => {
   const { email, password } = req.body;
-  const isEmailValid = validator.isEmail(email);
-  const isPWValid = validator.isLength(password, { min: 8, max: 35 });
+  const isValidEmail = validator.isEmail(email);
+  const isValidPwd = validator.isLength(password, { min: 8, max: 35 });
 
-  if (!isEmailValid) {
+  if (!isValidEmail) {
     res.status(400).send('Invalid email');
   }
 
-  if (!isPWValid) {
+  if (!isValidPwd) {
     res.status(400).send('Password must be 8-35 characters');
   }
 

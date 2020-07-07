@@ -1,4 +1,5 @@
 const db = require('../db');
+const validator = require('validator');
 
 /**
  * Searches usrs table and finds user by user_id.
@@ -26,8 +27,10 @@ const findUser = (user_id) => {
  *                          is found.
  */
 const findUserByEmail = (email) => {
+  const normalizedEmail = validator.normalizeEmail(email);
+
   return db
-    .query('SELECT * FROM users WHERE email=$1', [email])
+    .query('SELECT * FROM users WHERE email=$1', [normalizedEmail])
     .then((results) => {
       //if no user was found
       if (results.rowCount === 0) return null;
@@ -45,10 +48,12 @@ const findUserByEmail = (email) => {
  * @return  {Object}    user        JSON object representing the created user.
  */
 const createUser = (email, hashedpass) => {
+  const normalizedEmail = validator.normalizeEmail(validator.trim(email));
+
   return db
     .query(
       'INSERT INTO users (email, hashedpass) VALUES ($1, $2) RETURNING *',
-      [email, hashedpass]
+      [normalizedEmail, hashedpass]
     )
     .then((results) => {
       let user = results.rows[0];
