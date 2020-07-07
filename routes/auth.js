@@ -29,11 +29,10 @@ router.post('/signup', async (req, res) => {
     //create new user in db
     else {
       //hash password
-      bcrypt.hash(password, saltRounds).then((hashedpass) => {
-        UserDB.createUser(email, hashedpass)
-          .then((results) => res.status(201).json({ user: results }))
-          .catch((e) => res.status(500).send(e));
-      });
+      const hashedpass = await bcrypt.hash(password, saltRounds);
+      const results = await UserDB.createUser(email, hashedpass);
+
+      res.status(201).json({ user: results });
     }
   }
 });
