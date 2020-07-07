@@ -16,19 +16,17 @@ router.post('/signup', async (req, res) => {
 
   if (!isValidEmail) {
     res.status(400).send('Invalid email');
-  }
-
-  if (!isValidPwd) {
+  } //proceed to check password
+  else if (!isValidPwd) {
     res.status(400).send('Password must be 8-35 characters');
-  }
-
-  //proceed to signup
+  } //proceed to signup
   else {
     const user = await UserDB.findUserByEmail(email);
 
     if (user != null) {
       res.status(400).send('A user is already registered with this address');
     }
+
     //create new user in db
     else {
       //hash password

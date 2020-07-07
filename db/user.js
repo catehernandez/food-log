@@ -48,7 +48,7 @@ const findUserByEmail = (email) => {
  * @return  {Object}    user        JSON object representing the created user.
  */
 const createUser = (email, hashedpass) => {
-  const normalizedEmail = validator.normalizeEmail(validator.trim(email));
+  const normalizedEmail = validator.normalizeEmail(email);
 
   return db
     .query(
