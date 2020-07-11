@@ -1,36 +1,46 @@
 import React from 'react';
-import { useFormik } from 'formik';
+import styled from 'styled-components';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
-import { Form, Input, Label } from 'components/Form';
+import { StyledInput, StyledLabel } from 'components/StyledForm';
 import Button from 'components/Button';
 
-const LoginForm = () => {
-  const formik = useFormik({
-    initialValues: { email: '', password: '' },
-    validationSchema: Yup.object({
-      email: Yup.string().required('Required'),
-    }),
-    onSubmit: (values) => {
-      console.log(values);
-    },
-  });
+const StyledForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+`;
 
+const LoginForm = () => {
   return (
-    <Form onSubmit={formik.handleSubmit}>
-      <Label htmlFor="email">Email</Label>
-      <Input
-        name="email"
-        type="text"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.email}
-      />
-      {formik.touched.email && formik.errors.email ? (
-        <div>{formik.errors.email}</div>
-      ) : null}
-      <Button>Log in</Button>
-    </Form>
+    <Formik
+      initialValues={{ email: '', password: '' }}
+      validationSchema={Yup.object({
+        email: Yup.string().required('Required').email('Please enter an email'),
+        password: Yup.string()
+          .required('Required')
+          .min(8, 'Password must be at least 8 characters')
+          .max(35, 'Password must be less than 35 characters'),
+      })}
+      onSubmit={(values) => {
+        console.log(values);
+      }}
+    >
+      {({ errors, touched }) => (
+        <StyledForm>
+          <StyledLabel htmlFor="email">Email</StyledLabel>
+          <Field as={StyledInput} name="email" />
+          {errors.email && touched.email ? <div>{errors.email}</div> : null}
+          <StyledLabel htmlFor="password">Password</StyledLabel>
+          <Field as={StyledInput} name="password" type="password" />
+          {errors.password && touched.password ? (
+            <div>{errors.password}</div>
+          ) : null}
+          <Button>Log in</Button>
+        </StyledForm>
+      )}
+    </Formik>
   );
 };
 
