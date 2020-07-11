@@ -9,7 +9,6 @@ import Button from 'components/Button';
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  width: 30vw;
 `;
 
 const LoginForm = () => {

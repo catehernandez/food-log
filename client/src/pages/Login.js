@@ -4,7 +4,13 @@ import styled from 'styled-components';
 
 import LoginForm from 'components/LoginForm';
 
-const LoginContainer = styled.div``;
+const LoginContainer = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, 30%);
+  width: 30vw;
+`;
 
 const Login = () => {
   return (
