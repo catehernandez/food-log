@@ -20,11 +20,9 @@ const LoginForm = () => {
     <Formik
       initialValues={{ email: '', password: '' }}
       validationSchema={Yup.object({
-        email: Yup.string().required('Required').email('Please enter an email'),
-        password: Yup.string()
+        email: Yup.string()
           .required('Required')
-          .min(8, 'Password must be at least 8 characters')
-          .max(35, 'Password must be less than 35 characters'),
+          .email('Please enter a valid email'),
       })}
       onSubmit={(values) => {
         console.log(values);
@@ -37,14 +35,8 @@ const LoginForm = () => {
           <ErrorMessage component={StyledErrorMessage} name="email" />
           <StyledLabel htmlFor="password">Password</StyledLabel>
           <Field as={StyledInput} name="password" type="password" />
-          <ErrorMessage component={StyledErrorMessage} name="password" />
           <Button
-            disabled={
-              !touched.email ||
-              !touched.password ||
-              errors.email ||
-              errors.password
-            }
+            disabled={!touched.email || !touched.password || errors.email}
           >
             Log in
           </Button>
