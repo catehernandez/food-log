@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import { StyledInput, StyledLabel } from 'components/StyledInput';
@@ -30,12 +30,10 @@ const LoginForm = () => {
         <StyledForm>
           <StyledLabel htmlFor="email">Email</StyledLabel>
           <Field as={StyledInput} name="email" />
-          {errors.email && touched.email ? <div>{errors.email}</div> : null}
+          <ErrorMessage name="email" />
           <StyledLabel htmlFor="password">Password</StyledLabel>
           <Field as={StyledInput} name="password" type="password" />
-          {errors.password && touched.password ? (
-            <div>{errors.password}</div>
-          ) : null}
+          <ErrorMessage name="password" />
           <Button>Log in</Button>
         </StyledForm>
       )}
