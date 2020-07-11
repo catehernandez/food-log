@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
-import { StyledInput, StyledLabel } from 'components/StyledForm';
+import { StyledInput, StyledLabel } from 'components/StyledInput';
 import Button from 'components/Button';
 
 const StyledForm = styled(Form)`
