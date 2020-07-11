@@ -30,15 +30,26 @@ const LoginForm = () => {
         console.log(values);
       }}
     >
-      <StyledForm>
-        <StyledLabel htmlFor="email">Email</StyledLabel>
-        <Field as={StyledInput} name="email" />
-        <ErrorMessage component={StyledErrorMessage} name="email" />
-        <StyledLabel htmlFor="password">Password</StyledLabel>
-        <Field as={StyledInput} name="password" type="password" />
-        <ErrorMessage component={StyledErrorMessage} name="password" />
-        <Button>Log in</Button>
-      </StyledForm>
+      {({ errors, touched }) => (
+        <StyledForm>
+          <StyledLabel htmlFor="email">Email</StyledLabel>
+          <Field as={StyledInput} name="email" />
+          <ErrorMessage component={StyledErrorMessage} name="email" />
+          <StyledLabel htmlFor="password">Password</StyledLabel>
+          <Field as={StyledInput} name="password" type="password" />
+          <ErrorMessage component={StyledErrorMessage} name="password" />
+          <Button
+            disabled={
+              !touched.email ||
+              !touched.password ||
+              errors.email ||
+              errors.password
+            }
+          >
+            Log in
+          </Button>
+        </StyledForm>
+      )}
     </Formik>
   );
 };
