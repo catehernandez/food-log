@@ -5,13 +5,13 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import App from './App';
-import reducers from './reducers';
+import rootReducer from './ducks';
 import * as serviceWorker from './serviceWorker';
 
 import './index.css';
 
 //dummy reducer for init setup only
-const store = createStore(reducers, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>
