@@ -70,7 +70,6 @@ export const login = (data) => async (dispatch) => {
   dispatch(loggingIn());
 
   try {
-    console.log('reached');
     const res = await axios.post('/auth/login', data);
     console.log('res:', res);
     dispatch(loginSuccess(res));

@@ -46,9 +46,13 @@ router.post('/signup', async (req, res) => {
 });
 
 /* passport.authenticate executes login flow defined in services/passport */
-router.post('/login', passport.authenticate('local'), (req, res) => {
-  res.json(req.user);
-});
+router.post(
+  '/login',
+  passport.authenticate('local', { failWithError: true }),
+  (req, res) => {
+    res.json(req.user);
+  }
+);
 
 router.get('/logout', (req, res) => {
   req.session.destroy();
