@@ -40,6 +40,7 @@ class LoginForm extends React.Component {
             <StyledLabel htmlFor="password">Password</StyledLabel>
             <Field as={StyledInput} name="password" type="password" />
             <Button
+              type="submit"
               disabled={!touched.email || !touched.password || errors.email}
             >
               Log in
