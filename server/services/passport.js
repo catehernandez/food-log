@@ -16,21 +16,25 @@ passport.use(
       passwordField: 'password',
     },
     async (email, password, done) => {
-      const user = await UserDB.findUserByEmail(email);
+      try {
+        const user = await UserDB.findUserByEmail(email);
 
-      //user not found
-      if (!user) {
-        return done(null, false);
+        //user not found
+        if (!user) {
+          return done(null, false);
+        }
+
+        //check password
+        const pwdIsValid = await bcrypt.compare(password, user.hashedpass);
+
+        if (!pwdIsValid) {
+          return done(null, false);
+        }
+
+        return done(null, user);
+      } catch (err) {
+        return done(err);
       }
-
-      //check password
-      const pwdIsValid = await bcrypt.compare(password, user.hashedpass);
-
-      if (!pwdIsValid) {
-        return done(null, false);
-      }
-
-      return done(null, user);
     }
   )
 );
