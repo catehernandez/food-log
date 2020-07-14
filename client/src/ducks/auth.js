@@ -4,6 +4,9 @@ import axios from 'axios';
 const GET_CURRENT_USER = 'food-log/auth/GET_CURRENT_USER';
 const GET_CURRENT_USER_SUCCESS = 'food-log/auth/GET_CURRENT_USER_SUCCESS';
 const GET_CURRENT_USER_FAIL = 'food-log/auth/GET_CURRENT_USER_FAIL';
+const LOGIN = 'food-log/auth/LOGIN';
+const LOGIN_SUCCESS = 'food-log/auth/LOGIN_SUCCESS';
+const LOGIN_FAIL = 'food-log/auth/LOGIN_FAIL';
 
 //reducer
 const initialState = {
@@ -19,13 +22,19 @@ export default function reducer(state = initialState, action) {
       return { currentUser: action.payload, loading: false };
     case GET_CURRENT_USER_FAIL:
       return { ...state, loading: false };
+    case LOGIN:
+      return { ...state, loading: true };
+    case LOGIN_SUCCESS:
+      return { ...state, loading: false, currentUser: action.payload };
+    case LOGIN_FAIL:
+      return { ...state, loading: false, currentUser: null };
 
     default:
       return state;
   }
 }
 
-//action creators
+//getUser action creators
 export const getUser = () => ({
   type: GET_CURRENT_USER,
 });
@@ -38,6 +47,37 @@ export const getUserSuccess = (user) => ({
 export const getUserFailure = () => ({
   type: GET_CURRENT_USER_FAIL,
 });
+
+//login action creators
+export const loggingIn = () => ({
+  type: LOGIN,
+});
+
+export const loginSuccess = (user) => ({
+  type: LOGIN_SUCCESS,
+  payload: user,
+});
+
+export const loginFail = () => ({
+  type: LOGIN_FAIL,
+});
+
+/**
+ *
+ * @param {Object} values   Object containing users email and password.
+ */
+export const login = (data) => async (dispatch) => {
+  dispatch(loggingIn());
+
+  try {
+    console.log('reached');
+    const res = await axios.post('/auth/login', data);
+    console.log('res:', res);
+    dispatch(loginSuccess(res));
+  } catch {
+    dispatch(loginFail());
+  }
+};
 
 export const fetchUser = () => async (dispatch) => {
   dispatch(getUser());
