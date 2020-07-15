@@ -16,7 +16,7 @@ const LoginContainer = styled.div`
 
 const mapStateToProps = (state) => {
   console.log('redux state', state);
-  return { currentUser: state.auth.currentUser };
+  return { currentUser: state.session.currentUser };
 };
 
 const Login = (props) => {

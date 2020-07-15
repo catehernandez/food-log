@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-import * as authActions from 'session/auth';
+import * as sessionActions from 'session/sessionRedux';
 
 import {
   StyledInput,
@@ -52,4 +52,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default connect(null, authActions)(LoginForm);
+export default connect(null, sessionActions)(LoginForm);

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import auth from 'session/auth';
+import session from 'session/sessionRedux';
 
 export default combineReducers({
-  auth,
+  session,
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import * as authActions from './session/auth';
+import * as sessionActions from './session/sessionRedux';
 
 import Dashboard from './dashboard';
 import LoginPage from './session/LoginPage';
@@ -24,4 +24,4 @@ class App extends React.Component {
   }
 }
 
-export default connect(null, authActions)(App);
+export default connect(null, sessionActions)(App);
