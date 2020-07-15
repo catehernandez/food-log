@@ -1,6 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { connect } from 'react-redux';
 
 import LoginForm from 'session/LoginForm';
 
@@ -12,7 +14,16 @@ const LoginContainer = styled.div`
   width: 30vw;
 `;
 
-const Login = () => {
+const mapStateToProps = (state) => {
+  console.log('redux state', state);
+  return { currentUser: state.auth.currentUser };
+};
+
+const Login = (props) => {
+  if (props.currentUser != null) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <LoginContainer>
       <LoginForm />
@@ -23,4 +34,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default connect(mapStateToProps)(Login);
