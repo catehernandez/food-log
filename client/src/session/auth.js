@@ -19,15 +19,30 @@ export default function reducer(state = initialState, action) {
     case GET_CURRENT_USER:
       return { ...state, loading: true };
     case GET_CURRENT_USER_SUCCESS:
-      return { currentUser: action.payload, loading: false };
+      return {
+        currentUser: action.payload,
+        loading: false,
+      };
     case GET_CURRENT_USER_FAIL:
-      return { ...state, loading: false };
+      return {
+        ...state,
+        loading: false,
+        currentUser: null,
+      };
     case LOGIN:
       return { ...state, loading: true };
     case LOGIN_SUCCESS:
-      return { ...state, loading: false, currentUser: action.payload };
+      return {
+        ...state,
+        loading: false,
+        currentUser: action.payload,
+      };
     case LOGIN_FAIL:
-      return { ...state, loading: false, currentUser: null };
+      return {
+        ...state,
+        loading: false,
+        currentUser: null,
+      };
 
     default:
       return state;
@@ -71,8 +86,7 @@ export const login = (data) => async (dispatch) => {
 
   try {
     const res = await axios.post('/auth/login', data);
-    console.log('res:', res);
-    dispatch(loginSuccess(res));
+    dispatch(loginSuccess(res.data));
   } catch {
     dispatch(loginFail());
   }
@@ -83,7 +97,7 @@ export const fetchUser = () => async (dispatch) => {
 
   try {
     const res = await axios.get('/auth/current_user');
-    dispatch(getUserSuccess(res));
+    dispatch(getUserSuccess(res.data));
   } catch (error) {
     dispatch(getUserFailure());
   }
