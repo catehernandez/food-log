@@ -10,9 +10,9 @@ const UserDB = require('../db/user');
 //all routes prepended by auth
 router.get('/current_user', (req, res) => {
   if (req.isAuthenticated()) {
-    res.json({ user_id: req.user.user_id });
+    res.json(req.user);
   } else {
-    res.json({ user_id: '' });
+    res.json(null);
   }
 });
 
