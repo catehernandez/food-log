@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import SignupForm from 'components/SignupForm';
+import SignupForm from 'session/SignupForm';
 
 const SignupContainer = styled.div`
   position: absolute;

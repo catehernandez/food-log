@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-import * as authActions from 'ducks/auth';
+import * as authActions from 'session/auth';
 
 import {
   StyledInput,
   StyledLabel,
   StyledErrorMessage,
-} from 'components/StyledInput';
-import Button from 'components/Button';
+} from 'shared/StyledInput';
+import Button from 'shared/Button';
 
 const StyledForm = styled(Form)`
   display: flex;

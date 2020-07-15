@@ -7,8 +7,8 @@ import {
   StyledInput,
   StyledLabel,
   StyledErrorMessage,
-} from 'components/StyledInput';
-import Button from 'components/Button';
+} from 'shared/StyledInput';
+import Button from 'shared/Button';
 
 const StyledForm = styled(Form)`
   display: flex;

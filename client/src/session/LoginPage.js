@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import LoginForm from 'components/LoginForm';
+import LoginForm from 'session/LoginForm';
 
 const LoginContainer = styled.div`
   position: absolute;
