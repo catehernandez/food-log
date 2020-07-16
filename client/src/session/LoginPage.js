@@ -14,10 +14,9 @@ const LoginContainer = styled.div`
   width: 30vw;
 `;
 
-const mapStateToProps = (state) => {
-  console.log('redux state', state);
-  return { currentUser: state.session.currentUser };
-};
+const mapStateToProps = (state) => ({
+  currentUser: state.session.currentUser,
+});
 
 const Login = (props) => {
   if (props.currentUser) {
