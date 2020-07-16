@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 //Authentication packages
 const session = require('express-session');
@@ -14,6 +15,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 /* Authentication tools */
 // Express session configuration object
@@ -24,7 +26,7 @@ const sess = {
   secret: process.env.COOKIE_SECRET,
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000, sameSite: 'strict' }, // 30 days
 };
 
 //Only serve cookies over HTTPS in production
