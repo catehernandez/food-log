@@ -55,10 +55,12 @@ router.post(
 );
 
 router.get('/logout', (req, res) => {
-  req.session.destroy();
   req.logout();
-  //user will be undefined if logout was successful
-  res.json(req.user);
+  req.session.destroy(function () {
+    res.clearCookie('connect.sid');
+    //user will be undefined if logout was successful
+    res.json(req.user);
+  });
 });
 
 module.exports = router;
