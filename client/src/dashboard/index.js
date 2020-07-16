@@ -1,9 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
-
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux'; //redux related
 import * as sessionActions from 'session/sessionRedux';
 
+const mapStateToProps = (state) => {
+  console.log('redux state', state);
+  return { currentUser: state.session.currentUser };
+};
+
 const Dashboard = (props) => {
+  if (!props.currentUser) return <Redirect to="/login" />;
+
   const logout = () => {
     props.logout();
   };
@@ -16,4 +23,4 @@ const Dashboard = (props) => {
   );
 };
 
-export default connect(null, sessionActions)(Dashboard);
+export default connect(mapStateToProps, sessionActions)(Dashboard);

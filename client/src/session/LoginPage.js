@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
 };
 
 const Login = (props) => {
-  if (props.currentUser != null) {
+  if (props.currentUser) {
     return <Redirect to="/" />;
   }
 
