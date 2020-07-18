@@ -1,3 +1,6 @@
+/**
+ * Database queries related to logs table.
+ */
 const db = require('./index');
 
 /**
@@ -17,7 +20,9 @@ const findLog = (user_id, date) => {
 
       return results.rows[0];
     })
-    .catch((e) => console.error(e));
+    .catch((err) => {
+      throw err;
+    });
 };
 
 /**
@@ -55,7 +60,9 @@ const getAllUserLogs = (user_id) => {
     .then((results) => {
       return results.rows;
     })
-    .catch((e) => console.error(error));
+    .catch((err) => {
+      throw err;
+    });
 };
 
 module.exports = { findLog, createLog, getAllUserLogs };

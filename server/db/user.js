@@ -1,8 +1,11 @@
+/**
+ * Database queries pertaining to users table.
+ */
 const db = require('./index');
 const validator = require('validator');
 
 /**
- * Searches usrs table and finds user by user_id.
+ * Searches users table and finds user by user_id.
  *
  * @param {Integer}   user_id
  * @return {Object}   JSON object representing a user or NULL if no user
@@ -16,6 +19,9 @@ const findUser = (user_id) => {
       if (results.rowCount === 0) return null;
 
       return results.rows[0];
+    })
+    .catch((err) => {
+      throw err;
     });
 };
 
@@ -37,7 +43,9 @@ const findUserByEmail = (email) => {
 
       return results.rows[0];
     })
-    .catch((e) => console.log(e));
+    .catch((err) => {
+      throw err;
+    });
 };
 
 /**
@@ -60,7 +68,9 @@ const createUser = (email, hashedpass) => {
       console.log('user', user);
       return user;
     })
-    .catch((e) => console.log(e));
+    .catch((err) => {
+      throw err;
+    });
 };
 
 module.exports = { findUser, findUserByEmail, createUser };
