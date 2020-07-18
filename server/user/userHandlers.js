@@ -17,43 +17,52 @@ module.exports = {
     if (req.user) {
       res.json(req.user);
     } else {
+      //user is not authenticated
       res.json(null);
     }
   },
 
   getUsersLogs: async (req, res) => {
-    if (!req.user) {
-      res.status(401).json('Unauthorized');
-    } else {
-      const user = req.user;
-      const results = await LogsDB.getAllUserLogs(user.user_id);
+    if (!req.user) return res.status(401).json('Unauthorized');
 
-      res.status(200).json(results);
+    //user is authenticated
+    try {
+      const user = req.user;
+      const logs = await LogsDB.getAllUserLogs(user.user_id);
+      res.status(200).json(logs);
+    } catch {
+      res.status(500).json(err);
     }
   },
 
   createLog: async (req, res) => {
     if (!req.user) return res.status(401).json('Unauthorized');
 
-    const user = req.user;
-    const { date } = req.body;
-
+    //user is authenticated
     try {
+      const user = req.user;
+      const { date } = req.body;
+
       const newLog = await LogsDB.createLog(user.user_id, date);
       res.status(200).json(newLog);
     } catch (err) {
-      res.status(500).send(err);
+      res.status(500).json(err);
     }
   },
 
   getLog: async (req, res) => {
     if (!req.user) return res.status(401).json('Unauthorized');
 
-    const { date } = req.params;
+    //user is authenticated
+    try {
+      const { date } = req.params;
+      const user = req.user;
 
-    const user = req.user;
-    const log = await LogsDB.findLog(user.user_id, date);
+      const log = await LogsDB.findLog(user.user_id, date);
 
-    res.status(200).json(log);
+      res.status(200).json(log);
+    } catch (err) {
+      res.status(500).json(err);
+    }
   },
 };
