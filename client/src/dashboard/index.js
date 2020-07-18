@@ -1,10 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux'; //redux related
-import * as sessionActions from 'session/sessionRedux';
 import styled from 'styled-components';
 
 import Log from 'logs/Log';
+import LogoutButton from 'session/LogoutButton';
 
 const LogContainer = styled.div`
   position: absolute;
@@ -21,16 +21,12 @@ const mapStateToProps = (state) => {
 const Dashboard = (props) => {
   if (!props.currentUser) return <Redirect to="/login" />;
 
-  const logout = () => {
-    props.logout();
-  };
-
   return (
     <LogContainer>
       <Log />
-      <button onClick={logout}>Logout</button>
+      <LogoutButton />
     </LogContainer>
   );
 };
 
-export default connect(mapStateToProps, sessionActions)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);
