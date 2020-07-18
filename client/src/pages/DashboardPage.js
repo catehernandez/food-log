@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
   return { currentUser: state.session.currentUser };
 };
 
-const Dashboard = (props) => {
+const DashboardPage = (props) => {
   if (!props.currentUser) return <Redirect to="/login" />;
 
   return (
@@ -29,4 +29,4 @@ const Dashboard = (props) => {
   );
 };
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps)(DashboardPage);

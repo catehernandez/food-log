@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 import * as sessionActions from './session/sessionRedux';
 
-import Dashboard from './dashboard';
-import LoginPage from './session/LoginPage';
-import SignupPage from './session/SignupPage';
+import DashboardPage from './pages/DashboardPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 
 class App extends React.Component {
   componentDidMount() {
@@ -16,7 +16,7 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <Route path="/" exact component={Dashboard} />
+        <Route path="/" exact component={DashboardPage} />
         <Route path="/login" exact component={LoginPage} />
         <Route path="/signup" exact component={SignupPage} />
       </BrowserRouter>
