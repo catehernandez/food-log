@@ -33,7 +33,6 @@ const getUsersLogs = async (req, res) => {
   }
 };
 
-//get date from body or params?
 const createLog = async (req, res) => {
   if (!req.user) return res.status(401).json('Unauthorized');
 
@@ -48,23 +47,22 @@ const createLog = async (req, res) => {
   }
 };
 
-router.get('/currentLog', async (req, res) => {
+const getLog = async (req, res) => {
   if (!req.user) return res.status(401).json('Unauthorized');
 
-  //for testing only -- determine time on client end, i think
-  //so that "now" is dependent on user & not server timezone
-  const now = new Date();
+  const { date } = req.params;
 
   const user = req.user;
-  const results = await LogsDB.findLog(user.user_id, now);
+  const log = await LogsDB.findLog(user.user_id, date);
 
-  res.status(200).json(results);
-});
+  res.status(200).json(log);
+};
 
 //all routes prepended by /users
 router.get('/', getUsers);
 router.get('/current', getCurrentUser);
 router.get('/current/logs', getUsersLogs);
 router.post('/current/logs', createLog);
+router.get('/current/logs/:date', getLog);
 
 module.exports = router;
