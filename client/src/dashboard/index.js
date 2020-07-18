@@ -2,6 +2,16 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'; //redux related
 import * as sessionActions from 'session/sessionRedux';
+import styled from 'styled-components';
+
+import Log from 'logs/Log';
+
+const LogContainer = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, 30%);
+`;
 
 const mapStateToProps = (state) => {
   console.log('redux state', state);
@@ -16,10 +26,10 @@ const Dashboard = (props) => {
   };
 
   return (
-    <React.Fragment>
-      <div>Dashboard</div>
+    <LogContainer>
+      <Log />
       <button onClick={logout}>Logout</button>
-    </React.Fragment>
+    </LogContainer>
   );
 };
 
