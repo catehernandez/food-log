@@ -8,14 +8,6 @@ const passport = require('passport');
 const UserDB = require('../db/user');
 
 //all routes prepended by auth
-router.get('/current-user', (req, res) => {
-  if (req.isAuthenticated()) {
-    res.json(req.user);
-  } else {
-    res.json(null);
-  }
-});
-
 router.post('/signup', async (req, res) => {
   const { email, password } = req.body;
   const isValidEmail = validator.isEmail(email);

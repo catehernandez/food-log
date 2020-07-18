@@ -13,7 +13,16 @@ const getUsers = (req, res) => {
     });
 };
 
+const getCurrentUser = async (req, res) => {
+  if (req.user) {
+    res.json(req.user);
+  } else {
+    res.json(null);
+  }
+};
+
 //all routes prepended by /users
 router.get('/', getUsers);
+router.get('/current', getCurrentUser);
 
 module.exports = router;

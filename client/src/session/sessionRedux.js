@@ -120,7 +120,7 @@ export const fetchUser = () => async (dispatch) => {
   dispatch(getUser());
 
   try {
-    const res = await axios.get('/auth/current-user');
+    const res = await axios.get('/users/current');
     dispatch(getUserSuccess(res.data));
   } catch (error) {
     dispatch(getUserFailure());
