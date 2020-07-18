@@ -35,9 +35,9 @@ const createLog = (user_id, date) => {
     .then((results) => {
       return results.rows;
     })
-    .catch((err) => console.error(err));
-  /** Handle error if trying to insert duplicate */
-  /* returns err code 23505 */
+    .catch((err) => {
+      throw err;
+    });
 };
 
 /**

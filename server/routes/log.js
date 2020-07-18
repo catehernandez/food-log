@@ -16,15 +16,33 @@ router.get('/allLogs', async (req, res) => {
   }
 });
 
+//maybe this should just be "getLog"--if time is set on clientend
 router.get('/currentLog', async (req, res) => {
   if (!req.user) return res.status(401).json('Unauthorized');
 
-  const now = new Date(); //for testing only
+  //for testing only -- determine time on client end, i think
+  //so that "now" is dependent on user & not server timezone
+  const now = new Date();
 
   const user = req.user;
   const results = await LogsDB.findLog(user.user_id, now);
 
   res.status(200).json(results);
+});
+
+//get date from body or params?
+router.post('/createLog', async (req, res) => {
+  if (!req.user) return res.status(401).json('Unauthorized');
+
+  const user = req.user;
+  const { date } = req.body;
+
+  try {
+    const newLog = await LogsDB.createLog(user.user_id, date);
+    res.status(200).json(newLog);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 module.exports = router;
