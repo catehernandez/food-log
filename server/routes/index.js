@@ -1,5 +1,5 @@
 /** Routes each individual router into main app */
-const users = require('./users');
+const users = require('../user/userRoutes');
 const auth = require('./auth');
 
 module.exports = (app) => {
