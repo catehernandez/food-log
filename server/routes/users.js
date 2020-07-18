@@ -13,6 +13,7 @@ const getUsers = (req, res) => {
     });
 };
 
-router.get('/users', getUsers);
+//all routes prepended by /users
+router.get('/', getUsers);
 
 module.exports = router;
