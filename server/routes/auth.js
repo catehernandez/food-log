@@ -8,7 +8,7 @@ const passport = require('passport');
 const UserDB = require('../db/user');
 
 //all routes prepended by auth
-router.get('/current_user', (req, res) => {
+router.get('/current-user', (req, res) => {
   if (req.isAuthenticated()) {
     res.json(req.user);
   } else {
