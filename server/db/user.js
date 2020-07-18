@@ -65,7 +65,6 @@ const createUser = (email, hashedpass) => {
     )
     .then((results) => {
       let user = results.rows[0];
-      console.log('user', user);
       return user;
     })
     .catch((err) => {

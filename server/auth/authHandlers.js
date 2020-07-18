@@ -10,13 +10,14 @@ module.exports = {
     const isValidEmail = validator.isEmail(email);
     const isValidPwd = validator.isLength(password, { min: 8, max: 35 });
 
-    if (!isValidEmail) {
-      res.status(400).json('Invalid email');
-    } //proceed to check password
-    else if (!isValidPwd) {
-      res.status(400).json('Password must be 8-35 characters');
-    } //proceed to signup
-    else {
+    //validate inputs
+    if (!isValidEmail) return res.status(400).json('Invalid email');
+    if (!isValidPwd)
+      return res.status(400).json('Password must be 8-35 characters');
+
+    //proceed to signup
+    try {
+      //check if user exists
       const user = await UserDB.findUserByEmail(email);
 
       if (user != null) {
@@ -31,6 +32,8 @@ module.exports = {
 
         res.json(user);
       }
+    } catch (err) {
+      res.status(500).send(err);
     }
   },
   logout: (req, res) => {
