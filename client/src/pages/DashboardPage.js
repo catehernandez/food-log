@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Log from 'logs/Log';
-import LogoutButton from 'session/LogoutButton';
+import Header from 'shared/Header';
 
 const LogContainer = styled.div`
   position: absolute;
@@ -22,10 +22,12 @@ const DashboardPage = (props) => {
   if (!props.currentUser) return <Redirect to="/login" />;
 
   return (
-    <LogContainer>
-      <Log />
-      <LogoutButton />
-    </LogContainer>
+    <React.Fragment>
+      <Header />
+      <LogContainer>
+        <Log />
+      </LogContainer>
+    </React.Fragment>
   );
 };
 
