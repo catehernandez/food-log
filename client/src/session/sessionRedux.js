@@ -19,7 +19,6 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  console.log(action); //testing console log every action
   switch (action.type) {
     case GET_CURRENT_USER:
       return { ...state, loading: true };
@@ -120,7 +119,7 @@ export const fetchUser = () => async (dispatch) => {
   dispatch(getUser());
 
   try {
-    const res = await axios.get('/users/current');
+    const res = await axios.get('/user');
     dispatch(getUserSuccess(res.data));
   } catch (error) {
     dispatch(getUserFailure());
