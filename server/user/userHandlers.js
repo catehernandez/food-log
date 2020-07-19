@@ -1,18 +1,6 @@
-const db = require('../db');
 const LogsDB = require('../db/logs');
 
 module.exports = {
-  /* getUsers route for testing only*/
-  getUsers: (req, res) => {
-    db.query('SELECT * FROM users')
-      .then((results) => {
-        res.status(200).json(results.rows);
-      })
-      .catch((err) => {
-        throw err;
-      });
-  },
-
   getCurrentUser: async (req, res) => {
     if (req.user) {
       res.json(req.user);
@@ -22,7 +10,7 @@ module.exports = {
     }
   },
 
-  getUsersLogs: async (req, res) => {
+  getAllLogs: async (req, res) => {
     if (!req.user) return res.status(401).json('Unauthorized');
 
     //user is authenticated
@@ -56,9 +44,9 @@ module.exports = {
     //user is authenticated
     try {
       const { date } = req.params;
-      const user = req.user;
+      const { user_id } = req.user;
 
-      const log = await LogsDB.findLog(user.user_id, date);
+      const log = await LogsDB.findLog(user_id, date);
 
       res.status(200).json(log);
     } catch (err) {
