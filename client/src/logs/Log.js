@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import dateFormat from 'dateformat';
 
 import * as logActions from './logRedux';
 
@@ -15,7 +16,12 @@ class Log extends React.Component {
   }
 
   render() {
-    return <div>Log</div>;
+    return (
+      <div>
+        <div>{dateFormat(this.today, 'd mmmm yyyy')}</div>
+        <div>Log</div>
+      </div>
+    );
   }
 }
 
