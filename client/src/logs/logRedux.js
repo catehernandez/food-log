@@ -50,15 +50,11 @@ const getLogFail = () => ({
 export const getLog = (date) => async (dispatch) => {
   dispatch(gettingLog());
 
-  console.log('client', date);
-
   try {
-    const log = await axios.get(`/user/logs/${date}`);
-    console.log(log);
+    const res = await axios.get(`/user/logs/${date}`);
 
     //if no log exists, create new one
-
-    dispatch(getLogSuccess(log));
+    dispatch(getLogSuccess(res.data));
   } catch {
     dispatch(getLogFail());
   }
