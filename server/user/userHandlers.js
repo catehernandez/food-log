@@ -28,10 +28,10 @@ module.exports = {
 
     //user is authenticated
     try {
-      const user = req.user;
+      const { user_id } = req.user;
       const { date } = req.body;
 
-      const newLog = await LogsDB.createLog(user.user_id, date);
+      const newLog = await LogsDB.createLog(user_id, date);
       res.status(200).json(newLog);
     } catch (err) {
       res.status(500).json(err);
@@ -43,8 +43,8 @@ module.exports = {
 
     //user is authenticated
     try {
-      const { date } = req.params;
       const { user_id } = req.user;
+      const { date } = req.params;
 
       const log = await LogsDB.findLog(user_id, date);
 
