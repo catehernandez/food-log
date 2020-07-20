@@ -14,7 +14,6 @@ const LogContainer = styled.div`
 `;
 
 const mapStateToProps = (state) => {
-  console.log('redux state', state);
   return { currentUser: state.session.currentUser };
 };
 
