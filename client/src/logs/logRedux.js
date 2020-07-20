@@ -9,6 +9,7 @@ const GET_CURRENT_LOG_FAIL = 'food-log/logs/GET_CURRENT_LOG_FAIL';
 const initialState = {
   loading: true,
   currentLog: null,
+  errors: null,
 };
 
 export default function reducer(state = initialState, action) {
@@ -19,7 +20,7 @@ export default function reducer(state = initialState, action) {
     case GET_CURRENT_LOG_SUCCESS:
       return { ...state, loading: false, currentLog: action.payload };
     case GET_CURRENT_LOG_FAIL:
-      return { ...state, loading: false };
+      return { ...state, loading: false, errors: action.payload };
     default:
       return state;
   }
@@ -35,8 +36,9 @@ const getLogSuccess = (log) => ({
   payload: log,
 });
 
-const getLogFail = () => ({
+const getLogFail = (errCode) => ({
   type: GET_CURRENT_LOG_FAIL,
+  payload: errCode,
 });
 
 //operations
@@ -55,7 +57,8 @@ export const getLog = (date) => async (dispatch) => {
 
     //if no log exists, create new one
     dispatch(getLogSuccess(res.data));
-  } catch {
-    dispatch(getLogFail());
+  } catch (err) {
+    const statusCode = err.response.status;
+    dispatch(getLogFail(statusCode));
   }
 };
