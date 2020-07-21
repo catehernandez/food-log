@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 //action types
-const GET_CURRENT_LOG = 'food-log/logs/GET_CURRENT_LOG';
-const GET_CURRENT_LOG_SUCCESS = 'food-log/logs/GET_CURRENT_LOG_SUCCESS';
-const GET_CURRENT_LOG_FAIL = 'food-log/logs/GET_CURRENT_LOG_FAIL';
+const GET_LOG = 'food-log/logs/GET_LOG';
+const GET_LOG_SUCCESS = 'food-log/logs/GET_LOG_SUCCESS';
+const GET_LOG_FAIL = 'food-log/logs/GET_LOG_FAIL';
 
 //action reducer
 const initialState = {
@@ -13,13 +13,17 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  console.log(action); //testing console log every action
   switch (action.type) {
-    case GET_CURRENT_LOG:
+    case GET_LOG:
       return { ...state, loading: true };
-    case GET_CURRENT_LOG_SUCCESS:
-      return { ...state, loading: false, currentLog: action.payload };
-    case GET_CURRENT_LOG_FAIL:
+    case GET_LOG_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        currentLog: action.payload,
+        errors: null,
+      };
+    case GET_LOG_FAIL:
       return { ...state, loading: false, errors: action.payload };
     default:
       return state;
@@ -28,16 +32,16 @@ export default function reducer(state = initialState, action) {
 
 //action creator
 const gettingLog = () => ({
-  type: GET_CURRENT_LOG,
+  type: GET_LOG,
 });
 
 const getLogSuccess = (log) => ({
-  type: GET_CURRENT_LOG_SUCCESS,
+  type: GET_LOG_SUCCESS,
   payload: log,
 });
 
 const getLogFail = (errCode) => ({
-  type: GET_CURRENT_LOG_FAIL,
+  type: GET_LOG_FAIL,
   payload: errCode,
 });
 
@@ -55,7 +59,6 @@ export const getLog = (date) => async (dispatch) => {
   try {
     const res = await axios.get(`/user/logs/${date}`);
 
-    //if no log exists, create new one
     dispatch(getLogSuccess(res.data));
   } catch (err) {
     const statusCode = err.response.status;
