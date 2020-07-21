@@ -4,15 +4,25 @@ import dateFormat from 'dateformat';
 
 import * as logActions from './logRedux';
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return state;
-};
+const mapStateToProps = (state) => ({
+  currentLog: state.log.currentLog,
+  errors: state.log.errors,
+  loading: state.log.loading,
+});
 
 class Log extends React.Component {
+  constructor(props) {
+    super(props);
+    this.today = new Date();
+  }
   componentDidMount() {
-    const today = new Date().toISOString();
-    this.props.getLog(today);
+    this.props.getLog(this.today.toISOString());
+  }
+
+  componentDidUpdate() {
+    if (this.props.errors === 404) {
+      this.props.createLog(this.today);
+    }
   }
 
   render() {

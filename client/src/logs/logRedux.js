@@ -4,6 +4,9 @@ import axios from 'axios';
 const GET_LOG = 'food-log/logs/GET_LOG';
 const GET_LOG_SUCCESS = 'food-log/logs/GET_LOG_SUCCESS';
 const GET_LOG_FAIL = 'food-log/logs/GET_LOG_FAIL';
+const CREATE_LOG = 'food-log/logs/CREATE_LOG';
+const CREATE_LOG_SUCCESS = 'food-log/logs/CREATE_LOG_SUCCESS';
+const CREATE_LOG_FAIL = 'food-log/logs/CREATE_LOG_FAIL';
 
 //action reducer
 const initialState = {
@@ -25,6 +28,17 @@ export default function reducer(state = initialState, action) {
       };
     case GET_LOG_FAIL:
       return { ...state, loading: false, errors: action.payload };
+    case CREATE_LOG:
+      return { ...state, loading: true };
+    case CREATE_LOG_SUCCESS:
+      return {
+        ...state,
+        currentLog: action.payload,
+        errors: null,
+        loading: false,
+      };
+    case CREATE_LOG_FAIL:
+      return { ...state, errors: action.payload, loading: false };
     default:
       return state;
   }
@@ -42,6 +56,20 @@ const getLogSuccess = (log) => ({
 
 const getLogFail = (errCode) => ({
   type: GET_LOG_FAIL,
+  payload: errCode,
+});
+
+const creatingLog = () => ({
+  type: CREATE_LOG,
+});
+
+const createLogSuccess = (newLog) => ({
+  type: CREATE_LOG_SUCCESS,
+  payload: newLog,
+});
+
+const createLogFail = (errCode) => ({
+  type: CREATE_LOG_FAIL,
   payload: errCode,
 });
 
@@ -63,5 +91,17 @@ export const getLog = (date) => async (dispatch) => {
   } catch (err) {
     const statusCode = err.response.status;
     dispatch(getLogFail(statusCode));
+  }
+};
+
+export const createLog = (date) => async (dispatch) => {
+  dispatch(creatingLog());
+
+  try {
+    const res = await axios.post('/user/logs', { date: date });
+    dispatch(createLogSuccess(res.data));
+  } catch (err) {
+    const statusCode = err.response.status;
+    dispatch(createLogFail(statusCode));
   }
 };
