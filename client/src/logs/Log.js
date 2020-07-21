@@ -15,14 +15,26 @@ class Log extends React.Component {
     super(props);
     this.today = new Date();
   }
-  componentDidMount() {
-    this.props.getLog(this.today.toISOString());
-  }
 
-  componentDidUpdate() {
+  /**
+   * Async helper function to get log for today. If none exists,
+   * create one.
+   *
+   * @param {Date() Object} date
+   */
+  fetchOrCreateLog = async (date) => {
+    const ISODate = date.toISOString();
+
+    await this.props.getLog(ISODate);
+
+    //If log not found
     if (this.props.errors === 404) {
-      this.props.createLog(this.today);
+      this.props.createLog(ISODate);
     }
+  };
+
+  componentDidMount() {
+    this.fetchOrCreateLog(this.today);
   }
 
   render() {
