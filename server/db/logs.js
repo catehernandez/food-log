@@ -38,7 +38,7 @@ const createLog = (user_id, date) => {
       date,
     ])
     .then((results) => {
-      return results.rows;
+      return results.rows[0];
     })
     .catch((err) => {
       throw err;
