@@ -63,38 +63,48 @@ module.exports = {
   updateLog: async (req, res) => {
     if (!req.user) return res.sendStatus(401);
 
-    //user is authenticated
+    const { user_id } = req.user;
+    const { date } = req.params;
+
     try {
-      const { user_id } = req.user;
-      const { date } = req.params;
       const log = await LogsDB.findLog(user_id, date);
 
       if (!log) return res.sendStatus(404);
-
-      //Only accept requests to patch one field at a time
-      if (Object.keys(req.body).length !== 1)
-        return res.status(400).json('Update exactly one log field at a time');
-
-      //Only allowed to update some log fields e.g. cannot change user_id or log_date
-      const modifiable = new Set([
-        'veg_count',
-        'fruit_count',
-        'protein_count',
-        'grain_count',
-      ]);
-      const key = Object.keys(req.body)[0];
-
-      if (!modifiable.has(key))
-        return res.status(400).send(`Cannot update field ${key}`);
-
-      //Validate input
-      if (!validator.isInt(req.body[key])) return res.sendStatus(400);
-
-      //Finally ready to make request to db
-      //LogsDB.updateLog(user_id, date, req.body);
-
-      res.sendStatus(200);
     } catch (err) {
+      res.sendStatus(500);
+    }
+
+    //Only accept requests to patch one field at a time
+    if (Object.keys(req.body).length !== 1)
+      return res.status(400).json('Update exactly one log field at a time');
+
+    //Only allowed to update some log fields e.g. cannot change user_id or log_date
+    const modifiable = new Set([
+      'veg_count',
+      'fruit_count',
+      'protein_count',
+      'grain_count',
+    ]);
+    const key = Object.keys(req.body)[0];
+
+    if (!modifiable.has(key))
+      return res.status(400).send(`Cannot update field ${key}`);
+
+    //Validate input
+    if (!validator.isInt(req.body[key])) return res.sendStatus(400);
+
+    //Finally ready to make request to db
+    try {
+      const updatedLog = await LogsDB.updateLog(
+        user_id,
+        date,
+        key,
+        req.body[key]
+      );
+
+      res.status(200).send(updatedLog);
+    } catch (err) {
+      console.log(err);
       res.status(422).json(err);
     }
   },

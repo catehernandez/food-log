@@ -65,4 +65,38 @@ const getAllUserLogs = (user_id) => {
     });
 };
 
-module.exports = { findLog, createLog, getAllUserLogs };
+const updateLog = (user_id, date, field, value) => {
+  //Protect against SQL injection--do not directly interpolate raw values in query
+  const queries = new Map([
+    [
+      'veg_count',
+      'UPDATE logs SET veg_count=$1 WHERE user_id=$2 AND log_date=$3 RETURNING *',
+    ],
+    [
+      'fruit_count',
+      'UPDATE logs SET fruit_count=$1 WHERE user_id=$2 AND log_date=$3 RETURNING *',
+    ],
+    [
+      'protein_count',
+      'UPDATE logs SET protein_count=$1 WHERE user_id=$2 AND log_date=$3 RETURNING *',
+    ],
+    [
+      'grain_count',
+      'UPDATE logs SET grain_count=$1 WHERE user_id=$2 AND log_date=$3 RETURNING *',
+    ],
+  ]);
+
+  const query = queries.get(field);
+  return db
+    .query(query, [value, user_id, date])
+    .then((results) => {
+      console.log(results.rows[0]);
+      return results.rows[0];
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+};
+
+module.exports = { findLog, createLog, getAllUserLogs, updateLog };
