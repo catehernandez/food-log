@@ -88,7 +88,7 @@ module.exports = {
     const key = Object.keys(req.body)[0];
 
     if (!modifiable.has(key))
-      return res.status(400).send(`Cannot update field ${key}`);
+      return res.status(400).send(`Unmodifiable Field: ${key}`);
 
     //Validate input
     if (!validator.isInt(req.body[key])) return res.sendStatus(400);

@@ -66,35 +66,24 @@ const getAllUserLogs = (user_id) => {
 };
 
 const updateLog = (user_id, date, field, value) => {
-  //Protect against SQL injection--do not directly interpolate raw values in query
-  const queries = new Map([
-    [
-      'veg_count',
-      'UPDATE logs SET veg_count=$1 WHERE user_id=$2 AND log_date=$3 RETURNING *',
-    ],
-    [
-      'fruit_count',
-      'UPDATE logs SET fruit_count=$1 WHERE user_id=$2 AND log_date=$3 RETURNING *',
-    ],
-    [
-      'protein_count',
-      'UPDATE logs SET protein_count=$1 WHERE user_id=$2 AND log_date=$3 RETURNING *',
-    ],
-    [
-      'grain_count',
-      'UPDATE logs SET grain_count=$1 WHERE user_id=$2 AND log_date=$3 RETURNING *',
-    ],
+  //Protect against SQL injection--check if passed field is modifiable
+  const modifiable = new Set([
+    'veg_count',
+    'fruit_count',
+    'protein_count',
+    'grain_count',
   ]);
 
-  const query = queries.get(field);
+  if (!modifiable.has(field)) throw Error(`Unmodifiable Field: ${field}`);
+
+  const query = `UPDATE logs SET ${field}=$1 WHERE user_id=$2 AND log_date=$3 RETURNING *`;
+
   return db
     .query(query, [value, user_id, date])
     .then((results) => {
-      console.log(results.rows[0]);
       return results.rows[0];
     })
     .catch((err) => {
-      console.log(err);
       throw err;
     });
 };
