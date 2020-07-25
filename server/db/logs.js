@@ -6,7 +6,7 @@ const db = require('./index');
 /**
  * Retrieves a user's log for the given date. Returns null if no log is defined.
  *
- * @param { Integer } user_id
+ * @param { Number } user_id
  * @param { Date } date
  */
 const findLog = (user_id, date) => {

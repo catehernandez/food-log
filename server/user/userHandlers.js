@@ -1,5 +1,3 @@
-const validator = require('validator');
-
 const LogsDB = require('../db/logs');
 
 module.exports = {
@@ -85,21 +83,21 @@ module.exports = {
       'protein_count',
       'grain_count',
     ]);
-    const key = Object.keys(req.body)[0];
+    const field = Object.keys(req.body)[0];
 
-    if (!modifiable.has(key))
-      return res.status(400).send(`Unmodifiable Field: ${key}`);
+    if (!modifiable.has(field))
+      return res.status(400).send(`Unmodifiable Field: ${field}`);
 
     //Validate input
-    if (!validator.isInt(req.body[key])) return res.sendStatus(400);
+    if (!Number.isInteger(req.body[field])) return res.sendStatus(400);
 
     //Finally ready to make request to db
     try {
       const updatedLog = await LogsDB.updateLog(
         user_id,
         date,
-        key,
-        req.body[key]
+        field,
+        req.body[field]
       );
 
       res.status(200).send(updatedLog);
