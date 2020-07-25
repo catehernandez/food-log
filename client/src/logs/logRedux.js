@@ -7,6 +7,9 @@ const GET_LOG_FAIL = 'food-log/logs/GET_LOG_FAIL';
 const CREATE_LOG = 'food-log/logs/CREATE_LOG';
 const CREATE_LOG_SUCCESS = 'food-log/logs/CREATE_LOG_SUCCESS';
 const CREATE_LOG_FAIL = 'food-log/logs/CREATE_LOG_FAIL';
+const UPDATE_LOG = 'food-log/logs/UPDATE_LOG';
+const UPDATE_LOG_SUCCESS = 'food-log/logs/UPDATE_LOG_SUCCESS';
+const UPDATE_LOG_FAIL = 'food-log/logs/UPDATE_LOG_FAIL';
 
 //action reducer
 const initialState = {
@@ -39,6 +42,12 @@ export default function reducer(state = initialState, action) {
       };
     case CREATE_LOG_FAIL:
       return { ...state, errors: action.payload, loading: false };
+    case UPDATE_LOG:
+      return { ...state };
+    case UPDATE_LOG_SUCCESS:
+      return { ...state, currentLog: action.payload };
+    case UPDATE_LOG_FAIL:
+      return { ...state, errors: action.payload };
     default:
       return state;
   }
@@ -73,6 +82,19 @@ const createLogFail = (errCode) => ({
   payload: errCode,
 });
 
+const updatingLog = () => ({
+  type: UPDATE_LOG,
+});
+
+const updateLogSuccess = (updatedLog) => ({
+  type: UPDATE_LOG_SUCCESS,
+  payload: updatedLog,
+});
+
+const updateLogFail = () => ({
+  type: UPDATE_LOG_FAIL,
+});
+
 //operations
 /**
  * Function to get a log for a specified user.
@@ -103,5 +125,18 @@ export const createLog = (date) => async (dispatch) => {
   } catch (err) {
     const statusCode = err.response.status;
     dispatch(createLogFail(statusCode));
+  }
+};
+
+export const updateLog = (log_date, field, value) => async (dispatch) => {
+  dispatch(updatingLog());
+
+  try {
+    const res = await axios.patch(`/user/logs/${log_date}`, { [field]: value });
+
+    dispatch(updateLogSuccess(res.data));
+  } catch (err) {
+    const statusCode = err.response.status;
+    dispatch(updateLogFail(statusCode));
   }
 };

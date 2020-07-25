@@ -49,18 +49,22 @@ class Log extends React.Component {
       <div>
         <div>{dateFormat(this.today, 'd mmmm yyyy')}</div>
         <Servings
+          field="veg_count"
           goals={this.props.currentUser.vegetable_goals}
           completed={this.props.currentLog.veg_count}
         />
         <Servings
+          field="fruit_count"
           goals={this.props.currentUser.fruit_goals}
           completed={this.props.currentLog.fruit_count}
         />
         <Servings
+          field="protein_count"
           goals={this.props.currentUser.protein_goals}
           completed={this.props.currentLog.protein_count}
         />
         <Servings
+          field="grain_count"
           goals={this.props.currentUser.grain_goals}
           completed={this.props.currentLog.grain_count}
         />

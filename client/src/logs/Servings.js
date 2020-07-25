@@ -1,13 +1,36 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import * as logActions from './logRedux';
 
 import Checkbox from './Checkbox';
 
 const ServingsContainer = styled.div``;
 
+const mapStateToProps = (state) => ({
+  currentLog: state.log.currentLog,
+});
+
 class Servings extends React.Component {
   handleChange = (event) => {
-    console.log(event.target.checked);
+    //increment completed count
+    if (event.target.checked) {
+      this.props.updateLog(
+        this.props.currentLog.log_date,
+        this.props.field,
+        this.props.completed + 1
+      );
+      console.log(this.props.completed + 1);
+    }
+    //decrement completed count
+    else {
+      this.props.updateLog(
+        this.props.currentLog.log_date,
+        this.props.field,
+        this.props.completed - 1
+      );
+      console.log(this.props.completed - 1);
+    }
   };
 
   render() {
@@ -49,4 +72,4 @@ class Servings extends React.Component {
   }
 }
 
-export default Servings;
+export default connect(mapStateToProps, logActions)(Servings);
