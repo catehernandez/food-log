@@ -13,24 +13,25 @@ const mapStateToProps = (state) => ({
 
 class Servings extends React.Component {
   handleChange = (event) => {
+    const isChecked = event.target.checked;
+    let newCount;
+
     //increment completed count
-    if (event.target.checked) {
-      this.props.updateLog(
-        this.props.currentLog.log_date,
-        this.props.field,
-        this.props.completed + 1
-      );
-      console.log(this.props.completed + 1);
+    if (isChecked) {
+      newCount = this.props.completed + 1;
     }
     //decrement completed count
     else {
-      this.props.updateLog(
-        this.props.currentLog.log_date,
-        this.props.field,
-        this.props.completed - 1
-      );
-      console.log(this.props.completed - 1);
+      newCount = this.props.completed - 1;
     }
+
+    this.props.updateLog(
+      this.props.currentLog.log_date,
+      this.props.field,
+      newCount
+    );
+
+    console.log('new count', newCount);
   };
 
   render() {
