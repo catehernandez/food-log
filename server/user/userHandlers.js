@@ -103,7 +103,7 @@ module.exports = {
       res.status(200).send(updatedLog);
     } catch (err) {
       console.log(err);
-      res.status(422).json(err);
+      res.status(400).json(err);
     }
   },
 };

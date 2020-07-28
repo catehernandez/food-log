@@ -91,8 +91,9 @@ const updateLogSuccess = (updatedLog) => ({
   payload: updatedLog,
 });
 
-const updateLogFail = () => ({
+const updateLogFail = (errCode) => ({
   type: UPDATE_LOG_FAIL,
+  payload: errCode,
 });
 
 //operations
