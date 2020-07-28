@@ -12,8 +12,43 @@ const mapStateToProps = (state) => ({
 });
 
 class Servings extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      checkedItems: this.defineCheckedItems(this.props.completed),
+    };
+  }
+
+  //handles intial rendering--subsequent renderings handled by state
+  defineCheckedItems = (completed) => {
+    let checkedItems = new Map();
+
+    for (let i = 0; i < this.props.goals; i++) {
+      let itemName = i.toString();
+
+      if (i < completed) {
+        checkedItems.set(itemName, true);
+      }
+      //not yet completed
+      else {
+        checkedItems.set(itemName, false);
+      }
+    }
+
+    return checkedItems;
+  };
+
   handleChange = (event) => {
+    //update checkbox state
+    const itemName = event.target.name;
     const isChecked = event.target.checked;
+
+    this.setState((prevState) => ({
+      checkedItems: prevState.checkedItems.set(itemName, isChecked),
+    }));
+
+    //update item count on backend
     let newCount;
 
     //increment completed count
@@ -30,43 +65,35 @@ class Servings extends React.Component {
       this.props.field,
       newCount
     );
-
-    console.log('new count', newCount);
   };
 
   renderCheckboxes() {
     const boxes = [];
 
     for (let i = 0; i < this.props.goals; i++) {
-      let key = i.toString();
+      let name = i.toString();
+      let isChecked = this.state.checkedItems.get(name);
 
-      //default checked, enabled
-      if (i < this.props.completed - 1) {
-        boxes.push(<Checkbox key={key} checked={true} readOnly={true} />);
-      }
-      //default checked; enabled
-      else if (i === this.props.completed - 1) {
+      if (i === this.props.completed || i === this.props.completed - 1) {
         boxes.push(
           <Checkbox
-            key={key}
-            defaultChecked={true}
+            key={name}
+            name={name}
+            checked={isChecked}
             onChange={this.handleChange}
           />
         );
       }
-      //default unchecked; enabled
-      else if (i === this.props.completed) {
-        boxes.push(
-          <Checkbox
-            key={key}
-            defaultChecked={false}
-            onChange={this.handleChange}
-          />
-        );
-      }
-      //else unchecked & disabled
+      //all other checkboxes are readOnly
       else {
-        boxes.push(<Checkbox key={key} checked={false} readOnly={true} />);
+        boxes.push(
+          <Checkbox
+            key={name}
+            name={name}
+            checked={isChecked}
+            readOnly={true}
+          />
+        );
       }
     }
 
