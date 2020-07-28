@@ -34,8 +34,9 @@ class Servings extends React.Component {
     console.log('new count', newCount);
   };
 
-  render() {
+  renderCheckboxes() {
     const boxes = [];
+
     for (let i = 0; i < this.props.goals; i++) {
       let key = i.toString();
 
@@ -69,7 +70,11 @@ class Servings extends React.Component {
       }
     }
 
-    return <ServingsContainer>{boxes}</ServingsContainer>;
+    return boxes;
+  }
+
+  render() {
+    return <ServingsContainer>{this.renderCheckboxes()}</ServingsContainer>;
   }
 }
 
