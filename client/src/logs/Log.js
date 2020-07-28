@@ -5,6 +5,7 @@ import dateFormat from 'dateformat';
 import * as logActions from './logRedux';
 
 import Servings from './Servings';
+import LogErrMsg from './LogErrMsg';
 
 const mapStateToProps = (state) => ({
   currentUser: state.session.currentUser,
@@ -43,6 +44,15 @@ class Log extends React.Component {
   render() {
     if (!this.props.currentLog) {
       return <div />;
+    }
+
+    if (this.props.errors) {
+      console.log('err: ', this.props.errors);
+      return (
+        <div>
+          <LogErrMsg />
+        </div>
+      );
     }
 
     return (
