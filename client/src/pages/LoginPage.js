@@ -4,15 +4,8 @@ import styled from 'styled-components';
 
 import { connect } from 'react-redux';
 
+import CenteredBox from 'shared/CenteredBox';
 import LoginForm from 'session/LoginForm';
-
-const LoginContainer = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 30%;
-  transform: translate(-50%, 30%);
-  width: 30vw;
-`;
 
 const mapStateToProps = (state) => ({
   currentUser: state.session.currentUser,
@@ -24,12 +17,12 @@ const Login = (props) => {
   }
 
   return (
-    <LoginContainer>
+    <CenteredBox>
       <LoginForm />
       <div>
         Don't have an account? <Link to={'/signup'}>Sign up</Link>
       </div>
-    </LoginContainer>
+    </CenteredBox>
   );
 };
 

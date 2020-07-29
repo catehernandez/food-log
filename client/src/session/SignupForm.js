@@ -13,6 +13,7 @@ import Button from 'shared/Button';
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
+  width: 45%;
 `;
 
 const SignupForm = () => {

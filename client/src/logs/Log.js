@@ -4,7 +4,8 @@ import dateFormat from 'dateformat';
 
 import * as logActions from './logRedux';
 
-import { LogBox, DateContainer } from './LogContainer';
+import CenteredBox from 'shared/CenteredBox';
+import { DateContainer } from './LogContainer';
 import LogErrMsg from './LogErrMsg';
 import Servings from './Servings';
 
@@ -57,7 +58,7 @@ class Log extends React.Component {
     }
 
     return (
-      <LogBox>
+      <CenteredBox>
         <DateContainer>{dateFormat(this.today, 'd mmmm yyyy')}</DateContainer>
         <Servings
           field="veg_count"
@@ -79,7 +80,7 @@ class Log extends React.Component {
           goals={this.props.currentUser.grain_goals}
           completed={this.props.currentLog.grain_count}
         />
-      </LogBox>
+      </CenteredBox>
     );
   }
 }
