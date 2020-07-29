@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import dateFormat from 'dateformat';
-
 import * as logActions from './logRedux';
 
 import CenteredBox from 'shared/CenteredBox';
-import { DateContainer } from './LogContainer';
+import { LogContainer, DateContainer } from './LogContainer';
 import LogErrMsg from './LogErrMsg';
 import Servings from './Servings';
 
@@ -60,26 +59,28 @@ class Log extends React.Component {
     return (
       <CenteredBox>
         <DateContainer>{dateFormat(this.today, 'd mmmm yyyy')}</DateContainer>
-        <Servings
-          field="veg_count"
-          goals={this.props.currentUser.vegetable_goals}
-          completed={this.props.currentLog.veg_count}
-        />
-        <Servings
-          field="fruit_count"
-          goals={this.props.currentUser.fruit_goals}
-          completed={this.props.currentLog.fruit_count}
-        />
-        <Servings
-          field="protein_count"
-          goals={this.props.currentUser.protein_goals}
-          completed={this.props.currentLog.protein_count}
-        />
-        <Servings
-          field="grain_count"
-          goals={this.props.currentUser.grain_goals}
-          completed={this.props.currentLog.grain_count}
-        />
+        <LogContainer>
+          <Servings
+            field="veg_count"
+            goals={this.props.currentUser.vegetable_goals}
+            completed={this.props.currentLog.veg_count}
+          />
+          <Servings
+            field="fruit_count"
+            goals={this.props.currentUser.fruit_goals}
+            completed={this.props.currentLog.fruit_count}
+          />
+          <Servings
+            field="protein_count"
+            goals={this.props.currentUser.protein_goals}
+            completed={this.props.currentLog.protein_count}
+          />
+          <Servings
+            field="grain_count"
+            goals={this.props.currentUser.grain_goals}
+            completed={this.props.currentLog.grain_count}
+          />
+        </LogContainer>
       </CenteredBox>
     );
   }
