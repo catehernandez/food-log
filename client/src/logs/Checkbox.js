@@ -13,7 +13,16 @@ const StyledCheckbox = styled.div`
   display: inline-block;
   width: 16px;
   height: 16px;
-  background: ${(props) => (props.checked ? 'salmon' : 'papayawhip')};
+  background-color: ${(props) =>
+    props.className === 'veg_count'
+      ? props.theme.colors.green
+      : props.className === 'fruit_count'
+      ? props.theme.colors.pink
+      : props.className === 'protein_count'
+      ? props.theme.colors.darkBlue
+      : props.className === 'grain_count'
+      ? props.theme.colors.gold
+      : '#c4c4c4'};
   border-radius: 3px;
   transition: all 150ms;
 
@@ -38,7 +47,7 @@ const CheckboxContainer = styled.div`
 const Checkbox = ({ checked, ...props }) => (
   <label>
     <CheckboxContainer>
-      <StyledCheckbox checked={checked} readOnly={props.readOnly}>
+      <StyledCheckbox checked={checked} {...props}>
         <HiddenCheckbox checked={checked} {...props} />
       </StyledCheckbox>
     </CheckboxContainer>

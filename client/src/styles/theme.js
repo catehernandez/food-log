@@ -4,6 +4,10 @@ const theme = {
     lightBeige: '#F7F4ED',
     lightestBeige: '#F1ECDF',
     brownBlack: '#4D3232',
+    green: '#45F18A',
+    pink: '#F74C9E',
+    darkBlue: '#3F73F7',
+    gold: '#F7D14C',
   },
   breakpoints: {
     small: '576px',

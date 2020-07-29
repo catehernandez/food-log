@@ -78,6 +78,7 @@ class Servings extends React.Component {
         boxes.push(
           <Checkbox
             key={name}
+            className={this.props.field}
             name={name}
             checked={isChecked}
             onChange={this.handleChange}
@@ -89,6 +90,7 @@ class Servings extends React.Component {
         boxes.push(
           <Checkbox
             key={name}
+            className={this.props.field}
             name={name}
             checked={isChecked}
             readOnly={true}
