@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import * as sessionActions from './session/sessionRedux';
+import { ThemeProvider } from 'styled-components';
+import theme from './styles/theme';
 
 import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
@@ -15,11 +16,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <Route path="/" exact component={DashboardPage} />
-        <Route path="/login" exact component={LoginPage} />
-        <Route path="/signup" exact component={SignupPage} />
-      </BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Route path="/" exact component={DashboardPage} />
+          <Route path="/login" exact component={LoginPage} />
+          <Route path="/signup" exact component={SignupPage} />
+        </BrowserRouter>
+      </ThemeProvider>
     );
   }
 }
