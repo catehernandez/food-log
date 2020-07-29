@@ -4,8 +4,9 @@ import dateFormat from 'dateformat';
 
 import * as logActions from './logRedux';
 
-import Servings from './Servings';
+import { LogBox, DateContainer } from './LogContainer';
 import LogErrMsg from './LogErrMsg';
+import Servings from './Servings';
 
 const mapStateToProps = (state) => ({
   currentUser: state.session.currentUser,
@@ -56,8 +57,8 @@ class Log extends React.Component {
     }
 
     return (
-      <div>
-        <div>{dateFormat(this.today, 'd mmmm yyyy')}</div>
+      <LogBox>
+        <DateContainer>{dateFormat(this.today, 'd mmmm yyyy')}</DateContainer>
         <Servings
           field="veg_count"
           goals={this.props.currentUser.vegetable_goals}
@@ -78,7 +79,7 @@ class Log extends React.Component {
           goals={this.props.currentUser.grain_goals}
           completed={this.props.currentLog.grain_count}
         />
-      </div>
+      </LogBox>
     );
   }
 }
