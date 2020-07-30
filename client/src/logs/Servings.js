@@ -15,6 +15,14 @@ class Servings extends React.Component {
   constructor(props) {
     super(props);
 
+    //Colors for rendered checkboxes. Colors defined in theme.js
+    this.servingStyles = {
+      veg_count: 'green',
+      fruit_count: 'pink',
+      protein_count: 'darkBlue',
+      grain_count: 'yellow',
+    };
+
     this.state = {
       checkedItems: this.defineCheckedItems(this.props.completed),
     };
@@ -69,6 +77,8 @@ class Servings extends React.Component {
 
   renderCheckboxes() {
     const boxes = [];
+    const { field } = this.props;
+    const checkboxColor = this.servingStyles[field];
 
     for (let i = 0; i < this.props.goals; i++) {
       let name = i.toString();
@@ -77,10 +87,10 @@ class Servings extends React.Component {
       if (i === this.props.completed || i === this.props.completed - 1) {
         boxes.push(
           <Checkbox
-            key={name}
-            className={this.props.field}
-            name={name}
             checked={isChecked}
+            color={checkboxColor}
+            key={name}
+            name={name}
             onChange={this.handleChange}
           />
         );
@@ -89,10 +99,10 @@ class Servings extends React.Component {
       else {
         boxes.push(
           <Checkbox
-            key={name}
-            className={this.props.field}
-            name={name}
             checked={isChecked}
+            color={checkboxColor}
+            key={name}
+            name={name}
             readOnly={true}
           />
         );
