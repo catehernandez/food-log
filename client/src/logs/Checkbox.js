@@ -36,9 +36,8 @@ const CheckboxContainer = styled.div`
 const Checkbox = ({ checked, color = 'lightBlue', ...props }) => (
   <label>
     <CheckboxContainer>
-      <StyledCheckbox checked={checked} color={color} {...props}>
-        <HiddenCheckbox checked={checked} {...props} />
-      </StyledCheckbox>
+      <HiddenCheckbox checked={checked} {...props} />
+      <StyledCheckbox checked={checked} color={color} {...props} />
     </CheckboxContainer>
   </label>
 );
