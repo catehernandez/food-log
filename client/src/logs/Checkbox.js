@@ -8,16 +8,28 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   width: 0;
 `;
 
+// translate -1% makes it appear actually centered--some strange visual trick
+const StyledCheckFill = styled.div`
+  background-color: ${({ color, theme }) => theme.colors[color]};
+  border-radius: 50%;
+  height: inherit;
+  position: relative;
+  width: inherit;
+  transform: scale(0.85) translate(0%, -1%);
+`;
+
 const StyledCheckbox = styled.div`
   border: 1px solid ${({ color, theme }) => theme.colors[color]};
-  background-color: ${({ checked, color, theme }) =>
-    checked ? theme.colors[color] : 'none'};
+  border-radius: 100%;
   cursor: ${({ readOnly }) => (readOnly ? 'auto' : 'pointer')};
   display: inline-block;
-  width: 16px;
-  height: 16px;
-  border-radius: 3px;
+  height: 18px;
   transition: all 150ms;
+  width: 18px;
+
+  ${StyledCheckFill} {
+    visibility: ${({ checked }) => (checked ? 'visible' : 'hidden')};
+  }
 `;
 
 const CheckboxContainer = styled.div`
@@ -37,7 +49,9 @@ const Checkbox = ({ checked, color = 'lightBlue', ...props }) => (
   <label>
     <CheckboxContainer>
       <HiddenCheckbox checked={checked} {...props} />
-      <StyledCheckbox checked={checked} color={color} {...props} />
+      <StyledCheckbox checked={checked} color={color} {...props}>
+        <StyledCheckFill color={color} />
+      </StyledCheckbox>
     </CheckboxContainer>
   </label>
 );
