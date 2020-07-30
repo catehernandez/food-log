@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   position: absolute;
@@ -9,26 +9,47 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
 `;
 
 const StyledCheckbox = styled.div`
+  border: 1px solid #c4c4c4;
+  background-color: ${(props) => (props.checked ? '#c4c4c4' : 'none')};
   cursor: ${(props) => (props.readOnly ? 'auto' : 'pointer')};
   display: inline-block;
   width: 16px;
   height: 16px;
-  background-color: ${(props) =>
-    props.className === 'veg_count'
-      ? props.theme.colors.green
-      : props.className === 'fruit_count'
-      ? props.theme.colors.pink
-      : props.className === 'protein_count'
-      ? props.theme.colors.darkBlue
-      : props.className === 'grain_count'
-      ? props.theme.colors.gold
-      : '#c4c4c4'};
   border-radius: 3px;
   transition: all 150ms;
 
   ${HiddenCheckbox}:focus + & {
     box-shadow: 0 0 0 3px pink;
   }
+
+  ${(props) =>
+    props.className === 'veg_count' &&
+    css`
+      border: 1px solid ${(props) => props.theme.colors.green};
+      background-color: ${(props) =>
+        props.checked ? props.theme.colors.green : 'none'};
+    `}
+  ${(props) =>
+    props.className === 'fruit_count' &&
+    css`
+      border: 1px solid ${(props) => props.theme.colors.pink};
+      background-color: ${(props) =>
+        props.checked ? props.theme.colors.pink : 'none'};
+    `}
+  ${(props) =>
+    props.className === 'protein_count' &&
+    css`
+      border: 1px solid ${(props) => props.theme.colors.darkBlue};
+      background-color: ${(props) =>
+        props.checked ? props.theme.colors.darkBlue : 'none'};
+    `}
+  ${(props) =>
+    props.className === 'grain_count' &&
+    css`
+      border: 1px solid ${(props) => props.theme.colors.gold};
+      background-color: ${(props) =>
+        props.checked ? props.theme.colors.gold : 'none'};
+    `}
 `;
 
 const CheckboxContainer = styled.div`
