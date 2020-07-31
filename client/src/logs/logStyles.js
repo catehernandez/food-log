@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const DateContainer = styled.div`
   background-color: #c4c4c4;
   border-radius: 12px 12px 0px 0px;
+  font-size: 1.125rem;
   padding: 0.9rem;
   text-align: center;
 `;
