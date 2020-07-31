@@ -4,7 +4,7 @@ import dateFormat from 'dateformat';
 import * as logActions from './logRedux';
 
 import CenteredBox from 'shared/CenteredBox';
-import { LogContainer, DateContainer } from './LogContainer';
+import { LogContainer, DateContainer } from './logStyles';
 import LogErrMsg from './LogErrMsg';
 import Servings from './Servings';
 

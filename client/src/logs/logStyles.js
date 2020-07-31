@@ -7,8 +7,13 @@ export const DateContainer = styled.div`
   text-align: center;
 `;
 
-export const LogContainer = styled.div`
-  padding: 1.5rem;
+export const LogContainer = styled.table`
   margin: 0 auto;
+  padding: 1.5rem;
   width: max-content;
+`;
+
+export const ServingsLabel = styled.span`
+  margin: 1rem;
+  text-align: right;
 `;
