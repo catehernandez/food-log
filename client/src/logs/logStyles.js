@@ -21,12 +21,15 @@ export const LogContainer = styled.div`
   grid-row-gap: 1.5rem;
   grid-template-columns: repeat(2 1fr);
   grid-template-rows: repeat(4, 1fr);
-  margin: 0 auto;
-  padding: 3rem;
+  margin: 2.25rem auto;
   width: max-content;
 
+  @media (min-width: ${({ theme }) => theme.breakpoints.small}) {
+    margin: 3rem auto;
+  }
+
   ${ServingsLabel} {
-    grid-column-start: 1 / 2;
+    grid-column: 1 / 2;
   }
 
   ${ServingsContainer} {
