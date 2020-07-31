@@ -16,6 +16,9 @@ const theme = {
     large: '1200px',
     extraLarge: '2560px', //desktop
   },
+  fontFamily: {
+    Quicksand: "'Quicksand', sans-serif",
+  },
 };
 
 export default theme;

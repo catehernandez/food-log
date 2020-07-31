@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
   body{
-    font-family: 'Quicksand', sans-serif;
+    font-family: ${({ theme }) => theme.fontFamily.Quicksand};
   }
 `;
 
