@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 
 import DashboardPage from './pages/DashboardPage';
+import GlobalStyle from './styles/GlobalStyle';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 
@@ -17,6 +18,7 @@ class App extends React.Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
+        <GlobalStyle />
         <BrowserRouter>
           <Route path="/" exact component={DashboardPage} />
           <Route path="/login" exact component={LoginPage} />

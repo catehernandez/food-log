@@ -10,8 +10,6 @@ import App from './App';
 import rootReducer from './reducers';
 import * as serviceWorker from './serviceWorker';
 
-import './index.css';
-
 //axios defaults
 axios.defaults.baseURL = 'http://localhost:5000';
 axios.defaults.headers.post['Content-Type'] =
