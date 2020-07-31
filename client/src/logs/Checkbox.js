@@ -35,7 +35,7 @@ const StyledCheckbox = styled.div`
 const CheckboxContainer = styled.div`
   display: inline-block;
   vertical-align: middle;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
 `;
 
 /**

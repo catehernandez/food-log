@@ -7,13 +7,29 @@ export const DateContainer = styled.div`
   text-align: center;
 `;
 
-export const LogContainer = styled.table`
-  margin: 0 auto;
-  padding: 1.5rem;
-  width: max-content;
+export const ServingsLabel = styled.span`
+  text-align: right;
 `;
 
-export const ServingsLabel = styled.span`
-  margin: 1rem;
-  text-align: right;
+export const ServingsContainer = styled.div`
+  display: inline;
+`;
+
+export const LogContainer = styled.div`
+  display: grid;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1.5rem;
+  grid-template-columns: repeat(2 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  margin: 0 auto;
+  padding: 3rem;
+  width: max-content;
+
+  ${ServingsLabel} {
+    grid-column-start: 1 / 2;
+  }
+
+  ${ServingsContainer} {
+    grid-column: 3 / 4;
+  }
 `;

@@ -1,11 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import * as logActions from './logRedux';
 
 import Checkbox from './Checkbox';
-
-const ServingsContainer = styled.div``;
+import { ServingsContainer } from './logStyles';
 
 const mapStateToProps = (state) => ({
   currentLog: state.log.currentLog,
