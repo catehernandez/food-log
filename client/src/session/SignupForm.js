@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-import {
-  StyledInput,
-  StyledLabel,
-  StyledErrorMessage,
-} from 'shared/StyledInput';
+import { StyledInput, StyledErrorMessage } from 'shared/StyledInput';
 import Button from 'shared/Button';
 
 const StyledForm = styled(Form)`
@@ -33,10 +29,8 @@ const SignupForm = () => {
     >
       {({ errors, touched }) => (
         <StyledForm>
-          <StyledLabel htmlFor="email">Email</StyledLabel>
           <Field as={StyledInput} name="email" />
           <ErrorMessage component={StyledErrorMessage} name="email" />
-          <StyledLabel htmlFor="password">Password</StyledLabel>
           <Field as={StyledInput} name="password" type="password" />
           <ErrorMessage component={StyledErrorMessage} name="password" />
           <Button

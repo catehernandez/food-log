@@ -6,11 +6,7 @@ import * as Yup from 'yup';
 
 import * as sessionActions from 'session/sessionRedux';
 
-import {
-  StyledInput,
-  StyledLabel,
-  StyledErrorMessage,
-} from 'shared/StyledInput';
+import { StyledInput, StyledErrorMessage } from 'shared/StyledInput';
 import Button from 'shared/Button';
 
 const StyledForm = styled(Form)`
@@ -40,11 +36,19 @@ class LoginForm extends React.Component {
       >
         {({ errors, touched }) => (
           <StyledForm>
-            <StyledLabel htmlFor="email">Email</StyledLabel>
-            <Field as={StyledInput} name="email" type="email" />
+            <Field
+              as={StyledInput}
+              name="email"
+              placeholder="Email"
+              type="email"
+            />
             <ErrorMessage component={StyledErrorMessage} name="email" />
-            <StyledLabel htmlFor="password">Password</StyledLabel>
-            <Field as={StyledInput} name="password" type="password" />
+            <Field
+              as={StyledInput}
+              name="password"
+              placeholder="Password"
+              type="password"
+            />
             <Button
               type="submit"
               disabled={!touched.email || !touched.password || errors.email}
