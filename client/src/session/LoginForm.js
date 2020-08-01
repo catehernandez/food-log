@@ -16,7 +16,12 @@ import Button from 'shared/Button';
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  width: 45%;
+  margin: 1.5rem;
+  width: 80%;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    width: 70%;
+  }
 `;
 
 class LoginForm extends React.Component {
