@@ -19,7 +19,8 @@ const StyledCheckFill = styled.div`
 `;
 
 const StyledCheckbox = styled.div`
-  border: 1px solid ${({ color, theme }) => theme.colors[color]};
+  border: ${({ checked }) => (checked ? '1px' : '1.5px')} solid
+    ${({ color, theme }) => theme.colors[color]};
   border-radius: 100%;
   cursor: ${({ readOnly }) => (readOnly ? 'auto' : 'pointer')};
   display: inline-block;
