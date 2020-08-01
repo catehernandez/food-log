@@ -34,7 +34,7 @@ class LoginForm extends React.Component {
           this.props.login(values);
         }}
       >
-        {({ errors, touched }) => (
+        {({ errors, values }) => (
           <StyledForm>
             <Field
               as={StyledInput}
@@ -51,7 +51,7 @@ class LoginForm extends React.Component {
             />
             <Button
               type="submit"
-              disabled={!touched.email || !touched.password || errors.email}
+              disabled={!values.email || !values.password || errors.email}
             >
               Log in
             </Button>
