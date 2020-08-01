@@ -9,7 +9,7 @@ export const StyledInput = styled.input`
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
-  margin: 1rem 0;
+  margin: 1rem 0 0.5rem;
   padding: 0.5rem;
 
   &:focus {
@@ -22,5 +22,4 @@ export const StyledInput = styled.input`
 export const StyledErrorMessage = styled.div`
   color: red;
   font-size: 0.8rem;
-  margin: 0 0 0.5rem;
 `;

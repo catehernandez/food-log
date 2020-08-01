@@ -29,6 +29,7 @@ class LoginForm extends React.Component {
           email: Yup.string()
             .required('Required')
             .email('Please enter a valid email'),
+          password: Yup.string().required('Required'),
         })}
         onSubmit={(values) => {
           this.props.login(values);
@@ -49,6 +50,7 @@ class LoginForm extends React.Component {
               placeholder="Password"
               type="password"
             />
+            <ErrorMessage component={StyledErrorMessage} name="password" />
             <Button
               type="submit"
               disabled={!values.email || !values.password || errors.email}
