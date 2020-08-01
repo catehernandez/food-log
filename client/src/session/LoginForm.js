@@ -36,7 +36,7 @@ class LoginForm extends React.Component {
         {({ errors, touched }) => (
           <StyledForm>
             <StyledLabel htmlFor="email">Email</StyledLabel>
-            <Field as={StyledInput} name="email" />
+            <Field as={StyledInput} name="email" type="email" />
             <ErrorMessage component={StyledErrorMessage} name="email" />
             <StyledLabel htmlFor="password">Password</StyledLabel>
             <Field as={StyledInput} name="password" type="password" />
