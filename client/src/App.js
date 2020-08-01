@@ -9,7 +9,7 @@ import DashboardPage from './pages/DashboardPage';
 import GlobalStyle from './styles/GlobalStyle';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
-import UserProfile from './user/userProfile';
+import UserProfile from './user/UserProfile';
 
 class App extends React.Component {
   componentDidMount() {
