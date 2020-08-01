@@ -1,12 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import dateFormat from 'dateformat';
+import styled from 'styled-components';
+
 import * as logActions from './logRedux';
 
-import CenteredBox from 'shared/CenteredBox';
+import Box from 'shared/Box';
 import { LogContainer, DateContainer, ServingsLabel } from './logStyles';
 import LogErrMsg from './LogErrMsg';
 import Servings from './Servings';
+
+const LogBox = styled(Box)`
+  left: 50%;
+  max-height: 340px;
+  top: 17%;
+  transform: translate(-50%, 17%);
+  width: 340px;
+
+  @media (min-width: ${(props) => props.theme.breakpoints.small}) {
+    width: 400px;
+  }
+`;
 
 const mapStateToProps = (state) => ({
   currentUser: state.session.currentUser,
@@ -57,7 +71,7 @@ class Log extends React.Component {
     }
 
     return (
-      <CenteredBox>
+      <LogBox>
         <DateContainer>{dateFormat(this.today, 'd mmmm yyyy')}</DateContainer>
         <LogContainer>
           <ServingsLabel>Vegetables</ServingsLabel>
@@ -85,7 +99,7 @@ class Log extends React.Component {
             completed={this.props.currentLog.grain_count}
           />
         </LogContainer>
-      </CenteredBox>
+      </LogBox>
     );
   }
 }
