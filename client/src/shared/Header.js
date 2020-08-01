@@ -7,6 +7,9 @@ import { ReactComponent as UserIcon } from 'user/user-icon.svg';
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: flex-end;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
 `;
 
 const UserIconContainer = styled.span`
