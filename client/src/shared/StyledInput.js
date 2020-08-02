@@ -11,8 +11,7 @@ const StyledInput = styled.input`
   padding: 0.5rem;
 
   &:focus {
-    border: 1px solid ${({ theme }) => theme.colors.brownBlack};
-    border-radius: 4px;
+    border-width: 0 0 2px;
     outline: 0;
   }
 `;
