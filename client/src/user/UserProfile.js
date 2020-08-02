@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import NumericInput from 'shared/NumericInput';
+
 const UserProfilePanel = styled.div`
   background-color: #efefef;
   display: flex;
@@ -38,6 +40,9 @@ const UserProfile = (props) => {
       <UserProfileContainer>
         <div>Email: {user.email}</div>
         <div>Goals</div>
+        <div>
+          Vegetables: <NumericInput value={user.vegetable_goals} />
+        </div>
         <div>Vegetables: {user.vegetable_goals}</div>
         <div>Fruits: {user.fruit_goals}</div>
         <div>Protein: {user.protein_goals}</div>
