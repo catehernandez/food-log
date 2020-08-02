@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
 import * as sessionActions from 'session/sessionRedux';
@@ -40,7 +40,7 @@ const LoginForm = (props) => {
         props.login(values);
       }}
     >
-      {({ errors, values }) => (
+      {({ errors, touched, values }) => (
         <StyledForm>
           <TextInputLabel htmlFor="email">Email</TextInputLabel>
           <Field
@@ -49,7 +49,9 @@ const LoginForm = (props) => {
             placeholder="Email"
             type="email"
           />
-          <ErrorMessage component={InputErrorMessage} name="email" />
+          <InputErrorMessage>
+            {touched.email && errors.email ? errors.email : <pre></pre>}
+          </InputErrorMessage>
           <TextInputLabel htmlFor="password">Password</TextInputLabel>
           <Field
             as={StyledInput}
@@ -57,7 +59,14 @@ const LoginForm = (props) => {
             placeholder="Password"
             type="password"
           />
-          <ErrorMessage component={InputErrorMessage} name="password" />
+          <InputErrorMessage>
+            {touched.password && errors.password ? (
+              errors.password
+            ) : (
+              <pre></pre>
+            )}
+          </InputErrorMessage>
+
           {props.errors === 401 ? (
             <InputErrorMessage>Invalid username or password</InputErrorMessage>
           ) : (
