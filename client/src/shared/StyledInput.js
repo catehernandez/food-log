@@ -7,7 +7,6 @@ const StyledInput = styled.input`
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
-  margin: 1rem 0 0.5rem;
   padding: 0.5rem;
 
   &:focus {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -9,6 +9,7 @@ import * as sessionActions from 'session/sessionRedux';
 import InputErrorMessage from 'shared/InputErrorMessage';
 import LoginButton from './LoginButton';
 import StyledInput from 'shared/StyledInput';
+import TextInputLabel from 'shared/TextInputLabel';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -41,6 +42,7 @@ const LoginForm = (props) => {
     >
       {({ errors, values }) => (
         <StyledForm>
+          <TextInputLabel htmlFor="email">Email</TextInputLabel>
           <Field
             as={StyledInput}
             name="email"
@@ -48,6 +50,7 @@ const LoginForm = (props) => {
             type="email"
           />
           <ErrorMessage component={InputErrorMessage} name="email" />
+          <TextInputLabel htmlFor="password">Password</TextInputLabel>
           <Field
             as={StyledInput}
             name="password"
