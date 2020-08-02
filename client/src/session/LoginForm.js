@@ -42,7 +42,9 @@ const LoginForm = (props) => {
     >
       {({ errors, touched, values }) => (
         <StyledForm>
-          <TextInputLabel htmlFor="email">Email</TextInputLabel>
+          <TextInputLabel htmlFor="email" invisible={!values.email}>
+            Email
+          </TextInputLabel>
           <Field
             as={StyledInput}
             name="email"
@@ -52,7 +54,9 @@ const LoginForm = (props) => {
           <InputErrorMessage>
             {touched.email && errors.email ? errors.email : <pre></pre>}
           </InputErrorMessage>
-          <TextInputLabel htmlFor="password">Password</TextInputLabel>
+          <TextInputLabel htmlFor="password" invisible={!values.password}>
+            Password
+          </TextInputLabel>
           <Field
             as={StyledInput}
             name="password"
