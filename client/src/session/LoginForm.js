@@ -20,6 +20,10 @@ const StyledForm = styled(Form)`
   }
 `;
 
+const mapStateToProps = (state) => ({
+  errors: state.session.errors,
+});
+
 class LoginForm extends React.Component {
   render() {
     return (
@@ -51,6 +55,13 @@ class LoginForm extends React.Component {
               type="password"
             />
             <ErrorMessage component={StyledErrorMessage} name="password" />
+            {this.props.errors === 401 ? (
+              <StyledErrorMessage>
+                Invalid username or password
+              </StyledErrorMessage>
+            ) : (
+              ''
+            )}
             <Button
               type="submit"
               disabled={!values.email || !values.password || errors.email}
@@ -64,4 +75,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default connect(null, sessionActions)(LoginForm);
+export default connect(mapStateToProps, sessionActions)(LoginForm);
