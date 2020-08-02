@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledLabel = styled.label``;
-
-export const StyledInput = styled.input`
+const StyledInput = styled.input`
   background: none;
   border: none;
   border-bottom: 1px solid ${({ theme }) => theme.colors.brownBlack};
@@ -19,7 +17,4 @@ export const StyledInput = styled.input`
   }
 `;
 
-export const StyledErrorMessage = styled.div`
-  color: red;
-  font-size: 0.8rem;
-`;
+export default StyledInput;

@@ -6,8 +6,9 @@ import * as Yup from 'yup';
 
 import * as sessionActions from 'session/sessionRedux';
 
-import { StyledInput, StyledErrorMessage } from 'shared/StyledInput';
+import InputErrorMessage from 'shared/InputErrorMessage';
 import LoginButton from './LoginButton';
+import StyledInput from 'shared/StyledInput';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -47,18 +48,18 @@ class LoginForm extends React.Component {
               placeholder="Email"
               type="email"
             />
-            <ErrorMessage component={StyledErrorMessage} name="email" />
+            <ErrorMessage component={InputErrorMessage} name="email" />
             <Field
               as={StyledInput}
               name="password"
               placeholder="Password"
               type="password"
             />
-            <ErrorMessage component={StyledErrorMessage} name="password" />
+            <ErrorMessage component={InputErrorMessage} name="password" />
             {this.props.errors === 401 ? (
-              <StyledErrorMessage>
+              <InputErrorMessage>
                 Invalid username or password
-              </StyledErrorMessage>
+              </InputErrorMessage>
             ) : (
               ''
             )}

@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-import { StyledInput, StyledErrorMessage } from 'shared/StyledInput';
 import Button from 'shared/Button';
+import InputErrorMessage from 'shared/InputErrorMessage';
+import StyledInput from 'shared/StyledInput';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -30,9 +31,9 @@ const SignupForm = () => {
       {({ errors, touched }) => (
         <StyledForm>
           <Field as={StyledInput} name="email" />
-          <ErrorMessage component={StyledErrorMessage} name="email" />
+          <ErrorMessage component={InputErrorMessage} name="email" />
           <Field as={StyledInput} name="password" type="password" />
-          <ErrorMessage component={StyledErrorMessage} name="password" />
+          <ErrorMessage component={InputErrorMessage} name="password" />
           <Button
             disabled={
               !touched.email ||
