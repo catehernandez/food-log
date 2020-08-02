@@ -7,12 +7,12 @@ import * as Yup from 'yup';
 import * as sessionActions from 'session/sessionRedux';
 
 import { StyledInput, StyledErrorMessage } from 'shared/StyledInput';
-import Button from 'shared/Button';
+import LoginButton from './LoginButton';
 
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  margin: 1.5rem;
+  margin: 0 0 1rem;
   width: 80%;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
@@ -62,12 +62,12 @@ class LoginForm extends React.Component {
             ) : (
               ''
             )}
-            <Button
+            <LoginButton
               type="submit"
               disabled={!values.email || !values.password || errors.email}
             >
               Log in
-            </Button>
+            </LoginButton>
           </StyledForm>
         )}
       </Formik>
