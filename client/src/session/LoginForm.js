@@ -14,17 +14,12 @@ import TextInputLabel from 'shared/TextInputLabel';
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  margin: 0 0 0.5rem;
   width: 80%;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
     width: 70%;
   }
 `;
-
-const mapStateToProps = (state) => ({
-  errors: state.session.errors,
-});
 
 const LoginForm = (props) => {
   return (
@@ -70,12 +65,6 @@ const LoginForm = (props) => {
               <pre></pre>
             )}
           </InputErrorMessage>
-
-          {props.errors === 401 ? (
-            <InputErrorMessage>Invalid username or password</InputErrorMessage>
-          ) : (
-            ''
-          )}
           <LoginButton
             type="submit"
             disabled={!values.email || !values.password || errors.email}
@@ -88,4 +77,4 @@ const LoginForm = (props) => {
   );
 };
 
-export default connect(mapStateToProps, sessionActions)(LoginForm);
+export default connect(null, sessionActions)(LoginForm);

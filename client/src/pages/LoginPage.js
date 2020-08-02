@@ -22,8 +22,16 @@ const LoginBox = styled(Box)`
   }
 `;
 
+const AuthErrorMessage = styled.div`
+  color: red;
+  font-size: 0.9rem;
+  margin: 0.25rem;
+  text-align: center;
+`;
+
 const mapStateToProps = (state) => ({
   currentUser: state.session.currentUser,
+  errors: state.session.errors,
 });
 
 const Login = (props) => {
@@ -34,6 +42,11 @@ const Login = (props) => {
   return (
     <LoginBox>
       <LoginForm />
+      {props.errors === 401 ? (
+        <AuthErrorMessage>Invalid username or password</AuthErrorMessage>
+      ) : (
+        ''
+      )}
       <div>
         Don't have an account? <Link to={'/signup'}>Sign up</Link>
       </div>
