@@ -25,55 +25,51 @@ const mapStateToProps = (state) => ({
   errors: state.session.errors,
 });
 
-class LoginForm extends React.Component {
-  render() {
-    return (
-      <Formik
-        initialValues={{ email: '', password: '' }}
-        validationSchema={Yup.object({
-          email: Yup.string()
-            .required('Required')
-            .email('Please enter a valid email'),
-          password: Yup.string().required('Required'),
-        })}
-        onSubmit={(values) => {
-          this.props.login(values);
-        }}
-      >
-        {({ errors, values }) => (
-          <StyledForm>
-            <Field
-              as={StyledInput}
-              name="email"
-              placeholder="Email"
-              type="email"
-            />
-            <ErrorMessage component={InputErrorMessage} name="email" />
-            <Field
-              as={StyledInput}
-              name="password"
-              placeholder="Password"
-              type="password"
-            />
-            <ErrorMessage component={InputErrorMessage} name="password" />
-            {this.props.errors === 401 ? (
-              <InputErrorMessage>
-                Invalid username or password
-              </InputErrorMessage>
-            ) : (
-              ''
-            )}
-            <LoginButton
-              type="submit"
-              disabled={!values.email || !values.password || errors.email}
-            >
-              Log in
-            </LoginButton>
-          </StyledForm>
-        )}
-      </Formik>
-    );
-  }
-}
+const LoginForm = (props) => {
+  return (
+    <Formik
+      initialValues={{ email: '', password: '' }}
+      validationSchema={Yup.object({
+        email: Yup.string()
+          .required('Required')
+          .email('Please enter a valid email'),
+        password: Yup.string().required('Required'),
+      })}
+      onSubmit={(values) => {
+        props.login(values);
+      }}
+    >
+      {({ errors, values }) => (
+        <StyledForm>
+          <Field
+            as={StyledInput}
+            name="email"
+            placeholder="Email"
+            type="email"
+          />
+          <ErrorMessage component={InputErrorMessage} name="email" />
+          <Field
+            as={StyledInput}
+            name="password"
+            placeholder="Password"
+            type="password"
+          />
+          <ErrorMessage component={InputErrorMessage} name="password" />
+          {props.errors === 401 ? (
+            <InputErrorMessage>Invalid username or password</InputErrorMessage>
+          ) : (
+            ''
+          )}
+          <LoginButton
+            type="submit"
+            disabled={!values.email || !values.password || errors.email}
+          >
+            Log in
+          </LoginButton>
+        </StyledForm>
+      )}
+    </Formik>
+  );
+};
 
 export default connect(mapStateToProps, sessionActions)(LoginForm);
