@@ -14,7 +14,7 @@ import TextInputLabel from 'shared/TextInputLabel';
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  margin: 0 0 1rem;
+  margin: 0 0 0.5rem;
   width: 80%;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {

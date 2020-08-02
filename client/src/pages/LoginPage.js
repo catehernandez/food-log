@@ -10,7 +10,7 @@ const LoginBox = styled(Box)`
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 280px;
+  height: 300px;
   justify-content: center;
   left: 50%;
   top: 17%;
