@@ -1,25 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 
 import * as sessionActions from 'session/sessionRedux';
 
 import InputErrorMessage from 'shared/InputErrorMessage';
-import LoginButton from './LoginButton';
+import LoginButton from './styles/LoginButton';
+import StyledFormikForm from './styles/StyledFormikForm';
 import StyledInput from 'shared/StyledInput';
 import TextInputLabel from 'shared/TextInputLabel';
-
-const StyledForm = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
-    width: 70%;
-  }
-`;
 
 const LoginForm = (props) => {
   return (
@@ -36,7 +26,7 @@ const LoginForm = (props) => {
       }}
     >
       {({ errors, touched, values }) => (
-        <StyledForm>
+        <StyledFormikForm>
           <TextInputLabel htmlFor="email" invisible={!values.email}>
             Email
           </TextInputLabel>
@@ -71,7 +61,7 @@ const LoginForm = (props) => {
           >
             Log in
           </LoginButton>
-        </StyledForm>
+        </StyledFormikForm>
       )}
     </Formik>
   );
