@@ -6,7 +6,7 @@ module.exports = {
       res.json(req.user);
     } else {
       //user is not authenticated
-      res.json(null);
+      res.sendStatus(401);
     }
   },
   getAllLogs: async (req, res) => {

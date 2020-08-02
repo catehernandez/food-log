@@ -15,6 +15,7 @@ const LOGOUT_FAIL = 'food-log/auth/LOGOUT_FAIL';
 //reducer
 const initialState = {
   currentUser: null,
+  errors: null,
   loading: false,
 };
 
@@ -46,6 +47,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         loading: false,
         currentUser: null,
+        errors: action.payload,
       };
     case LOGOUT:
       return { ...state, loading: true };
@@ -83,8 +85,9 @@ export const loginSuccess = (user) => ({
   payload: user,
 });
 
-export const loginFail = () => ({
+export const loginFail = (errCode) => ({
   type: LOGIN_FAIL,
+  payload: errCode,
 });
 
 //logout action creators
@@ -110,8 +113,8 @@ export const login = (data) => async (dispatch) => {
   try {
     const res = await axios.post('/auth/login', data);
     dispatch(loginSuccess(res.data));
-  } catch {
-    dispatch(loginFail());
+  } catch (err) {
+    dispatch(loginFail(err.response.status));
   }
 };
 
