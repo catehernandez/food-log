@@ -60,11 +60,16 @@ const NumericInput = (props) => {
     }
   };
 
+  //type="button" prevents buttons from submitting on default within a form
   return (
     <InputContainer>
-      <DecrementButton onClick={decrementValue}>-</DecrementButton>
+      <DecrementButton onClick={decrementValue} type="button">
+        -
+      </DecrementButton>
       <InputValue>{value}</InputValue>
-      <IncrementButton onClick={incrementValue}>+</IncrementButton>
+      <IncrementButton onClick={incrementValue} type="button">
+        +
+      </IncrementButton>
     </InputContainer>
   );
 };
