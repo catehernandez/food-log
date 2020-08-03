@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 
-import * as sessionActions from 'session/sessionRedux';
-
+import Button from 'shared/Button';
 import InputErrorMessage from 'shared/InputErrorMessage';
-import LoginButton from './styles/LoginButton';
 import StyledFormikForm from './styles/StyledFormikForm';
 import StyledInput from 'shared/StyledInput';
 import TextInputLabel from 'shared/TextInputLabel';
+import * as sessionActions from 'session/sessionRedux';
 
 const LoginForm = (props) => {
   return (
@@ -55,12 +54,12 @@ const LoginForm = (props) => {
               <pre></pre>
             )}
           </InputErrorMessage>
-          <LoginButton
+          <Button
             type="submit"
             disabled={!values.email || !values.password || errors.email}
           >
             Log in
-          </LoginButton>
+          </Button>
         </StyledFormikForm>
       )}
     </Formik>
