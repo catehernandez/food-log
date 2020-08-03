@@ -47,11 +47,24 @@ const NumericInput = (props) => {
   const { value } = meta;
   const { setValue } = helpers;
 
+  const decrementValue = () => {
+    if (value > 0) {
+      setValue(value - 1);
+    }
+    //do nothing if value is 0 or less
+  };
+
+  const incrementValue = () => {
+    if (value < 10) {
+      setValue(value + 1);
+    }
+  };
+
   return (
     <InputContainer>
-      <DecrementButton onClick={() => setValue(value - 1)}>-</DecrementButton>
+      <DecrementButton onClick={decrementValue}>-</DecrementButton>
       <InputValue>{value}</InputValue>
-      <IncrementButton onClick={() => setValue(value + 1)}>+</IncrementButton>
+      <IncrementButton onClick={incrementValue}>+</IncrementButton>
     </InputContainer>
   );
 };
