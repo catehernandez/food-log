@@ -11,6 +11,8 @@ const Button = styled.button`
   padding: 0.5rem 1.5rem;
   text-align: center;
   text-decoration: none;
+  text-transform: capitalize;
+  width: max-content;
 `;
 
 export default Button;
