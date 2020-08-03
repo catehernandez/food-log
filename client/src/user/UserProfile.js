@@ -20,8 +20,15 @@ const UserProfilePanel = styled.div`
   }
 `;
 
-const UserProfileContainer = styled.div`
+const UserProfileContainer = styled.div``;
+
+const GoalsGrid = styled.div`
   display: grid;
+  grid-column-gap: 2.5rem;
+  grid-row-gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  margin: 1rem 0;
 `;
 
 const mapStateToProps = (state) => ({
@@ -51,17 +58,19 @@ const UserProfile = (props) => {
           onSubmit={(values) => console.log(values)}
         >
           <Form>
-            <label htmlFor="vegetable_goals">Vegetables</label>
-            <NumericInput name="vegetable_goals" />
+            <GoalsGrid>
+              <label htmlFor="vegetable_goals">Vegetables</label>
+              <NumericInput name="vegetable_goals" />
 
-            <label htmlFor="fruit_goals">Fruits</label>
-            <NumericInput name="fruit_goals" />
+              <label htmlFor="fruit_goals">Fruits</label>
+              <NumericInput name="fruit_goals" />
 
-            <label htmlFor="protein_goals">Protein</label>
-            <NumericInput name="protein_goals" />
+              <label htmlFor="protein_goals">Protein</label>
+              <NumericInput name="protein_goals" />
 
-            <label htmlFor="grain_goals">Grains</label>
-            <NumericInput name="grain_goals" />
+              <label htmlFor="grain_goals">Grains</label>
+              <NumericInput name="grain_goals" />
+            </GoalsGrid>
 
             <Button type="submit">Save changes</Button>
           </Form>
