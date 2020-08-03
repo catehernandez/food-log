@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { useField } from 'formik';
 
 import Button from 'shared/Button';
 
@@ -37,7 +38,14 @@ const InputValue = styled.span`
 `;
 
 const NumericInput = (props) => {
-  const [value, setValue] = useState(props.value);
+  /*
+   * Important! Even though field is not used directly, it must be included
+   * or else useField will not work
+   */
+  const [field, meta, helpers] = useField(props.name);
+
+  const { value } = meta;
+  const { setValue } = helpers;
 
   return (
     <InputContainer>
