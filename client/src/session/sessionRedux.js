@@ -11,6 +11,9 @@ const LOGIN_FAIL = 'food-log/auth/LOGIN_FAIL';
 const LOGOUT = 'food-log/auth/LOGOUT';
 const LOGOUT_SUCCESS = 'food-log/auth/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'food-log/auth/LOGOUT_FAIL';
+const SIGNUP = 'food-log/auth/SIGNUP';
+const SIGNUP_SUCCESS = 'food-log/auth/SIGNUP_SUCCESS';
+const SIGNUP_FAIL = 'food-log/auth/SIGNUP_FAIL';
 
 //reducer
 const initialState = {
@@ -54,6 +57,12 @@ export default function reducer(state = initialState, action) {
     case LOGOUT_SUCCESS:
       return { loading: false, currentUser: null };
     case LOGOUT_FAIL:
+      return { ...state, loading: false };
+    case SIGNUP:
+      return { ...state, loading: true };
+    case SIGNUP_SUCCESS:
+      return { loading: false, currentUser: action.payload };
+    case SIGNUP_FAIL:
       return { ...state, loading: false };
 
     default:
@@ -103,6 +112,21 @@ export const logoutFail = () => ({
   type: LOGOUT_FAIL,
 });
 
+//signupt action creators
+export const signingUp = () => ({
+  type: SIGNUP,
+});
+
+export const signupSuccess = (user) => ({
+  type: SIGNUP_SUCCESS,
+  payload: user,
+});
+
+export const signupFail = (errCode) => ({
+  type: SIGNUP_FAIL,
+  payload: errCode,
+});
+
 /**
  *
  * @param {Object} values   Object containing users email and password.
@@ -137,5 +161,16 @@ export const logout = () => async (dispatch) => {
     dispatch(logoutSuccess());
   } catch (err) {
     dispatch(logoutFail);
+  }
+};
+
+export const signup = (values) => async (dispatch) => {
+  dispatch(signingUp());
+
+  try {
+    const res = await axios.post('/auth/signup', values);
+    dispatch(loginSuccess(res.data));
+  } catch (err) {
+    dispatch(loginFail(err.response.status));
   }
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 
@@ -7,8 +8,9 @@ import InputErrorMessage from 'shared/InputErrorMessage';
 import StyledFormikForm from './styles/StyledFormikForm';
 import StyledInput from 'shared/StyledInput';
 import TextInputLabel from 'shared/TextInputLabel';
+import * as sessionActions from 'session/sessionRedux';
 
-const SignupForm = () => {
+const SignupForm = (props) => {
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
@@ -22,7 +24,7 @@ const SignupForm = () => {
           .max(35, 'Password must be less than 35 characters'),
       })}
       onSubmit={(values) => {
-        console.log(values);
+        props.signup(values);
       }}
     >
       {({ errors, touched, values }) => (
@@ -67,4 +69,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default connect(null, sessionActions)(SignupForm);
