@@ -1,10 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
 
 import LoginBox from 'session/styles/LoginBox';
 import SignupForm from 'session/SignupForm';
 
-const Signup = () => {
+const mapStateToProps = (state) => ({
+  currentUser: state.session.currentUser,
+});
+
+const Signup = (props) => {
+  if (props.currentUser) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <LoginBox>
       <SignupForm />
@@ -15,4 +24,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default connect(mapStateToProps)(Signup);
