@@ -21,19 +21,23 @@ module.exports = {
       const user = await UserDB.findUserByEmail(email);
 
       if (user != null) {
-        res.status(401).json('A user is already registered with this address');
+        res.status(400).json('A user is already registered with this address');
       }
 
       //create new user in db
       else {
-        //hash password
         const hashedpass = await bcrypt.hash(password, saltRounds);
         const user = await UserDB.createUser(email, hashedpass);
 
-        res.json(user);
+        //login newly created user.
+        req.login(user, function (err) {
+          if (err) res.sendStatus(500);
+
+          res.status(200).json(user);
+        });
       }
     } catch (err) {
-      res.status(500).send(err);
+      res.sendStatus(500);
     }
   },
   logout: (req, res) => {
