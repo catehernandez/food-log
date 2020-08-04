@@ -169,7 +169,7 @@ export const signup = (values) => async (dispatch) => {
 
   try {
     const res = await axios.post('/auth/signup', values);
-    dispatch(loginSuccess(res.data));
+    dispatch(signupSuccess(res.data));
   } catch (err) {
     dispatch(loginFail(err.response.status));
   }
