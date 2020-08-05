@@ -16,6 +16,7 @@ const LogBox = styled(Box)`
   top: 17%;
   transform: translate(-50%, 17%);
   width: 340px;
+  z-index: -1; /* Ensure rendered behind user profile popout */
 
   @media (min-width: ${(props) => props.theme.breakpoints.small}) {
     width: 400px;
