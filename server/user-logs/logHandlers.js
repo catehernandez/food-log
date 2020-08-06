@@ -81,7 +81,8 @@ module.exports = {
       return res.status(400).send(`Unmodifiable Field: ${field}`);
 
     //Validate input
-    if (!Number.isInteger(req.body[field])) return res.sendStatus(400);
+    if (!Number.isInteger(req.body[field]))
+      return res.status(400).json(`${field} value must be an integer`);
 
     //Finally ready to make request to db
     try {
