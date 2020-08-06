@@ -2,7 +2,6 @@
  * Database queries pertaining to users table.
  */
 const db = require('./index');
-const validator = require('validator');
 
 /**
  * Searches users table and finds user by user_id.
@@ -90,14 +89,14 @@ const updateUser = (
 ) => {
   //Reject invalid inputs
   if (
-    !validator.isInt(user_id) ||
-    !validator.isInt(vegetable_goals) ||
-    !validator.isInt(fruit_goals) ||
-    !validator.isInt(protein_goals) ||
-    !validator.isInt(grain_goals)
+    !Number.isInteger(vegetable_goals) ||
+    !Number.isInteger(fruit_goals) ||
+    !Number.isInteger(protein_goals) ||
+    !Number.isInteger(grain_goals)
   ) {
-    throw new Error('Invalid User Goals Input');
+    throw new Error('Invalid User Goals Input: Must be an Integer');
   }
+
   //else input into db
   return db
     .query(
