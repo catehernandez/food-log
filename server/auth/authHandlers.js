@@ -15,7 +15,6 @@ module.exports = {
     if (!isValidPwd)
       return res.status(400).json('Password must be 8-35 characters');
 
-    //proceed to signup
     try {
       //check if user exists
       const user = await UserDB.findUserByEmail(email);
@@ -27,7 +26,8 @@ module.exports = {
       //create new user in db
       else {
         const hashedpass = await bcrypt.hash(password, saltRounds);
-        const user = await UserDB.createUser(email, hashedpass);
+        const normalizedEmail = validator.normalizeEmail(email);
+        const user = await UserDB.createUser(normalizedEmail, hashedpass);
 
         //login newly created user.
         req.login(user, function (err) {
