@@ -10,7 +10,6 @@ module.exports = {
     }
   },
   updateUser: async (req, res) => {
-    console.log('called');
     if (!req.user) return res.sendStatus(401);
 
     if (!req.user.user_id === req.params.id) return res.sendStatus(401);
@@ -42,7 +41,7 @@ module.exports = {
 
     //update db
     try {
-      await UserDB.updateUser(
+      const user = await UserDB.updateUser(
         req.params.id,
         vegetable_goals,
         fruit_goals,
@@ -50,7 +49,7 @@ module.exports = {
         grain_goals
       );
 
-      res.sendStatus(204);
+      res.status(201).json(user);
     } catch (err) {
       //error in updating db
       console.log(err);
