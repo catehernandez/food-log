@@ -5,6 +5,6 @@ const user = require('../user/userRoutes');
 
 module.exports = (app) => {
   app.use('/auth', auth);
-  app.use('/user', user);
   app.use('/user/logs', logs);
+  app.use('/user', user);
 };
