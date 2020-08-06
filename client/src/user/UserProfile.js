@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import Button from 'shared/Button';
 import NumericInput from 'shared/NumericInput';
+import * as sessionActions from 'session/sessionRedux';
 
 const UserProfilePanel = styled.div`
   align-items: center;
@@ -57,7 +58,7 @@ const UserProfile = (props) => {
           protein_goals: user.protein_goals,
           grain_goals: user.grain_goals,
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => props.updateUser(values)}
       >
         <Form>
           <GoalsGrid>
@@ -81,4 +82,4 @@ const UserProfile = (props) => {
   );
 };
 
-export default connect(mapStateToProps)(UserProfile);
+export default connect(mapStateToProps, sessionActions)(UserProfile);

@@ -5,6 +5,9 @@ axios.defaults.withCredentials = true;
 const GET_CURRENT_USER = 'food-log/auth/GET_CURRENT_USER';
 const GET_CURRENT_USER_SUCCESS = 'food-log/auth/GET_CURRENT_USER_SUCCESS';
 const GET_CURRENT_USER_FAIL = 'food-log/auth/GET_CURRENT_USER_FAIL';
+const UPDATE_USER = 'food-log/logs/UPDATE_USER';
+const UPDATE_USER_SUCCESS = 'food-log/logs/UPDATE_USER_SUCCESS';
+const UPDATE_USER_FAIL = 'food-log/logs/UPDATE_USER_FAIL';
 const LOGIN = 'food-log/auth/LOGIN';
 const LOGIN_SUCCESS = 'food-log/auth/LOGIN_SUCCESS';
 const LOGIN_FAIL = 'food-log/auth/LOGIN_FAIL';
@@ -34,6 +37,12 @@ export default function reducer(state = initialState, action) {
         loading: false,
         currentUser: null,
       };
+    case UPDATE_USER:
+      return { ...state, loading: true };
+    case UPDATE_USER_SUCCESS:
+      return { ...state, loading: false, currentUser: action.payload };
+    case UPDATE_USER_FAIL:
+      return { ...state, loading: false, errors: action.payload };
     case LOGIN:
       return { ...state, loading: true };
     case LOGIN_SUCCESS:
@@ -73,6 +82,20 @@ export const getUserSuccess = (user) => ({
 
 export const getUserFailure = () => ({
   type: GET_CURRENT_USER_FAIL,
+});
+
+export const updatingUser = () => ({
+  type: UPDATE_USER,
+});
+
+export const updateUserSuccess = (user) => ({
+  type: UPDATE_USER_SUCCESS,
+  payload: user,
+});
+
+export const updateUserFail = (errCode) => ({
+  type: UPDATE_USER_FAIL,
+  payload: errCode,
 });
 
 //login action creators
@@ -137,5 +160,23 @@ export const logout = () => async (dispatch) => {
     dispatch(logoutSuccess());
   } catch (err) {
     dispatch(logoutFail);
+  }
+};
+
+export const updateUser = (values) => async (dispatch, getState) => {
+  dispatch(updatingUser);
+
+  const {
+    session: {
+      currentUser: { user_id },
+    },
+  } = getState();
+
+  try {
+    const res = await axios.post(`user/${user_id}`, values);
+
+    dispatch(updateUserSuccess(res.data));
+  } catch (err) {
+    dispatch(updateUserFail(err.response.status));
   }
 };
