@@ -1,3 +1,5 @@
+const validator = require('validator');
+
 /**
  * Database queries pertaining to users table.
  */
