@@ -13,15 +13,18 @@ export const ServingsLabel = styled.span`
 `;
 
 export const ServingsContainer = styled.div`
-  display: inline;
+  display: grid;
+  grid-template-columns: repeat(5, fit-content(1.5rem));
+  grid-template-rows: repeat(2, auto);
+  grid-row-gap: 0.5rem;
 `;
 
 export const LogContainer = styled.div`
   display: grid;
   grid-column-gap: 1rem;
   grid-row-gap: 1.5rem;
-  grid-template-columns: repeat(2 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(4, auto);
   margin: 2.25rem auto;
   width: max-content;
 
