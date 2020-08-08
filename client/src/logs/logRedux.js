@@ -129,8 +129,23 @@ export const createLog = (date) => async (dispatch) => {
   }
 };
 
-export const updateLog = (log_date, field, value) => async (dispatch) => {
+/**
+ * Function to register updates to the currentLog, stored in state, to the backend.
+ *
+ * @param {String}  field   The column that needs to be updated on the backend.
+ * @param {Number}  value   New value for the given field.
+ */
+export const updateCurrentLog = (field, value) => async (
+  dispatch,
+  getState
+) => {
   dispatch(updatingLog());
+
+  const {
+    log: {
+      currentLog: { log_date },
+    },
+  } = getState();
 
   try {
     const res = await axios.patch(`/user/logs/${log_date}`, { [field]: value });

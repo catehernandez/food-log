@@ -6,10 +6,6 @@ import Checkbox from './Checkbox';
 import { ServingsContainer } from './logStyles';
 import * as logActions from './logRedux';
 
-const mapStateToProps = (state) => ({
-  currentLog: state.log.currentLog,
-});
-
 /**
  * Renders the user's goals and the number of completed servings for the current
  * day.
@@ -51,10 +47,11 @@ class Servings extends React.Component {
   };
 
   handleChange = (event) => {
-    //update checkbox state
     const itemName = event.target.name;
     const isChecked = event.target.checked;
+    const { field } = this.props;
 
+    //update checkbox state
     this.setState((prevState) => ({
       checkedItems: prevState.checkedItems.set(itemName, isChecked),
     }));
@@ -62,7 +59,6 @@ class Servings extends React.Component {
     //update item count on backend
     let newCount;
 
-    //increment completed count
     if (isChecked) {
       newCount = this.props.completed + 1;
     }
@@ -71,11 +67,7 @@ class Servings extends React.Component {
       newCount = this.props.completed - 1;
     }
 
-    this.props.updateLog(
-      this.props.currentLog.log_date,
-      this.props.field,
-      newCount
-    );
+    this.props.updateCurrentLog(field, newCount);
   };
 
   renderCheckboxes() {
@@ -131,4 +123,4 @@ Servings.propTypes = {
   goals: PropTypes.number.isRequired,
 };
 
-export default connect(mapStateToProps, logActions)(Servings);
+export default connect(null, logActions)(Servings);
