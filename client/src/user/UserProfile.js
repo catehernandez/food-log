@@ -28,7 +28,7 @@ const UserProfilePanel = styled.div`
     width: 320px;
 
     ${(props) =>
-      props.hide &&
+      props.isHidden &&
       `
       transform: translateX(100%);
     `}
@@ -36,9 +36,10 @@ const UserProfilePanel = styled.div`
 `;
 
 const CloseButton = styled(CloseSVG)`
-  position: absolute;
+  cursor: pointer;
   left: 1.5rem;
-  margin: 0.5rem;
+  padding: 0.5rem;
+  position: absolute;
   top: 1.5rem;
 `;
 
@@ -61,7 +62,7 @@ const mapStateToProps = (state) => ({
 
 /**
  * Functional component that renders current user's profile in a popout panel
- * that can be shown or revealed by passing "hide" as a prop.
+ * that can be shown or revealed by passing "isHidden" as a prop.
  */
 const UserProfile = (props) => {
   const user = props.currentUser;
@@ -70,8 +71,8 @@ const UserProfile = (props) => {
   if (!user) return <div />;
 
   return (
-    <UserProfilePanel hide={props.hide}>
-      <CloseButton />
+    <UserProfilePanel isHidden={props.isHidden}>
+      <CloseButton onClick={props.toggleUserProfile} />
       <h3>Goals</h3>
       <Formik
         initialValues={{
