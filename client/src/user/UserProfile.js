@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import Button from 'shared/Button';
 import NumericInput from 'shared/NumericInput';
+import { ReactComponent as CloseSVG } from 'shared/SVG/X.svg';
 import * as sessionActions from 'session/sessionRedux';
 
 /**
@@ -34,6 +35,13 @@ const UserProfilePanel = styled.div`
   }
 `;
 
+const CloseButton = styled(CloseSVG)`
+  position: absolute;
+  left: 1.5rem;
+  margin: 0.5rem;
+  top: 1.5rem;
+`;
+
 const GoalsGrid = styled.div`
   display: grid;
   grid-column-gap: 2.5rem;
@@ -56,13 +64,14 @@ const mapStateToProps = (state) => ({
  * that can be shown or revealed by passing "hide" as a prop.
  */
 const UserProfile = (props) => {
-  //if currentUser not yet loaded
   const user = props.currentUser;
 
+  //if currentUser not yet loaded
   if (!user) return <div />;
 
   return (
     <UserProfilePanel hide={props.hide}>
+      <CloseButton />
       <h3>Goals</h3>
       <Formik
         initialValues={{
