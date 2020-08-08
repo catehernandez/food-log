@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Formik, Form } from 'formik';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Button from 'shared/Button';
@@ -9,7 +10,8 @@ import { ReactComponent as CloseSVG } from 'shared/SVG/X.svg';
 import * as sessionActions from 'session/sessionRedux';
 
 /**
- * UserProfilePanel is shown by default but can be hidden by passing "hide" as props.
+ * Panel is hidden or revealed depending on value of "isHidden", passed as props
+ * through UserProfile.
  */
 const UserProfilePanel = styled.div`
   align-items: center;
@@ -61,8 +63,12 @@ const mapStateToProps = (state) => ({
 });
 
 /**
- * Functional component that renders current user's profile in a popout panel
- * that can be shown or revealed by passing "isHidden" as a prop.
+ * Functional component that allows a user to view and update their profile in
+ * a popout panel.
+ *
+ * Whether the profile is hidden or revealed should be determined in the state
+ * of the parent component. The parent should pass the current state through the
+ * isHidden prop and pass a function to change the state as toggleUserProfile.
  */
 const UserProfile = (props) => {
   const user = props.currentUser;
@@ -103,6 +109,18 @@ const UserProfile = (props) => {
       </Formik>
     </UserProfilePanel>
   );
+};
+
+UserProfile.propTypes = {
+  currentUser: PropTypes.shape({
+    vegetable_goals: PropTypes.number.isRequired,
+    fruit_goals: PropTypes.number.isRequired,
+    protein_goals: PropTypes.number.isRequired,
+    grain_goals: PropTypes.number.isRequired,
+  }),
+  isHidden: PropTypes.bool.isRequired,
+  toggleUserProfile: PropTypes.func.isRequired,
+  updateUser: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, sessionActions)(UserProfile);
