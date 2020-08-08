@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const TextInputLabel = styled.label`
@@ -12,5 +13,12 @@ const TextInputLabel = styled.label`
       opacity: 0;
     `}
 `;
+
+TextInputLabel.propTypes = {
+  /**
+   * Optional prop to determine visibility of the label.
+   */
+  invisible: PropTypes.bool,
+};
 
 export default TextInputLabel;

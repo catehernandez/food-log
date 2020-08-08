@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useField } from 'formik';
 
@@ -14,7 +15,11 @@ const InputContainer = styled.div`
   width: 6rem;
 `;
 
-const IncrementButton = styled(Button)`
+/**
+ * type="button" is essential to prevent the buttons from submitting by default
+ * within the containing form.
+ */
+const IncrementButton = styled(Button).attrs({ type: 'button' })`
   border: none;
   border-left: inherit;
   border-radius: 0 4px 4px 0;
@@ -22,7 +27,7 @@ const IncrementButton = styled(Button)`
   width: 2rem;
 `;
 
-const DecrementButton = styled(Button)`
+const DecrementButton = styled(Button).attrs({ type: 'button' })`
   border: none;
   border-right: inherit;
   border-radius: 4px 0 0 4px;
@@ -37,9 +42,15 @@ const InputValue = styled.span`
   width: 4rem;
 `;
 
+/**
+ * Custom "input" that renders a given number that is adjustable through
+ * the increment and decrement buttons.
+ *
+ * Is always used with Formik, which passes the initial values.
+ */
 const NumericInput = (props) => {
-  /*
-   * Important! Even though field is not used directly, it must be included
+  /**
+   * Important: Even though field is not used directly, it must be included
    * or else useField will not work
    */
   const [field, meta, helpers] = useField(props.name);
@@ -60,18 +71,21 @@ const NumericInput = (props) => {
     }
   };
 
-  //type="button" prevents buttons from submitting on default within a form
   return (
     <InputContainer>
-      <DecrementButton onClick={decrementValue} type="button">
-        -
-      </DecrementButton>
+      <DecrementButton onClick={decrementValue}>-</DecrementButton>
       <InputValue>{value}</InputValue>
-      <IncrementButton onClick={incrementValue} type="button">
-        +
-      </IncrementButton>
+      <IncrementButton onClick={incrementValue}>+</IncrementButton>
     </InputContainer>
   );
+};
+
+NumericInput.propTypes = {
+  /**
+   * The name that will be used to reference the NumericalInput data when the
+   * Formik form is submitted.
+   */
+  name: PropTypes.string.isRequired,
 };
 
 export default NumericInput;
