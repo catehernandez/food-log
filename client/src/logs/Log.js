@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import dateFormat from 'dateformat';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
-import * as logActions from './logRedux';
 
 import Box from 'shared/Box';
 import { LogContainer, DateContainer, ServingsLabel } from './logStyles';
 import LogErrMsg from './LogErrMsg';
 import Servings from './Servings';
+import * as logActions from './logRedux';
 
 const LogBox = styled(Box)`
   left: 50%;
@@ -29,6 +29,10 @@ const mapStateToProps = (state) => ({
   loading: state.log.loading,
 });
 
+/**
+ * Renders Log for the current day in the user's timezone. If no log yet exists
+ * for the current day, create a new entry.
+ */
 class Log extends React.Component {
   constructor(props) {
     super(props);
@@ -57,12 +61,15 @@ class Log extends React.Component {
   }
 
   render() {
-    if (!this.props.currentLog) {
+    const { currentUser, currentLog } = this.props;
+
+    //404 err: handle by waiting for log to be fetched or created
+    if (!currentLog) {
       return <div />;
     }
 
+    //Any other non-404 err
     if (this.props.errors) {
-      console.log('err: ', this.props.errors);
       return (
         <div>
           <LogErrMsg />
@@ -77,31 +84,50 @@ class Log extends React.Component {
           <ServingsLabel>Vegetables</ServingsLabel>
           <Servings
             field="veg_count"
-            goals={this.props.currentUser.vegetable_goals}
-            completed={this.props.currentLog.veg_count}
+            goals={currentUser.vegetable_goals}
+            completed={currentLog.veg_count}
           />
           <ServingsLabel>Fruits</ServingsLabel>
           <Servings
             field="fruit_count"
-            goals={this.props.currentUser.fruit_goals}
-            completed={this.props.currentLog.fruit_count}
+            goals={currentUser.fruit_goals}
+            completed={currentLog.fruit_count}
           />
           <ServingsLabel>Protein</ServingsLabel>
           <Servings
             field="protein_count"
-            goals={this.props.currentUser.protein_goals}
-            completed={this.props.currentLog.protein_count}
+            goals={currentUser.protein_goals}
+            completed={currentLog.protein_count}
           />
           <ServingsLabel>Grains</ServingsLabel>
           <Servings
             field="grain_count"
-            goals={this.props.currentUser.grain_goals}
-            completed={this.props.currentLog.grain_count}
+            goals={currentUser.grain_goals}
+            completed={currentLog.grain_count}
           />
         </LogContainer>
       </LogBox>
     );
   }
 }
+
+Log.propTypes = {
+  createLog: PropTypes.func.isRequired,
+  currentUser: PropTypes.shape({
+    vegetable_goals: PropTypes.number.isRequired,
+    fruit_goals: PropTypes.number.isRequired,
+    protein_goals: PropTypes.number.isRequired,
+    grain_goals: PropTypes.number.isRequired,
+  }),
+  currentLog: PropTypes.shape({
+    veg_count: PropTypes.number.isRequired,
+    fruit_count: PropTypes.number.isRequired,
+    protein_count: PropTypes.number.isRequired,
+    grain_count: PropTypes.number.isRequired,
+  }),
+  errors: PropTypes.number,
+  getLog: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+};
 
 export default connect(mapStateToProps, logActions)(Log);

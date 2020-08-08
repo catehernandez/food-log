@@ -1,14 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as logActions from './logRedux';
+import PropTypes from 'prop-types';
 
 import Checkbox from './Checkbox';
 import { ServingsContainer } from './logStyles';
+import * as logActions from './logRedux';
 
 const mapStateToProps = (state) => ({
   currentLog: state.log.currentLog,
 });
 
+/**
+ * Renders the user's goals and the number of completed servings for the current
+ * day.
+ */
 class Servings extends React.Component {
   constructor(props) {
     super(props);
@@ -114,5 +119,16 @@ class Servings extends React.Component {
     return <ServingsContainer>{this.renderCheckboxes()}</ServingsContainer>;
   }
 }
+
+Servings.propTypes = {
+  completed: PropTypes.number.isRequired,
+  field: PropTypes.oneOf([
+    'veg_count',
+    'fruit_count',
+    'protein_count',
+    'grain_count',
+  ]),
+  goals: PropTypes.number.isRequired,
+};
 
 export default connect(mapStateToProps, logActions)(Servings);

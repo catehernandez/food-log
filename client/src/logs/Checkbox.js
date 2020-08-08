@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+//Remove default checkbox styling
 const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   position: absolute;
   opacity: 0;
@@ -8,16 +10,18 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   width: 0;
 `;
 
-// translate -1% makes it appear actually centered--some strange visual trick
+// Checked fill style.
 const StyledCheckFill = styled.div`
   background-color: ${({ color, theme }) => theme.colors[color]};
   border-radius: 50%;
   height: inherit;
   position: relative;
   width: inherit;
+  /* Translate -1% makes it appear actually centered--some strange visual trick */
   transform: scale(0.85) translate(0%, -1%);
 `;
 
+// Styled checkbox to replace the native component.
 const StyledCheckbox = styled.div`
   border: ${({ checked }) => (checked ? '1px' : '1.5px')} solid
     ${({ color, theme }) => theme.colors[color]};
@@ -33,6 +37,7 @@ const StyledCheckbox = styled.div`
   }
 `;
 
+// Container that wraps both hidden and styled checkboxes.
 const CheckboxContainer = styled.div`
   display: inline-block;
   vertical-align: middle;
@@ -41,6 +46,8 @@ const CheckboxContainer = styled.div`
 
 /**
  * Function to render a custom checkbox.
+ *
+ * Must be wrapped by a label to render hidden, underlying checkbox input clickable.
  *
  * @author Cole Bemis       https://bit.ly/3f9rhuC
  * @param {Object}  props   destructured props. Checked is a required field but
@@ -56,5 +63,16 @@ const Checkbox = ({ checked, color = 'lightBlue', ...props }) => (
     </CheckboxContainer>
   </label>
 );
+
+/**
+ * one of onChange or readOnly is required. React will throw warning if you
+ * provide neither or both.
+ */
+Checkbox.propTypes = {
+  checked: PropTypes.bool.isRequired,
+  color: PropTypes.string,
+  onChange: PropTypes.func,
+  readOnly: PropTypes.bool,
+};
 
 export default Checkbox;
