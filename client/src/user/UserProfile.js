@@ -7,6 +7,9 @@ import Button from 'shared/Button';
 import NumericInput from 'shared/NumericInput';
 import * as sessionActions from 'session/sessionRedux';
 
+/**
+ * UserProfilePanel is shown by default but can be hidden by passing "hide" as props.
+ */
 const UserProfilePanel = styled.div`
   align-items: center;
   background-color: #efefef;
@@ -14,11 +17,20 @@ const UserProfilePanel = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 100vh;
-  float: right;
+  position: absolute;
   width: 100%;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    right: 0;
+    transform: translateX(0%);
+    transition: transform 300ms;
     width: 320px;
+
+    ${(props) =>
+      props.hide &&
+      `
+      transform: translateX(100%);
+    `}
   }
 `;
 
@@ -40,16 +52,17 @@ const mapStateToProps = (state) => ({
 });
 
 /**
- * Functional component that renders current user's profile in a popout panel.
+ * Functional component that renders current user's profile in a popout panel
+ * that can be shown or revealed by passing "hide" as a prop.
  */
 const UserProfile = (props) => {
   //if currentUser not yet loaded
-  if (!props.currentUser) return <div />;
-
   const user = props.currentUser;
 
+  if (!user) return <div />;
+
   return (
-    <UserProfilePanel>
+    <UserProfilePanel hide={props.hide}>
       <h3>Goals</h3>
       <Formik
         initialValues={{

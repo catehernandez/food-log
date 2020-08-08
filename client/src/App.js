@@ -9,7 +9,6 @@ import DashboardPage from './pages/DashboardPage';
 import GlobalStyle from './styles/GlobalStyle';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
-import UserProfile from './user/UserProfile';
 
 class App extends React.Component {
   componentDidMount() {
@@ -21,7 +20,6 @@ class App extends React.Component {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <BrowserRouter>
-          <UserProfile />
           <Route path="/" exact component={DashboardPage} />
           <Route path="/login" exact component={LoginPage} />
           <Route path="/signup" exact component={SignupPage} />

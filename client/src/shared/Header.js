@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import LogoutButton from 'session/LogoutButton';
 import { ReactComponent as UserIcon } from 'user/user-icon.svg';
+import UserProfile from 'user/UserProfile';
 
 const HeaderContainer = styled.header`
   align-items: center;
@@ -18,18 +19,19 @@ const UserIconContainer = styled.span`
   margin: 0 1.2rem;
 `;
 
-const showUserProfile = () => {
-  console.log('user profile');
-};
-
 const Header = () => {
+  const [userProfileIsHidden, toggleUserProfile] = useState(true);
+
   return (
-    <HeaderContainer>
-      <UserIconContainer onClick={showUserProfile}>
-        <UserIcon />
-      </UserIconContainer>
-      <LogoutButton />
-    </HeaderContainer>
+    <React.Fragment>
+      <UserProfile hide={userProfileIsHidden} />
+      <HeaderContainer>
+        <UserIconContainer onClick={() => toggleUserProfile(false)}>
+          <UserIcon />
+        </UserIconContainer>
+        <LogoutButton />
+      </HeaderContainer>
+    </React.Fragment>
   );
 };
 
