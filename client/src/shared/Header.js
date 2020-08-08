@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import LogoutButton from 'session/LogoutButton';
@@ -18,6 +19,14 @@ const UserIcon = styled(UserIconSVG)`
   padding: 0 1.2rem;
 `;
 
+/**
+ * Header appears on dashboard for authenticated user. Contains buttons to reveal
+ * UserProfile and Logout.
+ *
+ * Clicking the UserIcon reveals the UserProfile. Visibility of UserProfile is
+ * determined in parent component's state and can be manipulated via the
+ * toggleUserProfile function, which must be passed to the header as a prop.
+ */
 const Header = (props) => {
   return (
     <HeaderContainer>
@@ -25,6 +34,10 @@ const Header = (props) => {
       <LogoutButton />
     </HeaderContainer>
   );
+};
+
+Header.propTypes = {
+  toggleUserProfile: PropTypes.func.isRequired,
 };
 
 export default Header;
