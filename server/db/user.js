@@ -1,8 +1,9 @@
+const validator = require('validator');
+
 /**
  * Database queries pertaining to users table.
  */
 const db = require('./index');
-const validator = require('validator');
 
 /**
  * Searches users table and finds user by user_id.
@@ -72,4 +73,47 @@ const createUser = (email, hashedpass) => {
     });
 };
 
-module.exports = { findUser, findUserByEmail, createUser };
+/**
+ * Function to update a user's goals.
+ *
+ * @param {Number} user_id            User's ID
+ * @param {Number} vegetable_goals    Integer between 0 and 10 inclusive
+ * @param {Number} fruit_goals        Integer between 0 and 10 inclusive
+ * @param {Number} protein_goals      Integer between 0 and 10 inclusive
+ * @param {Number} grain_goals        Integer between 0 and 10 inclusive
+ */
+const updateUser = (
+  user_id,
+  vegetable_goals,
+  fruit_goals,
+  protein_goals,
+  grain_goals
+) => {
+  //Reject invalid inputs
+  if (
+    !Number.isInteger(vegetable_goals) ||
+    !Number.isInteger(fruit_goals) ||
+    !Number.isInteger(protein_goals) ||
+    !Number.isInteger(grain_goals)
+  ) {
+    throw new Error('Invalid User Goals Input: Must be an Integer');
+  }
+
+  //else input into db
+  return db
+    .query(
+      `UPDATE users
+       SET (vegetable_goals, fruit_goals, protein_goals, grain_goals)= ($1, $2, $3, $4)
+       WHERE user_id=$5 RETURNING *`,
+      [vegetable_goals, fruit_goals, protein_goals, grain_goals, user_id]
+    )
+    .then((results) => {
+      let user = results.rows[0];
+      return user;
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
+module.exports = { findUser, findUserByEmail, createUser, updateUser };

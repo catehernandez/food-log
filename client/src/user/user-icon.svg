@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 46.25 52.58"
+     fill="none"
+     height="32px"
+     stroke="#4D3232"
+     stroke-miterlimit="10" 
+     stroke-width="1.5px"
+>
+    <circle cx="23.12" cy="12.63" r="12" />
+    <path d="M27.5,62.5a22.5,22.5,0,0,1,45,0" transform="translate(-26.88 -9.92)" />
+</svg>
