@@ -40,6 +40,7 @@ export const LogContainer = styled.div`
   grid-template-rows: repeat(4, auto);
   max-height: 230px;
   margin: 2.25rem auto;
+  padding: 0 1.5rem;
   overflow-y: auto;
   width: max-content;
 
