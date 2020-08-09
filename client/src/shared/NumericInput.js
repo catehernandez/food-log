@@ -64,6 +64,7 @@ const InputValue = styled.span`
   border-style: none solid;
   border-width: 0 1px;
   display: flex;
+  font-weight: ${({ theme }) => theme.fontWeights.regular};
   justify-content: center;
   width: 4rem;
 `;
