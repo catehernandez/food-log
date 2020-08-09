@@ -24,10 +24,8 @@ export const LogBox = styled(Box)`
 
 export const LogContainer = styled.div`
   display: grid;
-  grid-column-gap: 1rem;
-  grid-row-gap: 1.5rem;
+  gap: 1.5rem 1rem;
   grid-template-columns: repeat(2, auto);
-  grid-template-rows: repeat(4, auto);
   max-height: 230px;
   margin: 2.25rem auto;
   padding: 0 1.5rem;
