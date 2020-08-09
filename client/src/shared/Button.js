@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Button = styled.button`
   align-items: center;
@@ -15,6 +15,14 @@ const Button = styled.button`
   text-decoration: none;
   text-transform: capitalize;
   width: max-content;
+
+  ${(props) =>
+    props.disabled &&
+    css`
+      border-color: ${(props) => props.theme.colors.brownBlack60};
+      color: ${(props) => props.theme.colors.brownBlack60};
+      cursor: auto;
+    `}
 `;
 
 export default Button;
