@@ -1,10 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import Checkbox from './Checkbox';
-import { ServingsContainer } from './logStyles';
 import * as logActions from './logRedux';
+
+//Exported for managing layout in logStyles
+export const ServingsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, fit-content(1.5rem));
+  grid-template-rows: repeat(2, auto);
+  grid-row-gap: 0.5rem;
+`;
+
+export const ServingsLabel = styled.span`
+  text-align: right;
+  text-transform: capitalize;
+`;
 
 /**
  * Renders the user's goals as compared to the number of completed servings for
@@ -108,7 +121,14 @@ class Servings extends React.Component {
   }
 
   render() {
-    return <ServingsContainer>{this.renderCheckboxes()}</ServingsContainer>;
+    if (this.props.goals === 0) return '';
+
+    return (
+      <React.Fragment>
+        <ServingsLabel>{this.props.foodGroup}</ServingsLabel>
+        <ServingsContainer>{this.renderCheckboxes()}</ServingsContainer>
+      </React.Fragment>
+    );
   }
 }
 
@@ -126,6 +146,8 @@ Servings.propTypes = {
     'protein_count',
     'grain_count',
   ]),
+  /** The label for the Servings group */
+  foodGroup: PropTypes.string.isRequired,
   /** Determines the total number of checkboxes rendered within the Serving. */
   goals: PropTypes.number.isRequired,
   /**

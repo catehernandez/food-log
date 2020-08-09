@@ -11,7 +11,7 @@ import * as sessionActions from 'session/sessionRedux';
 
 const UserProfilePanel = styled.div`
   align-items: center;
-  background-color: #efefef;
+  background-color: ${({ theme }) => theme.colors.lightBeige};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,6 +20,7 @@ const UserProfilePanel = styled.div`
   width: 100%;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
     right: 0;
     transform: translateX(0%);
     transition: transform 300ms;
@@ -33,12 +34,27 @@ const UserProfilePanel = styled.div`
   }
 `;
 
+/** Subheader specific to the user profile panel */
+const UserProfileHeader = styled.header`
+  align-items: center;
+  display: inline-flex;
+  justify-content: space-between;
+  position: absolute;
+  padding: 1.5rem;
+  top: 0;
+  width: 16.5rem;
+`;
+
 const CloseButton = styled(CloseSVG)`
   cursor: pointer;
-  left: 1.5rem;
-  padding: 0.5rem;
-  position: absolute;
-  top: 1.5rem;
+  height: 20px;
+  margin: 0.5rem;
+`;
+
+const LogoutButton = styled(Button)`
+  background-color: ${({ theme }) => theme.colors.lightBeige};
+  border: none;
+  font-size: 1.1rem;
 `;
 
 const GoalsGrid = styled.div`
@@ -70,7 +86,10 @@ const UserProfile = (props) => {
 
   return (
     <UserProfilePanel isHidden={props.isHidden}>
-      <CloseButton onClick={props.toggleUserProfile} />
+      <UserProfileHeader>
+        <CloseButton onClick={props.toggleUserProfile} />
+        <LogoutButton onClick={props.logout}>Log out</LogoutButton>
+      </UserProfileHeader>
       <h3>Goals</h3>
       <Formik
         initialValues={{

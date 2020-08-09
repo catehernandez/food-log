@@ -4,9 +4,51 @@ import styled from 'styled-components';
 import { useField } from 'formik';
 
 import Button from 'shared/Button';
+import { ReactComponent as MinusSVG } from 'shared/SVG/minus.svg';
+import { ReactComponent as PlusSVG } from 'shared/SVG/plus.svg';
+
+const MinusSign = styled(MinusSVG)`
+  stroke: ${({ theme }) => theme.colors.brownBlack};
+  width: 0.8rem;
+`;
+
+const PlusSign = styled(PlusSVG)`
+  stroke: ${({ theme }) => theme.colors.brownBlack};
+  stroke-width: 1px;
+  width: 0.9rem;
+`;
+
+/**
+ * type="button" is essential to prevent the buttons from submitting by default
+ * within the containing form.
+ */
+const DecrementButton = styled(Button).attrs({ type: 'button' })`
+  border: none;
+  border-radius: 4px 0 0 4px;
+  padding: 0px;
+  width: 2rem;
+
+  &:active {
+    ${MinusSign} {
+      stroke-width: 2px;
+      transition: stroke-width 150ms;
+    }
+  }
+`;
+
+const IncrementButton = styled(DecrementButton)`
+  border-radius: 0 4px 4px 0;
+
+  &:active {
+    ${PlusSign} {
+      stroke-width: 1.5px;
+      transition: stroke-width 150ms;
+    }
+  }
+`;
 
 const InputContainer = styled.div`
-  border: 1px solid #444;
+  border: 1px solid ${({ theme }) => theme.colors.brownBlack};
   border-radius: 4px;
   display: inline-flex;
   font-size: 1rem;
@@ -15,29 +57,14 @@ const InputContainer = styled.div`
   width: 6rem;
 `;
 
-/**
- * type="button" is essential to prevent the buttons from submitting by default
- * within the containing form.
- */
-const IncrementButton = styled(Button).attrs({ type: 'button' })`
-  border: none;
-  border-left: inherit;
-  border-radius: 0 4px 4px 0;
-  padding: 0px;
-  width: 2rem;
-`;
-
-const DecrementButton = styled(Button).attrs({ type: 'button' })`
-  border: none;
-  border-right: inherit;
-  border-radius: 4px 0 0 4px;
-  padding: 0px;
-  width: 2rem;
-`;
-
 const InputValue = styled.span`
   align-items: center;
+  background-color: ${({ theme }) => theme.colors.lightestBeige};
+  border-color: ${({ theme }) => theme.colors.brownBlack};
+  border-style: none solid;
+  border-width: 0 1px;
   display: flex;
+  font-weight: ${({ theme }) => theme.fontWeights.regular};
   justify-content: center;
   width: 4rem;
 `;
@@ -73,9 +100,13 @@ const NumericInput = (props) => {
 
   return (
     <InputContainer>
-      <DecrementButton onClick={decrementValue}>-</DecrementButton>
+      <DecrementButton onClick={decrementValue}>
+        <MinusSign />
+      </DecrementButton>
       <InputValue>{value}</InputValue>
-      <IncrementButton onClick={incrementValue}>+</IncrementButton>
+      <IncrementButton onClick={incrementValue}>
+        <PlusSign />
+      </IncrementButton>
     </InputContainer>
   );
 };

@@ -2,25 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import dateFormat from 'dateformat';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
-import Box from 'shared/Box';
-import { LogContainer, DateContainer, ServingsLabel } from './logStyles';
+import { LogBox, LogContainer, DateContainer } from './logStyles';
 import LogErrMsg from './LogErrMsg';
 import Servings from './Servings';
 import * as logActions from './logRedux';
 
-const LogBox = styled(Box)`
-  left: 50%;
-  max-height: 340px;
-  top: 17%;
-  transform: translate(-50%, 17%);
-  width: 340px;
-
-  @media (min-width: ${(props) => props.theme.breakpoints.small}) {
-    width: 400px;
-  }
-`;
+/** All styled components are defined in logs/logStyles */
 
 const mapStateToProps = (state) => ({
   currentUser: state.session.currentUser,
@@ -81,26 +69,29 @@ class Log extends React.Component {
       <LogBox>
         <DateContainer>{dateFormat(this.today, 'd mmmm yyyy')}</DateContainer>
         <LogContainer>
-          <ServingsLabel>Vegetables</ServingsLabel>
           <Servings
+            foodGroup="vegetables"
             field="veg_count"
             goals={currentUser.vegetable_goals}
             completed={currentLog.veg_count}
           />
-          <ServingsLabel>Fruits</ServingsLabel>
+
           <Servings
+            foodGroup="fruits"
             field="fruit_count"
             goals={currentUser.fruit_goals}
             completed={currentLog.fruit_count}
           />
-          <ServingsLabel>Protein</ServingsLabel>
+
           <Servings
+            foodGroup="protein"
             field="protein_count"
             goals={currentUser.protein_goals}
             completed={currentLog.protein_count}
           />
-          <ServingsLabel>Grains</ServingsLabel>
+
           <Servings
+            foodGroup="grains"
             field="grain_count"
             goals={currentUser.grain_goals}
             completed={currentLog.grain_count}
