@@ -6,7 +6,7 @@ import { useField } from 'formik';
 import Button from 'shared/Button';
 
 const InputContainer = styled.div`
-  border: 1px solid #444;
+  border: 1px solid ${({ theme }) => theme.colors.brownBlack};
   border-radius: 4px;
   display: inline-flex;
   font-size: 1rem;
@@ -37,6 +37,7 @@ const DecrementButton = styled(Button).attrs({ type: 'button' })`
 
 const InputValue = styled.span`
   align-items: center;
+  background-color: ${({ theme }) => theme.colors.lightestBeige};
   display: flex;
   justify-content: center;
   width: 4rem;
