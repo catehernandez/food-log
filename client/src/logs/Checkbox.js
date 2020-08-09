@@ -50,8 +50,6 @@ const CheckboxContainer = styled.div`
  * Must be wrapped by a label to render hidden, underlying checkbox input clickable.
  *
  * @author Cole Bemis       https://bit.ly/3f9rhuC
- * @param {Object}  props   destructured props. Checked is a required field but
- *                          all others are optional.
  */
 const Checkbox = ({ checked, color = 'lightBlue', ...props }) => (
   <label>
@@ -65,13 +63,17 @@ const Checkbox = ({ checked, color = 'lightBlue', ...props }) => (
 );
 
 /**
- * one of onChange or readOnly is required. React will throw warning if you
+ * One of onChange or readOnly is required. React will throw warning if you
  * provide neither or both.
  */
 Checkbox.propTypes = {
+  /** Required boolean to determine checkbox initial state. */
   checked: PropTypes.bool.isRequired,
+  /** Optional to set custom checkbox color. */
   color: PropTypes.string,
+  /** Function to determine behavior when a Checkbox is clicked. */
   onChange: PropTypes.func,
+  /** Function that determines if a Checkbox is unmodifiable. */
   readOnly: PropTypes.bool,
 };
 

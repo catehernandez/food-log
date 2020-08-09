@@ -112,13 +112,16 @@ class Log extends React.Component {
 }
 
 Log.propTypes = {
+  /** Function called if no log found for current day. */
   createLog: PropTypes.func.isRequired,
+  /** Object stored in Redux state. */
   currentUser: PropTypes.shape({
     vegetable_goals: PropTypes.number.isRequired,
     fruit_goals: PropTypes.number.isRequired,
     protein_goals: PropTypes.number.isRequired,
     grain_goals: PropTypes.number.isRequired,
   }),
+  /** Object stored in Redux state. */
   currentLog: PropTypes.shape({
     veg_count: PropTypes.number.isRequired,
     fruit_count: PropTypes.number.isRequired,
@@ -126,7 +129,12 @@ Log.propTypes = {
     grain_count: PropTypes.number.isRequired,
   }),
   errors: PropTypes.number,
+  /**
+   * Function called to set currentLog in redux state if current value is null
+   * or undefined.
+   */
   getLog: PropTypes.func.isRequired,
+  /** Boolean to determine when loading screen is displayed. */
   loading: PropTypes.bool,
 };
 

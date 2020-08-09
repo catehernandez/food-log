@@ -22,10 +22,6 @@ const UserIcon = styled(UserIconSVG)`
 /**
  * Header appears on dashboard for authenticated user. Contains buttons to reveal
  * UserProfile and Logout.
- *
- * Clicking the UserIcon reveals the UserProfile. Visibility of UserProfile is
- * determined in parent component's state and can be manipulated via the
- * toggleUserProfile function, which must be passed to the header as a prop.
  */
 const Header = (props) => {
   return (
@@ -37,6 +33,10 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
+  /**
+   * Function passed by parent component to change UserProfile visibility.
+   * Gets called when user clicks the UserIcon.
+   */
   toggleUserProfile: PropTypes.func.isRequired,
 };
 

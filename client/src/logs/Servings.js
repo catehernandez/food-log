@@ -7,8 +7,8 @@ import { ServingsContainer } from './logStyles';
 import * as logActions from './logRedux';
 
 /**
- * Renders the user's goals and the number of completed servings for the current
- * day.
+ * Renders the user's goals as compared to the number of completed servings for
+ * the current day.
  */
 class Servings extends React.Component {
   constructor(props) {
@@ -113,14 +113,27 @@ class Servings extends React.Component {
 }
 
 Servings.propTypes = {
+  /** Determines the initial number of checked checkboxes. */
   completed: PropTypes.number.isRequired,
+  /**
+   * A name corresponding to a column of the currentLog in the database.
+   * This name will be used to reference the updated value when
+   * updateCurrentLog makes a call to the database.
+   */
   field: PropTypes.oneOf([
     'veg_count',
     'fruit_count',
     'protein_count',
     'grain_count',
   ]),
+  /** Determines the total number of checkboxes rendered within the Serving. */
   goals: PropTypes.number.isRequired,
+  /**
+   * Called when any checkboxes within the Servings component are clicked.
+   *
+   * Updates Redux state and makes call to the database to store the changes.
+   */
+  updateCurrentLog: PropTypes.func.isRequired,
 };
 
 export default connect(null, logActions)(Servings);

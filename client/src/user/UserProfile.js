@@ -9,10 +9,6 @@ import NumericInput from 'shared/NumericInput';
 import { ReactComponent as CloseSVG } from 'shared/SVG/X.svg';
 import * as sessionActions from 'session/sessionRedux';
 
-/**
- * Panel is hidden or revealed depending on value of "isHidden", passed as props
- * through UserProfile.
- */
 const UserProfilePanel = styled.div`
   align-items: center;
   background-color: #efefef;
@@ -65,10 +61,6 @@ const mapStateToProps = (state) => ({
 /**
  * Functional component that allows a user to view and update their profile in
  * a popout panel.
- *
- * Whether the profile is hidden or revealed should be determined in the state
- * of the parent component. The parent should pass the current state through the
- * isHidden prop and pass a function to change the state as toggleUserProfile.
  */
 const UserProfile = (props) => {
   const user = props.currentUser;
@@ -112,14 +104,21 @@ const UserProfile = (props) => {
 };
 
 UserProfile.propTypes = {
+  /** Object stored in redux state. Determines Formik initial values. */
   currentUser: PropTypes.shape({
     vegetable_goals: PropTypes.number.isRequired,
     fruit_goals: PropTypes.number.isRequired,
     protein_goals: PropTypes.number.isRequired,
     grain_goals: PropTypes.number.isRequired,
   }),
+  /** Boolean passed by parent component to indicate UserProfile visibility. */
   isHidden: PropTypes.bool.isRequired,
+  /**
+   * Function passed by parent component to change UserProfile visibility. Gets
+   * called when user clicks the X (close) icon.
+   */
   toggleUserProfile: PropTypes.func.isRequired,
+  /** Gets called when the user clicks the "Save Changes" button. */
   updateUser: PropTypes.func.isRequired,
 };
 
