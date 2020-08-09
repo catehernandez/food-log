@@ -1,14 +1,14 @@
 const theme = {
   colors: {
-    darkBeige: '#998A66',
-    lightBeige: '#F7F4ED',
-    lightestBeige: '#F1ECDF',
-    brownBlack: '#4D3232',
-    green: '#45F18A',
-    pink: '#F74C9E',
-    lightBlue: '#4CC4F7',
-    darkBlue: '#3F73F7',
-    yellow: '#F7D14C',
+    darkBeige: 'hsla(42,20%,50%,0.3)',
+    lightBeige: 'hsl(42,40%,91%)',
+    lightestBeige: 'hsl(42,40%,95%)',
+    brownBlack: 'hsl(0,21.3%,24.9%)',
+    green: 'hsl(144.1,86%,60.8%)',
+    pink: 'hsl(331.2,91.4%,63.3%)',
+    lightBlue: 'hsl(197.9,91.4%,63.3%)',
+    darkBlue: 'hsl(223,92%,60.8%)',
+    yellow: 'hsl(46.7,91.4%,63.3%)',
   },
   breakpoints: {
     small: '576px',
