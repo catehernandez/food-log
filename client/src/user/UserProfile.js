@@ -20,6 +20,7 @@ const UserProfilePanel = styled.div`
   width: 100%;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
     right: 0;
     transform: translateX(0%);
     transition: transform 300ms;

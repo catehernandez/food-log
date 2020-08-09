@@ -26,11 +26,11 @@ const DashboardPage = (props) => {
   return (
     <React.Fragment>
       <Header toggleUserProfile={showUserProfile} />
+      <Log />
       <UserProfile
         isHidden={userProfileIsHidden}
         toggleUserProfile={hideUserProfile}
       />
-      <Log />
     </React.Fragment>
   );
 };
