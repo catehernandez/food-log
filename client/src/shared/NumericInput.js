@@ -7,6 +7,17 @@ import Button from 'shared/Button';
 import { ReactComponent as MinusSVG } from 'shared/SVG/minus.svg';
 import { ReactComponent as PlusSVG } from 'shared/SVG/plus.svg';
 
+const MinusSign = styled(MinusSVG)`
+  stroke: ${({ theme }) => theme.colors.brownBlack};
+  width: 0.8rem;
+`;
+
+const PlusSign = styled(PlusSVG)`
+  stroke: ${({ theme }) => theme.colors.brownBlack};
+  stroke-width: 1px;
+  width: 0.9rem;
+`;
+
 /**
  * type="button" is essential to prevent the buttons from submitting by default
  * within the containing form.
@@ -17,6 +28,13 @@ const DecrementButton = styled(Button).attrs({ type: 'button' })`
   border-radius: 4px 0 0 4px;
   padding: 0px;
   width: 2rem;
+
+  &:active {
+    ${MinusSign} {
+      stroke-width: 2px;
+      transition: stroke-width 150ms;
+    }
+  }
 `;
 
 const IncrementButton = styled(Button).attrs({ type: 'button' })`
@@ -25,6 +43,13 @@ const IncrementButton = styled(Button).attrs({ type: 'button' })`
   border-radius: 0 4px 4px 0;
   padding: 0px;
   width: 2rem;
+
+  &:active {
+    ${PlusSign} {
+      stroke-width: 1.5px;
+      transition: stroke-width 150ms;
+    }
+  }
 `;
 
 const InputContainer = styled.div`
@@ -43,17 +68,6 @@ const InputValue = styled.span`
   display: flex;
   justify-content: center;
   width: 4rem;
-`;
-
-const MinusSign = styled(MinusSVG)`
-  stroke: ${({ theme }) => theme.colors.brownBlack};
-  width: 0.8rem;
-`;
-
-const PlusSign = styled(PlusSVG)`
-  stroke: ${({ theme }) => theme.colors.brownBlack};
-  stroke-width: 1px;
-  width: 0.9rem;
 `;
 
 /**
