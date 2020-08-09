@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import LogoutButton from 'session/LogoutButton';
 import { ReactComponent as UserIconSVG } from 'user/user-icon.svg';
 
 const HeaderContainer = styled.header`
@@ -16,7 +15,7 @@ const HeaderContainer = styled.header`
 
 const UserIcon = styled(UserIconSVG)`
   cursor: pointer;
-  padding: 0 1.2rem;
+  padding: 0 1rem;
 `;
 
 /**
@@ -27,7 +26,6 @@ const Header = (props) => {
   return (
     <HeaderContainer>
       <UserIcon onClick={props.toggleUserProfile} />
-      <LogoutButton />
     </HeaderContainer>
   );
 };

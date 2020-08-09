@@ -33,12 +33,20 @@ const UserProfilePanel = styled.div`
   }
 `;
 
+/** Subheader specific to the user profile panel */
+const UserProfileHeader = styled.header`
+  align-items: center;
+  display: inline-flex;
+  justify-content: space-between;
+  position: absolute;
+  padding: 1.5rem;
+  top: 0;
+  width: 16.5rem;
+`;
+
 const CloseButton = styled(CloseSVG)`
   cursor: pointer;
-  left: 1.5rem;
-  padding: 0.5rem;
-  position: absolute;
-  top: 1.5rem;
+  margin: 0.5rem;
 `;
 
 const GoalsGrid = styled.div`
@@ -70,7 +78,10 @@ const UserProfile = (props) => {
 
   return (
     <UserProfilePanel isHidden={props.isHidden}>
-      <CloseButton onClick={props.toggleUserProfile} />
+      <UserProfileHeader>
+        <CloseButton onClick={props.toggleUserProfile} />
+        <Button onClick={props.logout}>Log out</Button>
+      </UserProfileHeader>
       <h3>Goals</h3>
       <Formik
         initialValues={{
