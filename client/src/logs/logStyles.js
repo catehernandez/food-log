@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import Box from 'shared/Box';
+import { ServingsLabel, ServingsContainer } from './Servings';
 
 export const DateContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.darkBeige};
@@ -19,17 +20,6 @@ export const LogBox = styled(Box)`
   @media (min-width: ${(props) => props.theme.breakpoints.small}) {
     width: 400px;
   }
-`;
-
-export const ServingsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, fit-content(1.5rem));
-  grid-template-rows: repeat(2, auto);
-  grid-row-gap: 0.5rem;
-`;
-
-export const ServingsLabel = styled.span`
-  text-align: right;
 `;
 
 export const LogContainer = styled.div`
