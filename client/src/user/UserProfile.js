@@ -46,7 +46,14 @@ const UserProfileHeader = styled.header`
 
 const CloseButton = styled(CloseSVG)`
   cursor: pointer;
+  height: 20px;
   margin: 0.5rem;
+`;
+
+const LogoutButton = styled(Button)`
+  background-color: ${({ theme }) => theme.colors.lightBeige};
+  border: none;
+  font-size: 1.1rem;
 `;
 
 const GoalsGrid = styled.div`
@@ -80,7 +87,7 @@ const UserProfile = (props) => {
     <UserProfilePanel isHidden={props.isHidden}>
       <UserProfileHeader>
         <CloseButton onClick={props.toggleUserProfile} />
-        <Button onClick={props.logout}>Log out</Button>
+        <LogoutButton onClick={props.logout}>Log out</LogoutButton>
       </UserProfileHeader>
       <h3>Goals</h3>
       <Formik
