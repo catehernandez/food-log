@@ -20,6 +20,10 @@ const theme = {
   fontFamily: {
     Quicksand: "'Quicksand', sans-serif",
   },
+  fontWeights: {
+    light: '300',
+    regular: '400',
+  },
 };
 
 export default theme;

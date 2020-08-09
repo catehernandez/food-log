@@ -10,10 +10,18 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     overflow-x: hidden;
   }
-  body, input, button {
+
+  body {
     color: ${({ theme }) => theme.colors.brownBlack};
     font-family: ${({ theme }) => theme.fontFamily.Quicksand};
+    font-weight: ${({ theme }) => theme.fontWeights.light};
   }
+  
+  input, button{
+    color: inherit;
+    font-family: inherit;
+    font-weight: ${({ theme }) => theme.fontWeights.regular};
+  } 
 `;
 
 export default GlobalStyle;
