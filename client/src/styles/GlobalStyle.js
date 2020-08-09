@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 16px; 
     height: 100%;
     margin: 0;
+    overflow-x: hidden;
   }
   body, input, button {
     color: ${({ theme }) => theme.colors.brownBlack};
