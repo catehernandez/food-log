@@ -24,7 +24,6 @@ const PlusSign = styled(PlusSVG)`
  */
 const DecrementButton = styled(Button).attrs({ type: 'button' })`
   border: none;
-  border-right: inherit;
   border-radius: 4px 0 0 4px;
   padding: 0px;
   width: 2rem;
@@ -37,12 +36,8 @@ const DecrementButton = styled(Button).attrs({ type: 'button' })`
   }
 `;
 
-const IncrementButton = styled(Button).attrs({ type: 'button' })`
-  border: none;
-  border-left: inherit;
+const IncrementButton = styled(DecrementButton)`
   border-radius: 0 4px 4px 0;
-  padding: 0px;
-  width: 2rem;
 
   &:active {
     ${PlusSign} {
@@ -65,6 +60,9 @@ const InputContainer = styled.div`
 const InputValue = styled.span`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.lightestBeige};
+  border-color: ${({ theme }) => theme.colors.brownBlack};
+  border-style: none solid;
+  border-width: 0 1px;
   display: flex;
   justify-content: center;
   width: 4rem;
