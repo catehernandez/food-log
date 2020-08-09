@@ -11,7 +11,7 @@ import * as sessionActions from 'session/sessionRedux';
 
 const UserProfilePanel = styled.div`
   align-items: center;
-  background-color: #efefef;
+  background-color: ${({ theme }) => theme.colors.lightBeige};
   display: flex;
   flex-direction: column;
   justify-content: center;
