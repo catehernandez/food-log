@@ -58,11 +58,7 @@ class Log extends React.Component {
 
     //Any other non-404 err
     if (this.props.errors) {
-      return (
-        <div>
-          <LogErrMsg />
-        </div>
-      );
+      return <LogErrMsg />;
     }
 
     return (
