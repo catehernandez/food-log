@@ -36,15 +36,17 @@ class Servings extends React.Component {
     };
 
     this.state = {
-      checkedItems: this.defineCheckedItems(this.props.completed),
+      checkedItems: this.defineCheckedItems(),
     };
   }
 
   //handles intial rendering--subsequent renderings handled by state
-  defineCheckedItems = (completed) => {
+  defineCheckedItems = () => {
+    let { completed, goals } = this.props;
+
     let checkedItems = new Map();
 
-    for (let i = 0; i < this.props.goals; i++) {
+    for (let i = 0; i < goals; i++) {
       let itemName = i.toString();
 
       if (i < completed) {
@@ -59,10 +61,12 @@ class Servings extends React.Component {
     return checkedItems;
   };
 
+  //update local state first so there's no lag while Redux awaits API response
   handleChange = (event) => {
+    const { field } = this.props;
+
     const itemName = event.target.name;
     const isChecked = event.target.checked;
-    const { field } = this.props;
 
     //update checkbox state
     this.setState((prevState) => ({
@@ -84,18 +88,17 @@ class Servings extends React.Component {
   };
 
   renderCheckboxes() {
-    const boxes = [];
-    const { field } = this.props;
+    const { field, completed, goals } = this.props;
     const checkboxColor = this.servingStyles[field];
 
-    for (let i = 0; i < this.props.goals; i++) {
+    const boxes = [];
+    for (let i = 0; i < goals; i++) {
       let name = i.toString();
-      let isChecked = this.state.checkedItems.get(name);
 
-      if (i === this.props.completed || i === this.props.completed - 1) {
+      if (i === completed || i === completed - 1) {
         boxes.push(
           <Checkbox
-            checked={isChecked}
+            checked={i < completed ? true : false}
             color={checkboxColor}
             key={name}
             name={name}
@@ -107,7 +110,7 @@ class Servings extends React.Component {
       else {
         boxes.push(
           <Checkbox
-            checked={isChecked}
+            checked={i < completed ? true : false}
             color={checkboxColor}
             key={name}
             name={name}

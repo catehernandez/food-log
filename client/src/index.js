@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import axios from 'axios';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, applyMiddleware } from 'redux';
+import {
+  createStateSyncMiddleware,
+  initStateWithPrevTab,
+} from 'redux-state-sync';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import App from './App';
 import rootReducer from './reducers';
@@ -14,11 +18,17 @@ import * as serviceWorker from './serviceWorker';
 axios.defaults.baseURL = 'http://localhost:5000';
 axios.defaults.headers.post['Content-Type'] =
   'application/x-www-form-urlencoded';
-//dummy reducer for init setup only
+
+//configure store
+const syncConfig = {};
+const middlewares = [thunk, createStateSyncMiddleware(syncConfig)];
+
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
+  composeWithDevTools(applyMiddleware(...middlewares))
 );
+
+initStateWithPrevTab(store);
 
 ReactDOM.render(
   <Provider store={store}>
