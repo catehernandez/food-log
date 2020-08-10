@@ -84,18 +84,17 @@ class Servings extends React.Component {
   };
 
   renderCheckboxes() {
-    const boxes = [];
-    const { field } = this.props;
+    const { field, completed, goals } = this.props;
     const checkboxColor = this.servingStyles[field];
 
-    for (let i = 0; i < this.props.goals; i++) {
+    const boxes = [];
+    for (let i = 0; i < goals; i++) {
       let name = i.toString();
-      let isChecked = this.state.checkedItems.get(name);
 
-      if (i === this.props.completed || i === this.props.completed - 1) {
+      if (i === completed || i === completed - 1) {
         boxes.push(
           <Checkbox
-            checked={isChecked}
+            checked={i < completed ? true : false}
             color={checkboxColor}
             key={name}
             name={name}
@@ -107,7 +106,7 @@ class Servings extends React.Component {
       else {
         boxes.push(
           <Checkbox
-            checked={isChecked}
+            checked={i < completed ? true : false}
             color={checkboxColor}
             key={name}
             name={name}

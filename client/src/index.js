@@ -5,7 +5,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, applyMiddleware } from 'redux';
 import {
   createStateSyncMiddleware,
-  initMessageListener,
   initStateWithPrevTab,
 } from 'redux-state-sync';
 import { Provider } from 'react-redux';
@@ -29,7 +28,6 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(...middlewares))
 );
 
-//initMessageListener(store);
 initStateWithPrevTab(store);
 
 ReactDOM.render(
