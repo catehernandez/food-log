@@ -36,15 +36,17 @@ class Servings extends React.Component {
     };
 
     this.state = {
-      checkedItems: this.defineCheckedItems(this.props.completed),
+      checkedItems: this.defineCheckedItems(),
     };
   }
 
   //handles intial rendering--subsequent renderings handled by state
-  defineCheckedItems = (completed) => {
+  defineCheckedItems = () => {
+    let { completed, goals } = this.props;
+
     let checkedItems = new Map();
 
-    for (let i = 0; i < this.props.goals; i++) {
+    for (let i = 0; i < goals; i++) {
       let itemName = i.toString();
 
       if (i < completed) {
@@ -59,10 +61,12 @@ class Servings extends React.Component {
     return checkedItems;
   };
 
+  //update local state first so there's no lag while Redux awaits API response
   handleChange = (event) => {
+    const { field } = this.props;
+
     const itemName = event.target.name;
     const isChecked = event.target.checked;
-    const { field } = this.props;
 
     //update checkbox state
     this.setState((prevState) => ({
