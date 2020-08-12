@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
+require('dotenv').config();
 
 //Authentication packages
 const session = require('express-session');
@@ -16,13 +17,13 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-/** UPDATE ORIGIN before deploying */
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(helmet());
 
 /* Authentication tools */
 // Express session configuration object
 const sess = {
+  name: 'session',
   store: new pgSession({
     pool: pool, // Connection pool
   }),
@@ -34,8 +35,8 @@ const sess = {
 
 //Only serve cookies over HTTPS in production
 if (process.env.NODE_ENV === 'production') {
-  app.set('trust proxy', 1); // trust first proxy
   sess.cookie.secure = true; // serve secure cookies
+  sess.cookie.httpOnly = true;
 }
 
 app.use(session(sess));
@@ -44,8 +45,6 @@ app.use(passport.session());
 
 /* Mount routes */
 mountRoutes(app);
-
-app.get('/', (req, res) => res.send('Hello World!'));
 
 const PORT = process.env.PORT || 5000;
 
