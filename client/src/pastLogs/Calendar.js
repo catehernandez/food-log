@@ -6,9 +6,8 @@ const CalendarBorder = styled.table`
   border: 1px solid ${({ theme }) => theme.colors.darkBrown};
   border-radius: 10px;
   border-spacing: 0px;
-  height: 73vh;
   table-layout: fixed;
-  width: 90%;
+  width: 75%;
 
   & thead tr th:first-child {
     border-top-left-radius: 10px;
@@ -23,16 +22,29 @@ const WeekDay = styled.th`
   background-color: ${({ theme }) => theme.colors.lightBeige};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   text-transform: lowercase;
+  height: 3rem;
 `;
 
 const Date = styled.td`
   border-top: 1px solid ${({ theme }) => theme.colors.darkBrown};
   font-size: 1.5rem;
+  height: 5.5rem;
   text-align: center;
 
   & + td {
     border-left: 1px solid ${({ theme }) => theme.colors.darkBrown};
   }
+`;
+
+const TodayMarker = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.darkBeige};
+  border-radius: 100%;
+  height: 3.5rem;
+  width: 3.5rem;
+  margin: auto;
 `;
 
 const weekdays = () => {
@@ -46,16 +58,30 @@ const weekdays = () => {
 };
 
 /**
- * Function to populate the number of days in current month in a calendar
+ * Function to populate the number of days in current month in a calendar.
+ * Also adds special style to currentDay if it is within the month.
  *
  * @param {moment()}    month
  * @return {Array}      days    an array of <Date> cells to go in calendar
  */
 const getDatesInMonth = (month) => {
   let dates = [];
+  const isCurrentMonth = moment().isSame(month, 'month');
+  const today = moment().format('D');
 
   for (let date = 1; date <= month.daysInMonth(); date++) {
-    dates.push(<Date key={date}>{date}</Date>);
+    //style current date. Use == to compare String and Number
+    if (isCurrentMonth && date == today) {
+      dates.push(
+        <Date key={date}>
+          <TodayMarker>{date}</TodayMarker>
+        </Date>
+      );
+    }
+    //no special styling for other dates
+    else {
+      dates.push(<Date key={date}>{date}</Date>);
+    }
   }
 
   return dates;
