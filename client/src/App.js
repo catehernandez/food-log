@@ -8,6 +8,7 @@ import theme from './styles/theme';
 import DashboardPage from './pages/DashboardPage';
 import GlobalStyle from './styles/GlobalStyle';
 import LoginPage from './pages/LoginPage';
+import PastLogs from './pages/PastLogs';
 import SignupPage from './pages/SignupPage';
 
 class App extends React.Component {
@@ -23,6 +24,7 @@ class App extends React.Component {
           <Route path="/" exact component={DashboardPage} />
           <Route path="/login" exact component={LoginPage} />
           <Route path="/signup" exact component={SignupPage} />
+          <Route path="/archive" exact component={PastLogs} />
         </BrowserRouter>
       </ThemeProvider>
     );
