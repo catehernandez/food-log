@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import styled from 'styled-components';
 
+/** Calendar styles */
 const CalendarBorder = styled.table`
-  border: 1px solid ${({ theme }) => theme.colors.darkBrown};
+  border: 1px solid ${({ theme }) => theme.colors.brownBlack60};
   border-radius: 10px;
   border-spacing: 0px;
   table-layout: fixed;
@@ -26,13 +27,13 @@ const WeekDay = styled.th`
 `;
 
 const Date = styled.td`
-  border-top: 1px solid ${({ theme }) => theme.colors.darkBrown};
+  border-top: 1px solid ${({ theme }) => theme.colors.brownBlack60};
   font-size: 1.5rem;
   height: 5.5rem;
   text-align: center;
 
   & + td {
-    border-left: 1px solid ${({ theme }) => theme.colors.darkBrown};
+    border-left: 1px solid ${({ theme }) => theme.colors.brownBlack60};
   }
 `;
 
