@@ -4,11 +4,9 @@ import styled from 'styled-components';
 
 /** Calendar styles */
 const CalendarBorder = styled.table`
-  border: 1px solid ${({ theme }) => theme.colors.brownBlack60};
-  border-radius: 10px;
   border-spacing: 0px;
   table-layout: fixed;
-  width: 75%;
+  width: 100%;
 
   & thead tr th:first-child {
     border-top-left-radius: 10px;
@@ -16,6 +14,12 @@ const CalendarBorder = styled.table`
 
   & thead tr th:last-child {
     border-top-right-radius: 10px;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    border: 1px solid ${({ theme }) => theme.colors.brownBlack60};
+    border-radius: 10px;
+    width: 75%;
   }
 `;
 
@@ -27,13 +31,17 @@ const WeekDay = styled.th`
 `;
 
 const Date = styled.td`
-  border-top: 1px solid ${({ theme }) => theme.colors.brownBlack60};
-  font-size: 1.5rem;
-  height: 5.5rem;
   text-align: center;
+  height: 3rem;
 
-  & + td {
-    border-left: 1px solid ${({ theme }) => theme.colors.brownBlack60};
+  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    border-top: 1px solid ${({ theme }) => theme.colors.brownBlack60};
+    font-size: 1.5rem;
+    height: 5.5rem;
+
+    & + td {
+      border-left: 1px solid ${({ theme }) => theme.colors.brownBlack60};
+    }
   }
 `;
 
@@ -41,11 +49,16 @@ const TodayMarker = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 2rem;
   background-color: ${({ theme }) => theme.colors.darkBeige};
   border-radius: 100%;
-  height: 3.5rem;
-  width: 3.5rem;
   margin: auto;
+  width: 2rem;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    height: 3.5rem;
+    width: 3.5rem;
+  }
 `;
 
 const weekdays = () => {
