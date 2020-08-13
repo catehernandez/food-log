@@ -17,7 +17,7 @@ const CalendarBorder = styled.table`
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
-    border: 1px solid ${({ theme }) => theme.colors.brownBlack60};
+    border: 1px solid ${({ theme }) => theme.colors.darkBrown30};
     border-radius: 10px;
     width: 75%;
   }
@@ -35,12 +35,12 @@ const Date = styled.td`
   height: 3rem;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
-    border-top: 1px solid ${({ theme }) => theme.colors.brownBlack60};
+    border-top: 1px solid ${({ theme }) => theme.colors.darkBrown30};
     font-size: 1.5rem;
     height: 5.5rem;
 
     & + td {
-      border-left: 1px solid ${({ theme }) => theme.colors.brownBlack60};
+      border-left: 1px solid ${({ theme }) => theme.colors.darkBrown30};
     }
   }
 `;

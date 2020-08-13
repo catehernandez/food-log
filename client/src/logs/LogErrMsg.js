@@ -25,7 +25,7 @@ const LogErrWrapper = styled.div`
 `;
 
 const RefreshIcon = styled(RefreshSVG)`
-  stroke: ${({ theme }) => theme.colors.brownBlack};
+  stroke: ${({ theme }) => theme.colors.darkBrown};
   height: 1rem;
   padding: 0 0 1rem;
 `;
