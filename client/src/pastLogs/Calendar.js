@@ -5,19 +5,35 @@ import styled from 'styled-components';
 const CalendarBorder = styled.table`
   border: 1px solid ${({ theme }) => theme.colors.darkBrown};
   border-radius: 10px;
+  border-spacing: 0px;
   height: 73vh;
   table-layout: fixed;
   width: 90%;
 
-  & td + td,
-  & th + th {
-    border-left: 1px solid ${({ theme }) => theme.colors.darkBrown};
+  & thead tr th:first-child {
+    border-top-left-radius: 10px;
+  }
+
+  & thead tr th:last-child {
+    border-top-right-radius: 10px;
   }
 `;
 
-const WeekDay = styled.th``;
+const WeekDay = styled.th`
+  background-color: ${({ theme }) => theme.colors.lightBeige};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  text-transform: lowercase;
+`;
 
-const Date = styled.td``;
+const Date = styled.td`
+  border-top: 1px solid ${({ theme }) => theme.colors.darkBrown};
+  font-size: 1.5rem;
+  text-align: center;
+
+  & + td {
+    border-left: 1px solid ${({ theme }) => theme.colors.darkBrown};
+  }
+`;
 
 const weekdays = () => {
   const weekdayshort = moment.weekdaysShort();
