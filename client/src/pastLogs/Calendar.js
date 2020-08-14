@@ -19,6 +19,18 @@ const CalendarBorder = styled.table`
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
     border: 1px solid ${({ theme }) => theme.colors.darkBrown30};
     border-radius: 10px;
+    margin: 0 auto;
+    width: 70%;
+  }
+`;
+
+const Month = styled.div`
+  font-size: 1.75rem;
+  font-weight: ${({ theme }) => theme.fontWeights.regular};
+  text-align: left;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    margin: 1.5rem auto;
     width: 70%;
   }
 `;
@@ -153,12 +165,15 @@ const Calendar = () => {
   const days = weekdays();
 
   return (
-    <CalendarBorder>
-      <thead>
-        <tr>{days}</tr>
-      </thead>
-      {calendarCells}
-    </CalendarBorder>
+    <React.Fragment>
+      <Month>{currentMonth.format('MMMM YYYY')}</Month>
+      <CalendarBorder>
+        <thead>
+          <tr>{days}</tr>
+        </thead>
+        {calendarCells}
+      </CalendarBorder>
+    </React.Fragment>
   );
 };
 
