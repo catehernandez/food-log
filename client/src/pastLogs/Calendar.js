@@ -36,7 +36,7 @@ const Date = styled.td`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
     border-top: 1px solid ${({ theme }) => theme.colors.darkBrown30};
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     height: 5.5rem;
 
     & + td {
