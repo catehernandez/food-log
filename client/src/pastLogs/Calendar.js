@@ -6,7 +6,6 @@ import { ReactComponent as RightArrowSVG } from 'shared/SVG/right-arrow.svg';
 import { ReactComponent as LeftArrowSVG } from 'shared/SVG/left-arrow.svg';
 
 /** Calendar styles */
-
 const CalendarBorder = styled.table`
   border-spacing: 0px;
   table-layout: fixed;
@@ -26,41 +25,6 @@ const CalendarBorder = styled.table`
     margin: 0 auto;
     width: 70%;
   }
-`;
-
-const Month = styled.div`
-  font-size: 1.75rem;
-  font-weight: ${({ theme }) => theme.fontWeights.regular};
-  text-align: left;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
-    margin: 1.5rem auto;
-    width: 70%;
-  }
-`;
-
-const arrowStyle = css`
-  cursor: pointer;
-  height: 1.2rem;
-  padding: 0 0.5rem;
-  stroke: ${({ theme }) => theme.colors.darkBrown};
-  stroke-width: 3px;
-`;
-
-const LeftArrowIcon = styled(LeftArrowSVG)`
-  ${arrowStyle}
-`;
-
-const RightArrowIcon = styled(RightArrowSVG)`
-  ${arrowStyle}
-`;
-
-const WeekDay = styled.th`
-  background-color: ${({ theme }) => theme.colors.lightBeige};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.darkBrown30};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  text-transform: lowercase;
-  height: 3rem;
 `;
 
 const Date = styled.td`
@@ -87,6 +51,48 @@ const TodayMarker = styled.span`
     height: 3.5rem;
     width: 3.5rem;
   }
+`;
+
+const WeekDay = styled.th`
+  background-color: ${({ theme }) => theme.colors.lightBeige};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.darkBrown30};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  text-transform: lowercase;
+  height: 3rem;
+`;
+
+/** Month & arrow styles */
+const MonthContainer = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    margin: 1rem auto;
+    width: 70%;
+  }
+`;
+
+const Month = styled.span`
+  font-size: 1.75rem;
+  font-weight: ${({ theme }) => theme.fontWeights.regular};
+`;
+
+const arrowStyle = css`
+  cursor: pointer;
+  height: 1.2rem;
+  padding: 0 0.5rem;
+  stroke: ${({ theme }) => theme.colors.darkBrown};
+  stroke-width: 3px;
+`;
+
+const LeftArrowIcon = styled(LeftArrowSVG)`
+  ${arrowStyle}
+`;
+
+const RightArrowIcon = styled(RightArrowSVG)`
+  ${arrowStyle}
 `;
 
 const weekdays = () => {
@@ -186,15 +192,17 @@ const Calendar = () => {
 
   return (
     <React.Fragment>
-      <div>
+      <MonthContainer>
+        <span>
+          <LeftArrowIcon
+            onClick={() => setMonth(moment(currentMonth).subtract(1, 'month'))}
+          />
+          <RightArrowIcon
+            onClick={() => setMonth(moment(currentMonth).add(1, 'month'))}
+          />
+        </span>
         <Month>{currentMonth.format('MMMM YYYY')}</Month>
-        <LeftArrowIcon
-          onClick={() => setMonth(moment(currentMonth).subtract(1, 'month'))}
-        />
-        <RightArrowIcon
-          onClick={() => setMonth(moment(currentMonth).add(1, 'month'))}
-        />
-      </div>
+      </MonthContainer>
       <CalendarBorder>
         <thead>
           <tr>{days}</tr>
