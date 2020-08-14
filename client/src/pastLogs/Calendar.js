@@ -19,12 +19,13 @@ const CalendarBorder = styled.table`
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
     border: 1px solid ${({ theme }) => theme.colors.darkBrown30};
     border-radius: 10px;
-    width: 75%;
+    width: 70%;
   }
 `;
 
 const WeekDay = styled.th`
   background-color: ${({ theme }) => theme.colors.lightBeige};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.darkBrown30};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   text-transform: lowercase;
   height: 3rem;
@@ -35,13 +36,8 @@ const Date = styled.td`
   height: 3rem;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
-    border-top: 1px solid ${({ theme }) => theme.colors.darkBrown30};
     font-size: 1.3rem;
     height: 5.5rem;
-
-    & + td {
-      border-left: 1px solid ${({ theme }) => theme.colors.darkBrown30};
-    }
   }
 `;
 
