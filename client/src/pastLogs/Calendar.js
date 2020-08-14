@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+import { ReactComponent as RightArrowSVG } from 'shared/SVG/right-arrow.svg';
+import { ReactComponent as LeftArrowSVG } from 'shared/SVG/left-arrow.svg';
 
 /** Calendar styles */
+
 const CalendarBorder = styled.table`
   border-spacing: 0px;
   table-layout: fixed;
@@ -33,6 +37,22 @@ const Month = styled.div`
     margin: 1.5rem auto;
     width: 70%;
   }
+`;
+
+const arrowStyle = css`
+  cursor: pointer;
+  height: 1.2rem;
+  padding: 0 0.5rem;
+  stroke: ${({ theme }) => theme.colors.darkBrown};
+  stroke-width: 3px;
+`;
+
+const LeftArrowIcon = styled(LeftArrowSVG)`
+  ${arrowStyle}
+`;
+
+const RightArrowIcon = styled(RightArrowSVG)`
+  ${arrowStyle}
 `;
 
 const WeekDay = styled.th`
@@ -166,7 +186,15 @@ const Calendar = () => {
 
   return (
     <React.Fragment>
-      <Month>{currentMonth.format('MMMM YYYY')}</Month>
+      <div>
+        <Month>{currentMonth.format('MMMM YYYY')}</Month>
+        <LeftArrowIcon
+          onClick={() => setMonth(moment(currentMonth).subtract(1, 'month'))}
+        />
+        <RightArrowIcon
+          onClick={() => setMonth(moment(currentMonth).add(1, 'month'))}
+        />
+      </div>
       <CalendarBorder>
         <thead>
           <tr>{days}</tr>
