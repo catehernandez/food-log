@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import moment from 'moment';
 import styled, { css } from 'styled-components';
 
@@ -183,12 +184,35 @@ const formatCalendar = (month) => {
   return <tbody>{weeksOfMonth}</tbody>;
 };
 
-const Calendar = () => {
-  //initialize with current month
-  const [currentMonth, setMonth] = useState(moment());
-  const calendarCells = formatCalendar(currentMonth);
+const getPastLogs = async (month, year) => {
+  try {
+    const res = await axios.get(`/user/logs/${year}/${month}`);
 
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const Calendar = () => {
+  const [currentMonth, setMonth] = useState(moment());
+
+  //get past logs
+  useEffect(() => {
+    const fetchPastLogs = async () => {
+      const month = currentMonth.format('MM');
+      const year = currentMonth.format('YYYY');
+      const pastLogs = await getPastLogs(month, year);
+
+      console.log(pastLogs);
+    };
+
+    fetchPastLogs();
+  });
+
+  //calendar formatting
   const days = weekdays();
+  const calendarCells = formatCalendar(currentMonth);
 
   return (
     <React.Fragment>
