@@ -12,16 +12,17 @@ const MonthContainer = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  width: 100%;
+  margin: 1rem auto;
+  min-width: 375px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
-    margin: 1rem auto;
     width: 70%;
   }
 `;
 
 const Month = styled.span`
   font-size: 1.75rem;
+  padding: 0 0.3rem;
   font-weight: ${({ theme }) => theme.fontWeights.regular};
 `;
 
