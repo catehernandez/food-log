@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import moment from 'moment';
-import styled, { css } from 'styled-components';
-
-import { ReactComponent as RightArrowSVG } from 'shared/SVG/right-arrow.svg';
-import { ReactComponent as LeftArrowSVG } from 'shared/SVG/left-arrow.svg';
+import styled from 'styled-components';
 
 /** Calendar styles */
 const CalendarBorder = styled.table`
@@ -62,53 +58,26 @@ const WeekDay = styled.th`
   height: 3rem;
 `;
 
-/** Month & arrow styles */
-const MonthContainer = styled.div`
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  width: 100%;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
-    margin: 1rem auto;
-    width: 70%;
-  }
-`;
-
-const Month = styled.span`
-  font-size: 1.75rem;
-  font-weight: ${({ theme }) => theme.fontWeights.regular};
-`;
-
-const arrowStyle = css`
-  cursor: pointer;
-  height: 1.2rem;
-  padding: 0 0.5rem;
-  stroke: ${({ theme }) => theme.colors.darkBrown};
-  stroke-width: 3px;
-`;
-
-const LeftArrowIcon = styled(LeftArrowSVG)`
-  ${arrowStyle}
-`;
-
-const RightArrowIcon = styled(RightArrowSVG)`
-  ${arrowStyle}
-`;
-
-const weekdays = () => {
+/**
+ * Generate styled calendar header with weekdays.
+ */
+const createCalendarHeader = () => {
   const weekdayshort = moment.weekdaysShort();
 
-  const weekdayHeaders = weekdayshort.map((day) => (
+  const weekdays = weekdayshort.map((day) => (
     <WeekDay key={day}>{day}</WeekDay>
   ));
 
-  return weekdayHeaders;
+  return (
+    <thead>
+      <tr>{weekdays}</tr>
+    </thead>
+  );
 };
 
 /**
- * Function to populate the number of days in current month in a calendar.
- * Also adds special style to currentDay if it is within the month.
+ * Generates the dates in the given calendar month. Adds special style to the
+ * current day if it is within the month.
  *
  * @param {moment()}    month
  * @return {Array}      days    an array of <Date> cells to go in calendar
@@ -137,10 +106,12 @@ const getDatesInMonth = (month) => {
 };
 
 /**
+ * Takes all <Date /> cells including reserved blank spaces and formats them
+ * into 7 day weeks.
  *
- * @param {*} totalCells    All cells in calendar month including empty days.
+ * @param {Element} totalCells    All cells in calendar month including empty days.
  */
-const formatWeeks = (totalCells) => {
+const formatCalendarWeeks = (totalCells) => {
   const DAYS_IN_WEEK = 7;
   const LAST_DAY_OF_WEEK = 6;
   const lastDayOfMonth = totalCells.length - 1;
@@ -166,7 +137,12 @@ const formatWeeks = (totalCells) => {
   return allWeeks;
 };
 
-const formatCalendar = (month) => {
+/**
+ * Populates and formats the body of the calendar.
+ *
+ * @param {String} month  The current month to be displayed
+ */
+const createCalendarBody = (month) => {
   //determine blank days needded for formatting
   let firstWeekDay = moment(month).startOf('month').format('d');
 
@@ -179,58 +155,22 @@ const formatCalendar = (month) => {
   let dates = getDatesInMonth(month);
   let totalCells = [...blanks, ...dates];
 
-  const weeksOfMonth = formatWeeks(totalCells);
+  const weeksOfMonth = formatCalendarWeeks(totalCells);
 
   return <tbody>{weeksOfMonth}</tbody>;
 };
 
-const getPastLogs = async (month, year) => {
-  try {
-    const res = await axios.get(`/user/logs/${year}/${month}`);
-
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-const Calendar = () => {
-  const [currentMonth, setMonth] = useState(moment());
-
-  //get past logs
-  useEffect(() => {
-    const fetchPastLogs = async () => {
-      const month = currentMonth.format('MM');
-      const year = currentMonth.format('YYYY');
-      const pastLogs = await getPastLogs(month, year);
-
-      console.log(pastLogs);
-    };
-
-    fetchPastLogs();
-  });
-
-  //calendar formatting
-  const days = weekdays();
-  const calendarCells = formatCalendar(currentMonth);
+/**
+ * Creates a calendar for the given month and populates with events, if given.
+ */
+const Calendar = ({ month }) => {
+  const calendarHeader = createCalendarHeader();
+  const calendarCells = createCalendarBody(month);
 
   return (
     <React.Fragment>
-      <MonthContainer>
-        <span>
-          <LeftArrowIcon
-            onClick={() => setMonth(moment(currentMonth).subtract(1, 'month'))}
-          />
-          <RightArrowIcon
-            onClick={() => setMonth(moment(currentMonth).add(1, 'month'))}
-          />
-        </span>
-        <Month>{currentMonth.format('MMMM YYYY')}</Month>
-      </MonthContainer>
       <CalendarBorder>
-        <thead>
-          <tr>{days}</tr>
-        </thead>
+        {calendarHeader}
         {calendarCells}
       </CalendarBorder>
     </React.Fragment>
