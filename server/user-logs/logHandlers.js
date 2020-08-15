@@ -1,4 +1,5 @@
 const LogsDB = require('../db/logs');
+const validator = require('validator');
 
 module.exports = {
   getAllLogs: async (req, res) => {
@@ -13,7 +14,26 @@ module.exports = {
       if (logs.length === 0) return res.sendStatus(404);
 
       res.status(200).json(logs);
-    } catch {
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+  getLogsByMonth: async (req, res) => {
+    if (!req.user) return res.sendStatus(401);
+
+    //validate params
+    const { month, year } = req.params;
+
+    if (!validator.isInt(month, { min: 1, max: 12 }))
+      return res.status(400).json('Month must be an integer between 1-12');
+    if (!validator.isInt(year))
+      return res.status(400).json('Year must be an integer');
+
+    try {
+      const logs = await LogsDB.getLogsByMonth(month, year);
+
+      res.status(200).json(logs);
+    } catch (err) {
       res.status(500).json(err);
     }
   },
