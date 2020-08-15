@@ -85,11 +85,11 @@ const createCalendarHeader = () => {
 const getDatesInMonth = (month) => {
   let dates = [];
   const isCurrentMonth = moment().isSame(month, 'month');
-  const today = moment().format('D');
+  const today = parseInt(moment().format('D'));
 
   for (let date = 1; date <= month.daysInMonth(); date++) {
-    //style current date. Use == to compare String and Number
-    if (isCurrentMonth && date == today) {
+    //style current date.
+    if (isCurrentMonth && date === today) {
       dates.push(
         <Date key={date}>
           <TodayMarker>{date}</TodayMarker>
