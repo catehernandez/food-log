@@ -18,19 +18,20 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  getLogsByMonth: async (req, res) => {
+  getUserLogsByMonth: async (req, res) => {
     if (!req.user) return res.sendStatus(401);
 
-    //validate params
+    const { user_id } = req.user;
     const { month, year } = req.params;
 
+    //validate params
     if (!validator.isInt(month, { min: 1, max: 12 }))
       return res.status(400).json('Month must be an integer between 1-12');
     if (!validator.isInt(year))
       return res.status(400).json('Year must be an integer');
 
     try {
-      const logs = await LogsDB.getLogsByMonth(month, year);
+      const logs = await LogsDB.getUserLogsByMonth(user_id, month, year);
 
       res.status(200).json(logs);
     } catch (err) {

@@ -73,13 +73,14 @@ const getAllUserLogs = (user_id) => {
 /**
  * Retrieve user's logs within the given month and year.
  *
+ * @param {number} user_id
  * @param {String} month  An integer from 1-12, represented as a String.
  * @param {String} year   An integer represented as a String.
  *
  * @return {Promise}      Promise object returns an array of logs matching the
  *                        given query or an empty array if no such logs are found.
  */
-const getLogsByMonth = (month, year) => {
+const getUserLogsByMonth = (user_id, month, year) => {
   //validate inputs
   if (!validator.isInt(month, { min: 1, max: 12 }))
     throw Error('Month must be an integer between 1-12');
@@ -89,8 +90,8 @@ const getLogsByMonth = (month, year) => {
 
   return db
     .query(
-      'SELECT * FROM logs WHERE EXTRACT(MONTH from log_date)=$1 AND EXTRACT(YEAR from log_date)=$2',
-      [month, year]
+      'SELECT * FROM logs WHERE user_id = $1 AND EXTRACT(MONTH from log_date)=$2 AND EXTRACT(YEAR from log_date)=$3 ORDER BY log_date ASC',
+      [user_id, month, year]
     )
     .then((results) => {
       return results.rows;
@@ -137,7 +138,7 @@ const updateLog = (user_id, date, field, value) => {
 module.exports = {
   findLog,
   createLog,
-  getLogsByMonth,
+  getUserLogsByMonth,
   getAllUserLogs,
   updateLog,
 };
