@@ -25,7 +25,7 @@ const CalendarBorder = styled.table`
   }
 `;
 
-const Date = styled.td`
+const DateCell = styled.td`
   text-align: center;
   height: 3rem;
 
@@ -80,26 +80,43 @@ const createCalendarHeader = () => {
  * Generates the dates in the given calendar month. Adds special style to the
  * current day if it is within the month.
  *
- * @param {Object}      month   A moment() object
- * @return {Element[]}  days    an array of <Date> cells to go in calendar
+ * @param {Object}      month         A moment() object
+ * @param {Object[]}    logEvents     An array of log objects in the given month.
+ *
+ * @return {Element[]}  an array of <DateCell>'s.
  */
-const getDatesInMonth = (month) => {
+const createDatesForMonth = (month, logEvents) => {
   let dates = [];
   const isCurrentMonth = moment().isSame(month, 'month');
   const today = parseInt(moment().format('D'));
 
+  if (logEvents.length === 0) {
+    for (let date = 1; date <= month.daysInMonth(); date++) {
+      dates.push(<DateCell key={date}>{date}</DateCell>);
+    }
+
+    return dates;
+  }
+
+  //else logEvents is not empty
+
+  //i tracks index on logEvents array
+  let i = 0;
+  let logDate = new Date(logEvents[i].log_date).getDate();
+
+  console.log(logDate);
+
   for (let date = 1; date <= month.daysInMonth(); date++) {
-    //style current date.
     if (isCurrentMonth && date === today) {
       dates.push(
-        <Date key={date}>
+        <DateCell key={date}>
           <TodayMarker>{date}</TodayMarker>
-        </Date>
+        </DateCell>
       );
     }
-    //no special styling for other dates
+    //is not today and there is no log for the day
     else {
-      dates.push(<Date key={date}>{date}</Date>);
+      dates.push(<DateCell key={date}>{date}</DateCell>);
     }
   }
 
@@ -107,7 +124,7 @@ const getDatesInMonth = (month) => {
 };
 
 /**
- * Takes all <Date /> cells including reserved blank spaces and formats them
+ * Takes all <DateCell />s including reserved blank spaces and formats them
  * into 7 day weeks.
  *
  * @param {Element[]} totalCells  All cells in calendar month including empty days.
@@ -144,19 +161,18 @@ const formatCalendarWeeks = (totalCells) => {
  * @param {string}     month    The current month to be displayed
  * @param {Object[]}   logs     An array of log objects for the given month.
  */
-const createCalendarBody = (month, logs) => {
+const createCalendarBody = (month, logEvents) => {
   //determine blank days needded for formatting
   let firstWeekDay = moment(month).startOf('month').format('d');
 
-  console.log(logs);
-
+  //Create blank cells at beginning of month for formatting
   let blanks = [];
   for (let i = 0; i < firstWeekDay; i++) {
     blanks.push(<td key={`blank${i}`}>{''}</td>);
   }
 
   //format actual dates
-  let dates = getDatesInMonth(month);
+  let dates = createDatesForMonth(month, logEvents);
   let totalCells = [...blanks, ...dates];
 
   const weeksOfMonth = formatCalendarWeeks(totalCells);
