@@ -15,7 +15,7 @@ import formatDatesInMonth from './util/formatDatesInMonth';
  */
 const createCalendarBody = (month, logEvents) => {
   //determine blank days needded for formatting
-  let firstWeekDay = moment(month).startOf('month').format('d');
+  const firstWeekDay = moment(month).startOf('month').format('d');
 
   //Create blank cells at beginning of month for formatting
   let blanks = [];
@@ -24,8 +24,8 @@ const createCalendarBody = (month, logEvents) => {
   }
 
   //format actual dates
-  let dates = formatDatesInMonth(month, logEvents);
-  let totalCells = [...blanks, ...dates];
+  const dates = formatDatesInMonth(month, logEvents);
+  const totalCells = [...blanks, ...dates];
 
   const weeksOfMonth = formatCalendarWeeks(totalCells);
 
