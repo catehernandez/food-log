@@ -6,6 +6,7 @@ import CalendarBorder from './components/CalendarBorder';
 import createCalendarHeader from './util/createCalendarHeader';
 import formatCalendarWeeks from './util/formatCalendarWeeks';
 import formatDatesInMonth from './util/formatDatesInMonth';
+import formatDatesWithEvents from './util/formatDatesWithEvents';
 
 /**
  * Coordinates other function calls to populate and format the body of the calendar.
@@ -24,7 +25,10 @@ const createCalendarBody = (month, logEvents) => {
   }
 
   //format actual dates
-  const dates = formatDatesInMonth(month, logEvents);
+  const areLogsInMonth = logEvents.length > 0;
+  const dates = areLogsInMonth
+    ? formatDatesWithEvents(month, logEvents)
+    : formatDatesInMonth(month);
   const totalCells = [...blanks, ...dates];
 
   const weeksOfMonth = formatCalendarWeeks(totalCells);
