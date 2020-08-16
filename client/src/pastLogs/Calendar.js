@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 /** Calendar styles */
@@ -79,8 +80,8 @@ const createCalendarHeader = () => {
  * Generates the dates in the given calendar month. Adds special style to the
  * current day if it is within the month.
  *
- * @param {moment()}    month
- * @return {Array}      days    an array of <Date> cells to go in calendar
+ * @param {Object}      month   A moment() object
+ * @return {Element[]}  days    an array of <Date> cells to go in calendar
  */
 const getDatesInMonth = (month) => {
   let dates = [];
@@ -109,7 +110,7 @@ const getDatesInMonth = (month) => {
  * Takes all <Date /> cells including reserved blank spaces and formats them
  * into 7 day weeks.
  *
- * @param {Element} totalCells    All cells in calendar month including empty days.
+ * @param {Element[]} totalCells  All cells in calendar month including empty days.
  */
 const formatCalendarWeeks = (totalCells) => {
   const DAYS_IN_WEEK = 7;
@@ -140,11 +141,14 @@ const formatCalendarWeeks = (totalCells) => {
 /**
  * Populates and formats the body of the calendar.
  *
- * @param {String} month  The current month to be displayed
+ * @param {string}     month    The current month to be displayed
+ * @param {Object[]}   logs     An array of log objects for the given month.
  */
-const createCalendarBody = (month) => {
+const createCalendarBody = (month, logs) => {
   //determine blank days needded for formatting
   let firstWeekDay = moment(month).startOf('month').format('d');
+
+  console.log(logs);
 
   let blanks = [];
   for (let i = 0; i < firstWeekDay; i++) {
@@ -161,11 +165,11 @@ const createCalendarBody = (month) => {
 };
 
 /**
- * Creates a calendar for the given month and populates with events, if given.
+ * Creates a calendar for the given month and populates with pastLog events, if given.
  */
-const Calendar = ({ month }) => {
+const Calendar = ({ month, logs }) => {
   const calendarHeader = createCalendarHeader();
-  const calendarCells = createCalendarBody(month);
+  const calendarCells = createCalendarBody(month, logs);
 
   return (
     <React.Fragment>
@@ -175,6 +179,13 @@ const Calendar = ({ month }) => {
       </CalendarBorder>
     </React.Fragment>
   );
+};
+
+Calendar.propTypes = {
+  /** A moment() object */
+  month: PropTypes.object.isRequired,
+  /** An array of log objects */
+  pastLogs: PropTypes.array,
 };
 
 export default Calendar;

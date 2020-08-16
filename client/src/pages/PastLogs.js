@@ -76,8 +76,6 @@ const PastLogs = () => {
     fetchPastLogs();
   }, [currentMonth]);
 
-  console.log(pastLogs);
-
   if (isError) {
     return <LogErrMsg />;
   }
@@ -95,7 +93,7 @@ const PastLogs = () => {
         </span>
         <Month>{currentMonth.format('MMMM YYYY')}</Month>
       </MonthContainer>
-      <Calendar month={currentMonth} />
+      <Calendar month={currentMonth} logs={pastLogs} />
     </React.Fragment>
   );
 };
