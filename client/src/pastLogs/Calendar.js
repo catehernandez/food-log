@@ -88,7 +88,7 @@ const createCalendarHeader = () => {
 const createDatesForMonth = (month, logEvents) => {
   let dates = [];
   const isCurrentMonth = moment().isSame(month, 'month');
-  const today = parseInt(moment().format('D'));
+  const today = new Date().getDate();
 
   if (logEvents.length === 0) {
     for (let date = 1; date <= month.daysInMonth(); date++) {
