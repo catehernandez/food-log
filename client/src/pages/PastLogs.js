@@ -4,6 +4,7 @@ import moment from 'moment';
 import styled, { css } from 'styled-components';
 
 import Calendar from 'pastLogs/Calendar';
+import LogErrMsg from 'logs/LogErrMsg';
 import { ReactComponent as RightArrowSVG } from 'shared/SVG/right-arrow.svg';
 import { ReactComponent as LeftArrowSVG } from 'shared/SVG/left-arrow.svg';
 
@@ -47,26 +48,34 @@ const getPastLogs = async (month, year) => {
     const res = await axios.get(`/user/logs/${year}/${month}`);
 
     return res.data;
-  } catch (err) {
-    console.log(err);
+  } catch {
+    throw Error;
   }
 };
 
 const PastLogs = () => {
   const [currentMonth, setMonth] = useState(moment());
+  const [isError, setIsError] = useState(false);
 
   //get past logs
   useEffect(() => {
     const fetchPastLogs = async () => {
       const month = currentMonth.format('MM');
       const year = currentMonth.format('YYYY');
-      const pastLogs = await getPastLogs(month, year);
 
-      console.log(pastLogs);
+      try {
+        const pastLogs = await getPastLogs(month, year);
+      } catch {
+        setIsError(true);
+      }
     };
 
     fetchPastLogs();
   });
+
+  if (isError) {
+    return <LogErrMsg />;
+  }
 
   return (
     <React.Fragment>
