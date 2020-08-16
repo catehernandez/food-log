@@ -3,7 +3,7 @@ import axios from 'axios';
 import moment from 'moment';
 import styled, { css } from 'styled-components';
 
-import Calendar from 'pastLogs/Calendar';
+import Calendar from 'calendar/App';
 import LogErrMsg from 'logs/LogErrMsg';
 import { ReactComponent as RightArrowSVG } from 'shared/SVG/right-arrow.svg';
 import { ReactComponent as LeftArrowSVG } from 'shared/SVG/left-arrow.svg';
