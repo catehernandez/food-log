@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as sessionActions from './session/sessionRedux';
 import { ThemeProvider } from 'styled-components';
@@ -8,6 +8,7 @@ import theme from './styles/theme';
 import DashboardPage from './pages/DashboardPage';
 import GlobalStyle from './styles/GlobalStyle';
 import LoginPage from './pages/LoginPage';
+import NotFoundPage from './pages/NotFoundPage';
 import SignupPage from './pages/SignupPage';
 
 class App extends React.Component {
@@ -20,9 +21,12 @@ class App extends React.Component {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <BrowserRouter>
-          <Route path="/" exact component={DashboardPage} />
-          <Route path="/login" exact component={LoginPage} />
-          <Route path="/signup" exact component={SignupPage} />
+          <Switch>
+            <Route path="/" exact component={DashboardPage} />
+            <Route path="/login" exact component={LoginPage} />
+            <Route path="/signup" exact component={SignupPage} />
+            <Route component={NotFoundPage} />
+          </Switch>
         </BrowserRouter>
       </ThemeProvider>
     );
