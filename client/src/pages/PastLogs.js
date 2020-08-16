@@ -56,6 +56,7 @@ const getPastLogs = async (month, year) => {
 const PastLogs = () => {
   const [currentMonth, setMonth] = useState(moment());
   const [isError, setIsError] = useState(false);
+  const [pastLogs, setPastLogs] = useState([]);
 
   //get past logs
   useEffect(() => {
@@ -64,14 +65,18 @@ const PastLogs = () => {
       const year = currentMonth.format('YYYY');
 
       try {
-        const pastLogs = await getPastLogs(month, year);
+        const results = await getPastLogs(month, year);
+
+        setPastLogs(results);
       } catch {
         setIsError(true);
       }
     };
 
     fetchPastLogs();
-  });
+  }, [currentMonth]);
+
+  console.log(pastLogs);
 
   if (isError) {
     return <LogErrMsg />;
