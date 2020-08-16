@@ -7,8 +7,8 @@ import { withTheme } from 'styled-components';
  * Render daily logs as doughnut graph.
  */
 const LogDoughnut = (props) => {
-  const { theme } = props;
-  const { veg_count, fruit_count, protein_count, grain_count } = props;
+  const { log, theme } = props;
+  const { veg_count, fruit_count, protein_count, grain_count } = log;
 
   const data = [
     { name: 'Vegetables', value: veg_count, fill: `${theme.colors.green}` },
@@ -25,10 +25,13 @@ const LogDoughnut = (props) => {
 };
 
 LogDoughnut.propTypes = {
-  veg_count: PropTypes.number.isRequired,
-  fruit_count: PropTypes.number.isRequired,
-  protein_count: PropTypes.number.isRequired,
-  grain_count: PropTypes.number.isRequired,
+  /** A log object */
+  log: PropTypes.shape({
+    veg_count: PropTypes.number.isRequired,
+    fruit_count: PropTypes.number.isRequired,
+    protein_count: PropTypes.number.isRequired,
+    grain_count: PropTypes.number.isRequired,
+  }),
 };
 
 export default withTheme(LogDoughnut);
