@@ -9,6 +9,7 @@ import DashboardPage from './pages/DashboardPage';
 import GlobalStyle from './styles/GlobalStyle';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
+import ProtectedRoute from './shared/ProtectedRoute';
 import SignupPage from './pages/SignupPage';
 
 class App extends React.Component {
@@ -22,7 +23,7 @@ class App extends React.Component {
         <GlobalStyle />
         <BrowserRouter>
           <Switch>
-            <Route path="/" exact component={DashboardPage} />
+            <ProtectedRoute path="/" exact component={DashboardPage} />
             <Route path="/login" exact component={LoginPage} />
             <Route path="/signup" exact component={SignupPage} />
             <Route component={NotFoundPage} />
