@@ -27,6 +27,10 @@ const LogDoughnut = (props) => {
     { name: 'Grains', value: grain_count, fill: `${theme.colors.yellow}` },
   ];
 
+  const total_count = veg_count + fruit_count + protein_count + grain_count;
+
+  if (total_count === 0) return <span>{props.children}</span>;
+
   return (
     <LogDoughnutContainer>
       <ResponsiveContainer>
