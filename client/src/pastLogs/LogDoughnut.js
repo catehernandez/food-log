@@ -1,7 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { PieChart, Pie, ResponsiveContainer } from 'recharts';
+import styled from 'styled-components';
 import { withTheme } from 'styled-components';
+
+const LogDoughnutContainer = styled.div`
+  height: 44px;
+  width: 100%;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    height: 64px;
+  }
+`;
 
 /**
  * Render daily logs as doughnut graph.
@@ -18,18 +28,20 @@ const LogDoughnut = (props) => {
   ];
 
   return (
-    <ResponsiveContainer>
-      <PieChart width={56} height={56}>
-        <Pie
-          data={data}
-          dataKey="value"
-          innerRadius={24}
-          isAnimationActive={false}
-          outerRadius={28}
-          stroke="none"
-        />
-      </PieChart>
-    </ResponsiveContainer>
+    <LogDoughnutContainer>
+      <ResponsiveContainer>
+        <PieChart>
+          <Pie
+            data={data}
+            dataKey="value"
+            isAnimationActive={false}
+            innerRadius="87%"
+            outerRadius="100%"
+            stroke="none"
+          />
+        </PieChart>
+      </ResponsiveContainer>
+    </LogDoughnutContainer>
   );
 };
 
