@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PieChart, Pie, ResponsiveContainer } from 'recharts';
+import { Label, PieChart, Pie, ResponsiveContainer } from 'recharts';
 import styled from 'styled-components';
 import { withTheme } from 'styled-components';
 
@@ -38,7 +38,11 @@ const LogDoughnut = (props) => {
             innerRadius="87%"
             outerRadius="100%"
             stroke="none"
-          />
+          >
+            <Label width={30} position="center">
+              {`${props.children}`}
+            </Label>
+          </Pie>
         </PieChart>
       </ResponsiveContainer>
     </LogDoughnutContainer>

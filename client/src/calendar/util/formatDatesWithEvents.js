@@ -34,7 +34,7 @@ const formatDatesWithEvents = (month, logEvents) => {
     } else if (currentLogDate === date) {
       dates.push(
         <DateCell key={date}>
-          <LogDoughnut log={currentLog} />
+          <LogDoughnut log={currentLog}>{date}</LogDoughnut>
         </DateCell>
       );
 
