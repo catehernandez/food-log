@@ -3,6 +3,7 @@ import moment from 'moment';
 
 import CurrentDateMarker from '../components/CurrentDateMarker';
 import DateCell from '../components/DateCell';
+import LogDoughnut from 'pastLogs/LogDoughnut';
 
 /**
  * Generates the dates in the given calendar month. Adds special style to the
@@ -13,12 +14,14 @@ import DateCell from '../components/DateCell';
  *
  * @return {Element[]}  an array of <DateCell>'s.
  */
-const formatDatesInMonth = (month, logEvents) => {
+const formatDatesWithEvents = (month, logEvents) => {
   let dates = [];
   const isCurrentMonth = moment().isSame(month, 'month');
   const today = new Date().getDate();
 
-  console.log(logEvents);
+  let i = 0;
+  let currentLog = logEvents[i];
+  let currentLogDate = new Date(currentLog.log_date).getDate();
 
   for (let date = 1; date <= month.daysInMonth(); date++) {
     if (isCurrentMonth && date === today) {
@@ -27,8 +30,19 @@ const formatDatesInMonth = (month, logEvents) => {
           <CurrentDateMarker>{date}</CurrentDateMarker>
         </DateCell>
       );
+      i++;
+    } else if (currentLogDate === date) {
+      dates.push(
+        <DateCell key={date}>
+          <LogDoughnut log={currentLog} />
+        </DateCell>
+      );
+
+      i++;
+      currentLog = logEvents[i];
+      currentLogDate = new Date(currentLog.log_date).getDate();
     }
-    //is not current date
+    //is not current date && there is no log for current date
     else {
       dates.push(<DateCell key={date}>{date}</DateCell>);
     }
@@ -37,4 +51,4 @@ const formatDatesInMonth = (month, logEvents) => {
   return dates;
 };
 
-export default formatDatesInMonth;
+export default formatDatesWithEvents;
