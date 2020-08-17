@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PieChart, Pie } from 'recharts';
+import { PieChart, Pie, ResponsiveContainer } from 'recharts';
 import { withTheme } from 'styled-components';
 
 /**
@@ -18,9 +18,18 @@ const LogDoughnut = (props) => {
   ];
 
   return (
-    <PieChart width={64} height={64}>
-      <Pie data={data} dataKey="value" innerRadius={24} outerRadius={32} />
-    </PieChart>
+    <ResponsiveContainer>
+      <PieChart width={56} height={56}>
+        <Pie
+          data={data}
+          dataKey="value"
+          innerRadius={24}
+          isAnimationActive={false}
+          outerRadius={28}
+          stroke="none"
+        />
+      </PieChart>
+    </ResponsiveContainer>
   );
 };
 
