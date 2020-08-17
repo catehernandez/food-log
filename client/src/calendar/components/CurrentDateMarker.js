@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const CurrentDateMarker = styled.span`
+  color: ${({ theme }) => theme.colors.darkBrown};
   display: flex;
   align-items: center;
   justify-content: center;
