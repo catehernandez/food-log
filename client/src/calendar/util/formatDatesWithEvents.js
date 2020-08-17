@@ -39,12 +39,16 @@ const formatDatesWithEvents = (month, logEvents) => {
       );
 
       i++;
-      currentLog = logEvents[i];
-      currentLogDate = new Date(currentLog.log_date).getDate();
     }
     //is not current date && there is no log for current date
     else {
       dates.push(<DateCell key={date}>{date}</DateCell>);
+    }
+
+    //update logs index
+    if (i < logEvents.length) {
+      currentLog = logEvents[i];
+      currentLogDate = new Date(currentLog.log_date).getDate();
     }
   }
 
