@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StyledInput = styled.input`
   background: none;
   border: none;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.brownBlack};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.darkBrown};
   font-size: 1rem;
   line-height: inherit;
   padding: 0.25rem 0.5rem 0.5rem;
