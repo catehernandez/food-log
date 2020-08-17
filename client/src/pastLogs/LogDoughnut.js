@@ -43,7 +43,11 @@ const LogDoughnut = (props) => {
             outerRadius="100%"
             stroke="none"
           >
-            <Label width={30} position="center">
+            <Label
+              fill={`${theme.colors.darkBrown}`}
+              position="center"
+              width={30}
+            >
               {`${props.children}`}
             </Label>
           </Pie>
