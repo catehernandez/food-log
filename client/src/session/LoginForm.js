@@ -38,6 +38,7 @@ const LoginForm = (props) => {
           <InputErrorMessage>
             {touched.email && errors.email ? errors.email : <pre></pre>}
           </InputErrorMessage>
+
           <TextInputLabel htmlFor="password" invisible={!values.password}>
             Password
           </TextInputLabel>
@@ -54,6 +55,7 @@ const LoginForm = (props) => {
               <pre></pre>
             )}
           </InputErrorMessage>
+
           <Button
             type="submit"
             disabled={!values.email || !values.password || errors.email}

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
-import AuthErrorMessage from 'session/styles/AuthErrorMessage';
+import ErrorMessage from 'shared/ErrorMessage';
 import LoginBox from 'session/styles/LoginBox';
 import LoginForm from 'session/LoginForm';
 
@@ -22,7 +22,11 @@ const Login = (props) => {
     <LoginBox>
       <LoginForm />
       {props.errors === 401 ? (
-        <AuthErrorMessage>Invalid username or password</AuthErrorMessage>
+        <ErrorMessage>Invalid username or password</ErrorMessage>
+      ) : props.errors === 429 ? (
+        <ErrorMessage>
+          Too many failed login attempts. Please wait before trying again.
+        </ErrorMessage>
       ) : (
         ''
       )}
