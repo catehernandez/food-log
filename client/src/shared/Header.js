@@ -1,9 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import UnstyledLink from './UnstyledLink';
 import { ReactComponent as UserIconSVG } from 'user/user-icon.svg';
+import { ReactComponent as CalendarIconSVG } from './SVG/calendar.svg';
+
+const HeaderIconStyles = css`
+  cursor: pointer;
+  height: 32px;
+  padding: 0 1rem;
+  position: absolute;
+  right: 1.5rem;
+  stroke-width: 1.5px;
+`;
+
+const CalendarIcon = styled(CalendarIconSVG)`
+  ${HeaderIconStyles}
+`;
 
 const HeaderContainer = styled.header`
   align-items: center;
@@ -22,10 +36,7 @@ const Title = styled.h1`
 `;
 
 const UserIcon = styled(UserIconSVG)`
-  cursor: pointer;
-  padding: 0 1rem;
-  position: absolute;
-  right: 1.5rem;
+  ${HeaderIconStyles}
 `;
 
 /**
@@ -38,6 +49,9 @@ const Header = (props) => {
       <Title>
         <UnstyledLink to="/">Intueat</UnstyledLink>
       </Title>
+      <UnstyledLink to="/archive">
+        <CalendarIcon />
+      </UnstyledLink>
       <UserIcon onClick={props.toggleUserProfile} />
     </HeaderContainer>
   );
