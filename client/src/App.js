@@ -27,7 +27,7 @@ class App extends React.Component {
             <ProtectedRoute path="/" exact component={DashboardPage} />
             <Route path="/login" exact component={LoginPage} />
             <Route path="/signup" exact component={SignupPage} />
-            <Route path="/archive" exact component={PastLogs} />
+            <ProtectedRoute path="/archive" exact component={PastLogs} />
             <Route component={NotFoundPage} />
           </Switch>
         </BrowserRouter>

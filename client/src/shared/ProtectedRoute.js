@@ -17,7 +17,13 @@ function ProtectedRoute({ component: Component, currentUser, ...rest }) {
     <Route
       {...rest}
       render={(props) =>
-        currentUser ? <Component {...props} /> : <Redirect to="/login" />
+        currentUser ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{ pathname: '/login', state: { from: props.location } }}
+          />
+        )
       }
     />
   );
