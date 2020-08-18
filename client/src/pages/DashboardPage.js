@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Log from 'logs/Log';
-import Header from 'shared/Header';
+import Header from 'header/App';
 import UserProfile from 'user/UserProfile';
 
 const DashboardPage = (props) => {

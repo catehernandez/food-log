@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-import UnstyledLink from './UnstyledLink';
-import { ReactComponent as UserIconSVG } from 'user/user-icon.svg';
-import { ReactComponent as CalendarIconSVG } from './SVG/calendar.svg';
+import SiteTitle from './SiteTitle';
+import UnstyledLink from '../shared/UnstyledLink';
+import { CalendarIcon, UserIcon } from './headerIcons';
 
 const HeaderContainer = styled.header`
   align-items: flex-end;
@@ -22,29 +22,9 @@ const HeaderContainer = styled.header`
   }
 `;
 
-const Title = styled.h1`
-  font-size: 1.25rem;
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-`;
-
-//Icons & styles
 const HeaderIconContainer = styled.span`
   display: flex;
   column-gap: 1.5rem;
-`;
-
-const HeaderIconStyles = css`
-  cursor: pointer;
-  height: 2.125rem;
-  stroke-width: 1.5px;
-`;
-
-const CalendarIcon = styled(CalendarIconSVG)`
-  ${HeaderIconStyles}
-`;
-
-const UserIcon = styled(UserIconSVG)`
-  ${HeaderIconStyles}
 `;
 
 /**
@@ -54,9 +34,7 @@ const UserIcon = styled(UserIconSVG)`
 const Header = (props) => {
   return (
     <HeaderContainer>
-      <Title>
-        <UnstyledLink to="/">Intueat</UnstyledLink>
-      </Title>
+      <SiteTitle />
 
       <HeaderIconContainer>
         <UnstyledLink to="/archive">
