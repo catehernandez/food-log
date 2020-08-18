@@ -10,6 +10,7 @@ import GlobalStyle from './styles/GlobalStyle';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProtectedRoute from './shared/ProtectedRoute';
+import PastLogs from './pages/PastLogs';
 import SignupPage from './pages/SignupPage';
 
 class App extends React.Component {
@@ -26,6 +27,7 @@ class App extends React.Component {
             <ProtectedRoute path="/" exact component={DashboardPage} />
             <Route path="/login" exact component={LoginPage} />
             <Route path="/signup" exact component={SignupPage} />
+            <Route path="/archive" exact component={PastLogs} />
             <Route component={NotFoundPage} />
           </Switch>
         </BrowserRouter>

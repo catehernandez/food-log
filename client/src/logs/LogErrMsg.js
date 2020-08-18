@@ -25,7 +25,8 @@ const LogErrWrapper = styled.div`
 `;
 
 const RefreshIcon = styled(RefreshSVG)`
-  stroke: ${({ theme }) => theme.colors.brownBlack};
+  cursor: pointer;
+  stroke: ${({ theme }) => theme.colors.darkBrown};
   height: 1rem;
   padding: 0 0 1rem;
 `;
@@ -38,7 +39,7 @@ const LogErrMsg = () => {
         <br />
         &hellip;working on it.
       </LogErrWrapper>
-      <RefreshIcon />
+      <RefreshIcon onClick={() => window.location.reload()} />
     </LogErrBox>
   );
 };

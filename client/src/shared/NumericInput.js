@@ -8,12 +8,12 @@ import { ReactComponent as MinusSVG } from 'shared/SVG/minus.svg';
 import { ReactComponent as PlusSVG } from 'shared/SVG/plus.svg';
 
 const MinusSign = styled(MinusSVG)`
-  stroke: ${({ theme }) => theme.colors.brownBlack};
+  stroke: ${({ theme }) => theme.colors.darkBrown};
   width: 0.8rem;
 `;
 
 const PlusSign = styled(PlusSVG)`
-  stroke: ${({ theme }) => theme.colors.brownBlack};
+  stroke: ${({ theme }) => theme.colors.darkBrown};
   stroke-width: 1px;
   width: 0.9rem;
 `;
@@ -48,7 +48,7 @@ const IncrementButton = styled(DecrementButton)`
 `;
 
 const InputContainer = styled.div`
-  border: 1px solid ${({ theme }) => theme.colors.brownBlack};
+  border: 1px solid ${({ theme }) => theme.colors.darkBrown};
   border-radius: 4px;
   display: inline-flex;
   font-size: 1rem;
@@ -60,7 +60,7 @@ const InputContainer = styled.div`
 const InputValue = styled.span`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.lightestBeige};
-  border-color: ${({ theme }) => theme.colors.brownBlack};
+  border-color: ${({ theme }) => theme.colors.darkBrown};
   border-style: none solid;
   border-width: 0 1px;
   display: flex;
