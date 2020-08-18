@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 const Button = styled.button`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.lightestBeige};
-  border: 1px solid ${({ theme }) => theme.colors.brownBlack};
+  border: 1px solid ${({ theme }) => theme.colors.darkBrown};
   border-radius: 4px;
   cursor: pointer;
   display: flex;
@@ -19,8 +19,8 @@ const Button = styled.button`
   ${(props) =>
     props.disabled &&
     css`
-      border-color: ${(props) => props.theme.colors.brownBlack60};
-      color: ${(props) => props.theme.colors.brownBlack60};
+      border-color: ${(props) => props.theme.colors.darkBrown60};
+      color: ${(props) => props.theme.colors.darkBrown60};
       cursor: auto;
     `}
 `;

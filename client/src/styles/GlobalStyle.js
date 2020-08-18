@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    color: ${({ theme }) => theme.colors.brownBlack};
+    color: ${({ theme }) => theme.colors.darkBrown};
     font-family: ${({ theme }) => theme.fontFamily.Quicksand};
     font-weight: ${({ theme }) => theme.fontWeights.light};
   }

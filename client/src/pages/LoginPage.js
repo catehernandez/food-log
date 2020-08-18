@@ -12,8 +12,10 @@ const mapStateToProps = (state) => ({
 });
 
 const Login = (props) => {
+  const { from } = props.location.state || { from: { pathname: '/' } };
+
   if (props.currentUser) {
-    return <Redirect to="/" />;
+    return <Redirect to={from} />;
   }
 
   return (
