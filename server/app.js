@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 require('dotenv').config();
+const rateLimit = require('express-rate-limit');
 
 //Authentication packages
 const session = require('express-session');
@@ -19,6 +20,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(helmet());
+
+//configure rate limiter on login route
+const loginLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 5, // 5 requests,
+});
+
+app.use('/auth/login', loginLimiter);
+
+//configure rate limiter on signup route
+const signupLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, //1 hour
+  max: 5, //5 requests
+});
+
+app.use('/auth/signup', signupLimiter);
 
 /* Authentication tools */
 // Express session configuration object
