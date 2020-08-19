@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import CurrentDateMarker from '../components/CurrentDateMarker';
 import DateCell from '../components/DateCell';
-import LogDoughnut from 'pastLogs/LogDoughnut';
+import LogDoughnut from 'log/components/LogDoughnut';
 
 /**
  * Generates the dates in the given calendar month. Adds special style to the

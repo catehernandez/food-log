@@ -4,9 +4,9 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import { LogBox, LogContainer, DateContainer } from './logStyles';
-import LogErrMsg from './LogErrMsg';
+import LogErrMsg from '../LogErrMsg';
 import Servings from './Servings';
-import * as logActions from './logRedux';
+import * as logActions from '../logRedux';
 
 /** All styled components are defined in logs/logStyles */
 
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => ({
  * Renders Log for the current day in the user's timezone. If no log yet exists
  * for the current day, create a new entry.
  */
-class Log extends React.Component {
+class CurrentLog extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -96,7 +96,7 @@ class Log extends React.Component {
   }
 }
 
-Log.propTypes = {
+CurrentLog.propTypes = {
   /** Function called if no log found for current day. */
   createLog: PropTypes.func.isRequired,
   /** Object stored in Redux state. */
@@ -123,4 +123,4 @@ Log.propTypes = {
   loading: PropTypes.bool,
 };
 
-export default connect(mapStateToProps, logActions)(Log);
+export default connect(mapStateToProps, logActions)(CurrentLog);

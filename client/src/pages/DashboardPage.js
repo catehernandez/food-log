@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Log from 'logs/Log';
+import CurrentLog from 'log/components/CurrentLog';
 import Header from 'header/App';
 import UserProfile from 'user/UserProfile';
 
@@ -18,7 +18,7 @@ const DashboardPage = (props) => {
   return (
     <React.Fragment>
       <Header toggleUserProfile={showUserProfile} />
-      <Log />
+      <CurrentLog />
       <UserProfile
         isHidden={userProfileIsHidden}
         toggleUserProfile={hideUserProfile}

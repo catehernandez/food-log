@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Checkbox from './Checkbox';
-import * as logActions from './logRedux';
+import * as logActions from '../logRedux';
 
 //Exported for managing layout in logStyles
 export const ServingsContainer = styled.div`
