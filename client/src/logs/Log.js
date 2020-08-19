@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import dateFormat from 'dateformat';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import { LogBox, LogContainer, DateContainer } from './logStyles';
@@ -24,28 +24,26 @@ const mapStateToProps = (state) => ({
 class Log extends React.Component {
   constructor(props) {
     super(props);
-    this.today = new Date();
   }
 
   /**
    * Async helper function to get log for today. If none exists,
    * create one.
    *
-   * @param {Date() Object} date
    */
-  fetchOrCreateLog = async (date) => {
-    const ISODate = date.toISOString();
+  getCurrentLog = async () => {
+    const today = moment().format('YYYY-MM-DD');
 
-    await this.props.getLog(ISODate);
+    await this.props.getLog(today);
 
     //If log not found
     if (this.props.errors === 404) {
-      this.props.createLog(ISODate);
+      this.props.createLog(today);
     }
   };
 
   componentDidMount() {
-    this.fetchOrCreateLog(this.today);
+    this.getCurrentLog();
   }
 
   render() {
@@ -63,7 +61,7 @@ class Log extends React.Component {
 
     return (
       <LogBox>
-        <DateContainer>{dateFormat(this.today, 'd mmmm yyyy')}</DateContainer>
+        <DateContainer>{moment().format('D MMMM YYYY')}</DateContainer>
         <LogContainer>
           <Servings
             foodGroup="vegetables"

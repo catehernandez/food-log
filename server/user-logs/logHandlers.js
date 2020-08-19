@@ -46,7 +46,11 @@ module.exports = {
       const { user_id } = req.user;
       const { date } = req.body;
 
+      if (!validator.isISO8601(date))
+        return res.status(400).json('Date must be in ISO format');
+
       const newLog = await LogsDB.createLog(user_id, date);
+
       res.status(200).json(newLog);
     } catch (err) {
       res.status(500).json(err);
@@ -59,6 +63,9 @@ module.exports = {
     try {
       const { user_id } = req.user;
       const { date } = req.params;
+
+      if (!validator.isISO8601(date))
+        return res.status(400).json('Date must be in ISO format');
 
       //console.log(date);
       const log = await LogsDB.findLog(user_id, date);
@@ -76,6 +83,9 @@ module.exports = {
 
     const { user_id } = req.user;
     const { date } = req.params;
+
+    if (!validator.isISO8601(date))
+      return res.status(400).json('Date must be in ISO format');
 
     try {
       const log = await LogsDB.findLog(user_id, date);
