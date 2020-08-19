@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import dateFormat from 'dateformat';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import { LogBox, LogContainer, DateContainer } from './logStyles';
@@ -63,7 +63,7 @@ class Log extends React.Component {
 
     return (
       <LogBox>
-        <DateContainer>{dateFormat(this.today, 'd mmmm yyyy')}</DateContainer>
+        <DateContainer>{moment().format('D MMMM YYYY')}</DateContainer>
         <LogContainer>
           <Servings
             foodGroup="vegetables"
