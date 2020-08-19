@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import ErrorMessage from 'shared/ErrorMessage';
 import LoginBox from 'session/styles/LoginBox';
 import LoginForm from 'session/LoginForm';
+import UnstyledLink from 'shared/UnstyledLink';
 
 const mapStateToProps = (state) => ({
   currentUser: state.session.currentUser,
@@ -31,7 +32,10 @@ const Login = (props) => {
         ''
       )}
       <div>
-        Don't have an account? <Link to={'/signup'}>Sign up</Link>
+        Don't have an account?{' '}
+        <UnstyledLink to={'/signup'}>
+          <u>Sign up</u>
+        </UnstyledLink>
       </div>
     </LoginBox>
   );

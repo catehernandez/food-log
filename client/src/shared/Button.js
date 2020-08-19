@@ -19,7 +19,7 @@ const Button = styled.button`
   ${(props) =>
     props.disabled &&
     css`
-      border-color: ${(props) => props.theme.colors.darkBrown60};
+      border-color: ${(props) => props.theme.colors.darkBrown30};
       color: ${(props) => props.theme.colors.darkBrown60};
       cursor: auto;
     `}

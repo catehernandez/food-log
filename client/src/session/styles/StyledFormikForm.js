@@ -8,7 +8,7 @@ const StyledFormikForm = styled(Form)`
   width: 80%;
 
   ${Button} {
-    margin: 1rem auto 0.5rem;
+    margin: 1rem auto;
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
