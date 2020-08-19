@@ -24,28 +24,26 @@ const mapStateToProps = (state) => ({
 class Log extends React.Component {
   constructor(props) {
     super(props);
-    this.today = new Date();
   }
 
   /**
    * Async helper function to get log for today. If none exists,
    * create one.
    *
-   * @param {Date() Object} date
    */
-  fetchOrCreateLog = async (date) => {
-    const ISODate = date.toISOString();
+  getCurrentLog = async () => {
+    const today = moment().format('YYYY-MM-DD');
 
-    await this.props.getLog(ISODate);
+    await this.props.getLog(today);
 
     //If log not found
     if (this.props.errors === 404) {
-      this.props.createLog(ISODate);
+      this.props.createLog(today);
     }
   };
 
   componentDidMount() {
-    this.fetchOrCreateLog(this.today);
+    this.getCurrentLog();
   }
 
   render() {
