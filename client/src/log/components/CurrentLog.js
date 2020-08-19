@@ -22,14 +22,9 @@ const mapStateToProps = (state) => ({
  * for the current day, create a new entry.
  */
 class CurrentLog extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   /**
    * Async helper function to get log for today. If none exists,
    * create one.
-   *
    */
   getCurrentLog = async () => {
     const today = moment().format('YYYY-MM-DD');
