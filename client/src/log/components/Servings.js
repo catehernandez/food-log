@@ -7,7 +7,7 @@ import Checkbox from './Checkbox';
 import * as logActions from '../logRedux';
 
 //Exported for managing layout in logStyles
-export const ServingsContainer = styled.div`
+export const ServingsWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(5, fit-content(1.5rem));
   grid-template-rows: repeat(2, auto);
@@ -129,7 +129,7 @@ class Servings extends React.Component {
     return (
       <React.Fragment>
         <ServingsLabel>{this.props.foodGroup}</ServingsLabel>
-        <ServingsContainer>{this.renderCheckboxes()}</ServingsContainer>
+        <ServingsWrapper>{this.renderCheckboxes()}</ServingsWrapper>
       </React.Fragment>
     );
   }

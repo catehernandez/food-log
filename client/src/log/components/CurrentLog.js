@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
-import { LogBox, LogContainer, DateContainer } from './logStyles';
+import Log from './Log';
 import LogErrMsg from '../LogErrMsg';
 import Servings from './Servings';
 import * as logActions from '../logRedux';
@@ -60,38 +60,35 @@ class CurrentLog extends React.Component {
     }
 
     return (
-      <LogBox>
-        <DateContainer>{moment().format('D MMMM YYYY')}</DateContainer>
-        <LogContainer>
-          <Servings
-            foodGroup="vegetables"
-            field="veg_count"
-            goals={currentUser.vegetable_goals}
-            completed={currentLog.veg_count}
-          />
+      <Log date={moment().format('D MMMM YYYY')}>
+        <Servings
+          foodGroup="vegetables"
+          field="veg_count"
+          goals={currentUser.vegetable_goals}
+          completed={currentLog.veg_count}
+        />
 
-          <Servings
-            foodGroup="fruits"
-            field="fruit_count"
-            goals={currentUser.fruit_goals}
-            completed={currentLog.fruit_count}
-          />
+        <Servings
+          foodGroup="fruits"
+          field="fruit_count"
+          goals={currentUser.fruit_goals}
+          completed={currentLog.fruit_count}
+        />
 
-          <Servings
-            foodGroup="protein"
-            field="protein_count"
-            goals={currentUser.protein_goals}
-            completed={currentLog.protein_count}
-          />
+        <Servings
+          foodGroup="protein"
+          field="protein_count"
+          goals={currentUser.protein_goals}
+          completed={currentLog.protein_count}
+        />
 
-          <Servings
-            foodGroup="grains"
-            field="grain_count"
-            goals={currentUser.grain_goals}
-            completed={currentLog.grain_count}
-          />
-        </LogContainer>
-      </LogBox>
+        <Servings
+          foodGroup="grains"
+          field="grain_count"
+          goals={currentUser.grain_goals}
+          completed={currentLog.grain_count}
+        />
+      </Log>
     );
   }
 }
