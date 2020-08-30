@@ -1,6 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 46.85"><defs>
-<style>
-    .a,.d{fill:none;}
-    .a,.b{stroke:#4D3232;stroke-miterlimit:10;}
-    .b{fill:#fff;}
-    .c{fill:#4D3232;}</style></defs><rect class="a" x="0.51" y="5.27" width="46.94" height="41.07" rx="3"/><line class="b" x1="48" y1="13.83" y2="13.83"/><rect class="c" x="9" y="20.83" width="6" height="6"/><rect class="c" x="21" y="20.83" width="6" height="6"/><rect class="c" x="33" y="20.83" width="6" height="6"/><rect class="c" x="9" y="32.83" width="6" height="6"/><rect class="c" x="21" y="32.83" width="6" height="6"/><rect class="c" x="33" y="32.83" width="6" height="6"/><line class="d" x1="12" y1="3.18" x2="15.19"/><line class="a" x1="12" y1="5.67" x2="12" y2="1.17"/><line class="a" x1="36" y1="5.42" x2="36" y2="1.42"/></svg>
+<svg id="Layer_1" 
+    data-name="Layer 1" 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 48 46.85"><defs
+    ><style>.cls-1,.cls-3,.cls-4,.cls-5{fill:none;}.cls-1,.cls-2,.cls-4,.cls-5{stroke:#4D3232;stroke-miterlimit:10;}.cls-2{fill:#fff;}.cls-4,.cls-5{stroke-linecap:round;}.cls-5{stroke-width:1.5px;}</style></defs><rect class="cls-1" x="0.51" y="5.27" width="46.94" height="41.07" rx="3"/><line class="cls-2" x1="48" y1="13.83" y2="13.83"/><line class="cls-3" x1="12" y1="3.18" x2="15.19"/><line class="cls-4" x1="11.89" y1="8.27" x2="11.89" y2="2.27"/><line class="cls-4" x1="36" y1="8.27" x2="36" y2="2.27"/><line class="cls-5" x1="17.5" y1="21.7" x2="21.5" y2="21.7"/><line class="cls-5" x1="17.5" y1="38.15" x2="21.5" y2="38.15"/><line class="cls-5" x1="17.5" y1="29.83" x2="21.5" y2="29.83"/><line class="cls-5" x1="8.5" y1="38.15" x2="12.5" y2="38.15"/><line class="cls-5" x1="8.5" y1="29.83" x2="12.5" y2="29.83"/><line class="cls-5" x1="26.5" y1="21.6" x2="30.5" y2="21.6"/><line class="cls-5" x1="26.5" y1="38.06" x2="30.5" y2="38.06"/><line class="cls-5" x1="26.5" y1="29.74" x2="30.5" y2="29.74"/><line class="cls-5" x1="35.5" y1="21.6" x2="39.5" y2="21.6"/><line class="cls-5" x1="35.29" y1="29.74" x2="39.29" y2="29.74"/></svg>
