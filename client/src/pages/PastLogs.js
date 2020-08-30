@@ -4,7 +4,7 @@ import moment from 'moment';
 import styled, { css } from 'styled-components';
 
 import Calendar from 'calendar/App';
-import LogErrMsg from 'logs/LogErrMsg';
+import LogErrMsg from 'log/LogErrMsg';
 import { ReactComponent as RightArrowSVG } from 'shared/SVG/right-arrow.svg';
 import { ReactComponent as LeftArrowSVG } from 'shared/SVG/left-arrow.svg';
 
