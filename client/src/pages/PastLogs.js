@@ -2,13 +2,25 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Calendar from 'calendar/App';
 import LogErrMsg from 'log/LogErrMsg';
 import { ReactComponent as RightArrowSVG } from 'shared/SVG/right-arrow.svg';
 import { ReactComponent as LeftArrowSVG } from 'shared/SVG/left-arrow.svg';
+import { ReactComponent as BackArrowSVG } from 'shared/SVG/arrow.svg';
 
-/** Month & arrow styles */
+const BackArrow = styled(BackArrowSVG)`
+  cursor: pointer;
+  left: 1.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  stroke-width: 0.5px;
+  top: 1.5rem;
+  width: 2.5rem;
+`;
+
+/** styles for month & arrows to toggle month */
 const MonthContainer = styled.div`
   display: flex;
   align-items: flex-end;
@@ -27,6 +39,7 @@ const Month = styled.span`
   font-weight: ${({ theme }) => theme.fontWeights.regular};
 `;
 
+//for arrows to toggle month
 const arrowStyle = css`
   cursor: pointer;
   height: 1.2rem;
@@ -82,6 +95,10 @@ const PastLogs = () => {
 
   return (
     <React.Fragment>
+      <Link to="/">
+        <BackArrow />
+      </Link>
+
       <MonthContainer>
         <span>
           <LeftArrowIcon
