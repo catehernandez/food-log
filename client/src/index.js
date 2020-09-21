@@ -15,7 +15,6 @@ import rootReducer from './reducers';
 import * as serviceWorker from './serviceWorker';
 
 //axios defaults
-axios.defaults.baseURL = 'http://localhost:5000';
 axios.defaults.headers.post['Content-Type'] =
   'application/x-www-form-urlencoded';
 
