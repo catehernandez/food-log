@@ -44,6 +44,7 @@ const sess = {
 
 //Only serve cookies over HTTPS in production
 if (process.env.NODE_ENV === 'production') {
+  sess.cookie.domain = 'intueat.heroku.com';
   sess.cookie.secure = true; // serve secure cookies
   sess.cookie.httpOnly = true;
 }
