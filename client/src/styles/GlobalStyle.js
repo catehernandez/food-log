@@ -9,7 +9,10 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     margin: 0;
     overflow-x: hidden;
-    overflow-y: hidden;
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+      overflow-y: hidden;
+    }
   }
 
   body {
