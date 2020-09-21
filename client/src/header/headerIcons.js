@@ -7,6 +7,7 @@ import { ReactComponent as CalendarIconSVG } from 'shared/SVG/calendar.svg';
 const HeaderIconStyles = css`
   cursor: pointer;
   height: 2.125rem;
+  margin-left: 1.5rem;
   stroke-width: 1.5px;
 `;
 

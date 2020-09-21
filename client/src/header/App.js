@@ -24,7 +24,6 @@ const HeaderContainer = styled.header`
 
 const HeaderIconContainer = styled.span`
   display: flex;
-  column-gap: 1.5rem;
 `;
 
 /**
