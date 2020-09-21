@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cluster = require('cluster');
+const cors = require('cors');
 const compression = require('compression');
 const helmet = require('helmet');
 const numCPUs = require('os').cpus().length;
@@ -74,6 +75,15 @@ if (!isDev && cluster.isMaster) {
     sess.cookie.secure = true; // serve secure cookies
     sess.cookie.httpOnly = true;
   }
+  //configure cors - needed to send cookies in production
+  const origin = {
+    origin: isDev ? '*' : 'https://intueat.herokuapp.com',
+  };
+  app.use(cors(origin));
+
+  //rate limiters
+  app.use('/auth/login', loginLimiter);
+  app.use('/auth/signup', signupLimiter);
 
   app.use(session(sess));
   app.use(passport.initialize());
