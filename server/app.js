@@ -71,7 +71,7 @@ if (!isDev && cluster.isMaster) {
   //Only serve cookies over HTTPS in production
   if (!isDev) {
     app.set('trust proxy', 1); // trust first proxy
-    sess.cookie.domain = 'intueat.heroku.com';
+    sess.cookie.domain = 'intueat.herokuapp.com';
     sess.cookie.secure = true; // serve secure cookies
     sess.cookie.httpOnly = true;
   }
