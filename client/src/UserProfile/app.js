@@ -6,51 +6,11 @@ import styled from 'styled-components';
 
 import Button from 'shared/Button';
 import NumericInput from 'shared/NumericInput';
-import { ReactComponent as CloseSVG } from 'shared/SVG/X.svg';
 import * as sessionActions from 'session/sessionRedux';
-
-const UserProfilePanel = styled.div`
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.lightBeige};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100vh;
-  position: absolute;
-  transform: translateY(0%);
-  transition: transform 300ms;
-  width: 100%;
-
-  ${(props) =>
-    props.isHidden &&
-    `
-    transform: translateY(-100%);
-  `}
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-    right: 0;
-    transform: translateX(0%);
-    width: 320px;
-
-    ${(props) =>
-      props.isHidden &&
-      `
-      transform: translateX(100%);
-    `}
-  }
-`;
-
-/** Subheader specific to the user profile panel */
-const UserProfileHeader = styled.header`
-  align-items: center;
-  display: inline-flex;
-  justify-content: space-between;
-  position: absolute;
-  padding: 1.5rem;
-  top: 0;
-  width: 16.5rem;
-`;
+import UserGoalsContainer from './components/UserGoalsContainer';
+import UserProfilePanel from './components/UserProfilePanel';
+import UserProfileHeader from './components/UserProfileHeader';
+import { ReactComponent as CloseSVG } from 'shared/SVG/X.svg';
 
 const CloseButton = styled(CloseSVG)`
   cursor: pointer;
@@ -64,16 +24,7 @@ const LogoutButton = styled(Button)`
   font-size: 1.1rem;
 `;
 
-const GoalsGrid = styled.div`
-  display: grid;
-  grid-column-gap: 2.5rem;
-  grid-row-gap: 2rem;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  margin: 0.5rem auto;
-`;
-
-const SubmitButton = styled(Button)`
+const UpdateUserButton = styled(Button)`
   margin: 2rem auto;
 `;
 
@@ -108,7 +59,7 @@ const UserProfile = (props) => {
         onSubmit={(values) => props.updateUser(values)}
       >
         <Form>
-          <GoalsGrid>
+          <UserGoalsContainer>
             <label htmlFor="vegetable_goals">Vegetables</label>
             <NumericInput name="vegetable_goals" />
 
@@ -120,9 +71,9 @@ const UserProfile = (props) => {
 
             <label htmlFor="grain_goals">Grains</label>
             <NumericInput name="grain_goals" />
-          </GoalsGrid>
+          </UserGoalsContainer>
 
-          <SubmitButton type="submit">Save changes</SubmitButton>
+          <UpdateUserButton type="submit">Save changes</UpdateUserButton>
         </Form>
       </Formik>
     </UserProfilePanel>
