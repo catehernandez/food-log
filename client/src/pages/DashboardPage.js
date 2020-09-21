@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import CurrentLog from 'log/components/CurrentLog';
 import Header from 'header/App';
-import UserProfile from 'user/UserProfile';
+import UserProfile from 'UserProfile/app';
 
 const DashboardPage = (props) => {
   const [userProfileIsHidden, setUserProfileIsHidden] = useState(true);
