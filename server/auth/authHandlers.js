@@ -43,7 +43,7 @@ module.exports = {
   logout: (req, res) => {
     req.logout();
     req.session.destroy(function () {
-      res.clearCookie('connect.sid');
+      res.clearCookie('session');
       //user will be undefined if logout was successful
       res.json(req.user);
     });
