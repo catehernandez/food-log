@@ -8,14 +8,14 @@ const path = require('path');
 require('dotenv').config();
 const rateLimit = require('express-rate-limit');
 
-const pool = require('./db');
-const mountRoutes = require('./routes');
-
 //Authentication packages
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 const passport = require('passport');
 require('./services/passport');
+
+const pool = require('./db');
+const mountRoutes = require('./routes');
 
 //configure rate limiter on login route
 const loginLimiter = rateLimit({
@@ -28,26 +28,6 @@ const signupLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, //1 hour
   max: 5, //5 requests
 });
-
-/* Authentication tools */
-// Express session configuration object
-const sess = {
-  name: 'session',
-  store: new pgSession({
-    pool: pool, // Connection pool
-  }),
-  secret: process.env.COOKIE_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000, sameSite: 'lax' }, // 30 days
-};
-
-//Only serve cookies over HTTPS in production
-if (process.env.NODE_ENV === 'production') {
-  sess.cookie.domain = 'intueat.heroku.com';
-  sess.cookie.secure = true; // serve secure cookies
-  sess.cookie.httpOnly = true;
-}
 
 // from heroku-cra-node
 const isDev = process.env.NODE_ENV !== 'production';
@@ -75,13 +55,33 @@ if (!isDev && cluster.isMaster) {
   app.use(compression());
   app.use(helmet());
 
-  //rate limiters
-  app.use('/auth/login', loginLimiter);
-  app.use('/auth/signup', signupLimiter);
+  // Express session configuration
+  const sess = {
+    name: 'session',
+    store: new pgSession({
+      pool: pool, // Connection pool
+    }),
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000, sameSite: 'lax' }, // 30 days
+  };
+
+  //Only serve cookies over HTTPS in production
+  if (!isDev) {
+    app.set('trust proxy', 1); // trust first proxy
+    sess.cookie.domain = 'intueat.heroku.com';
+    sess.cookie.secure = true; // serve secure cookies
+    sess.cookie.httpOnly = true;
+  }
 
   app.use(session(sess));
   app.use(passport.initialize());
   app.use(passport.session());
+
+  //rate limiters
+  app.use('/auth/login', loginLimiter);
+  app.use('/auth/signup', signupLimiter);
 
   /* Mount routes */
   mountRoutes(app);
