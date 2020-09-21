@@ -15,13 +15,13 @@ import { ReactComponent as CloseSVG } from 'shared/SVG/X.svg';
 const CloseButton = styled(CloseSVG)`
   cursor: pointer;
   height: 20px;
-  margin: 0.5rem;
 `;
 
 const LogoutButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.lightBeige};
   border: none;
   font-size: 1.1rem;
+  padding: 0; /* override default Button padding */
 `;
 
 const UpdateUserButton = styled(Button)`
