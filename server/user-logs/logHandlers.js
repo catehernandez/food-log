@@ -67,7 +67,6 @@ module.exports = {
       if (!validator.isISO8601(date))
         return res.status(400).json('Date must be in ISO format');
 
-      //console.log(date);
       const log = await LogsDB.findLog(user_id, date);
 
       //if not log is found
@@ -126,7 +125,6 @@ module.exports = {
 
       res.status(200).send(updatedLog);
     } catch (err) {
-      console.log(err);
       res.status(400).json(err);
     }
   },

@@ -51,8 +51,6 @@ module.exports = {
 
       res.status(201).json(user);
     } catch (err) {
-      //error in updating db
-      console.log(err);
       res.sendStatus(500);
     }
   },
