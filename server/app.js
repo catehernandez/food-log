@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cluster = require('cluster');
+const compression = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
 const numCPUs = require('os').cpus().length;
@@ -72,6 +73,7 @@ if (!isDev && cluster.isMaster) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+  app.use(compression());
   app.use(helmet());
 
   //rate limiters
