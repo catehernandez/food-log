@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Label, PieChart, Pie, ResponsiveContainer } from 'recharts';
 import styled from 'styled-components';
+import { Label, PieChart, Pie, ResponsiveContainer } from 'recharts';
 import { withTheme } from 'styled-components';
 
 const LogDoughnutContainer = styled.div`
@@ -17,7 +17,7 @@ const LogDoughnutContainer = styled.div`
  * Render daily logs as doughnut graph
  */
 const LogDoughnut = (props) => {
-  const { log, theme, innerFillColor = 'none' } = props;
+  const { innerFillColor = 'none', log, theme } = props;
   const { veg_count, fruit_count, protein_count, grain_count } = log;
 
   const innerRadius = '87%';
@@ -32,9 +32,7 @@ const LogDoughnut = (props) => {
 
   const total_count = veg_count + fruit_count + protein_count + grain_count;
 
-  const data01 = [{ name: 'test', value: 100 }];
-
-  //don't return a log doughnut if there are no values
+  //don't return a log doughnut if all log fields are empty
   if (total_count === 0) return <span>{props.children}</span>;
 
   return (
@@ -42,14 +40,11 @@ const LogDoughnut = (props) => {
       <ResponsiveContainer>
         <PieChart>
           <Pie
-            data={data01}
+            data={[{ value: 1 }]}
             dataKey="value"
             isAnimationActive={false}
-            nameKey="name"
-            cx="50%"
-            cy="50%"
-            outerRadius={innerRadius}
             fill={innerFillColor}
+            outerRadius={innerRadius}
             stroke="none"
           />
           <Pie
@@ -75,6 +70,8 @@ const LogDoughnut = (props) => {
 };
 
 LogDoughnut.propTypes = {
+  /** Option to customize the color of the LogDoughnut center. Default fill is none*/
+  innerFillColor: PropTypes.string,
   /** A log object */
   log: PropTypes.shape({
     veg_count: PropTypes.number.isRequired,
