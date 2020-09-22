@@ -34,7 +34,7 @@ const MonthContainer = styled.div`
 `;
 
 const Month = styled.span`
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   padding: 0 0.3rem;
   font-weight: ${({ theme }) => theme.fontWeights.regular};
 `;
