@@ -100,6 +100,7 @@ const PastLogs = () => {
       </Link>
 
       <MonthContainer>
+        <Month>{currentMonth.format('MMMM YYYY')}</Month>
         <span>
           <LeftArrowIcon
             onClick={() => setMonth(moment(currentMonth).subtract(1, 'month'))}
@@ -108,7 +109,6 @@ const PastLogs = () => {
             onClick={() => setMonth(moment(currentMonth).add(1, 'month'))}
           />
         </span>
-        <Month>{currentMonth.format('MMMM YYYY')}</Month>
       </MonthContainer>
       <Calendar month={currentMonth} logs={pastLogs} />
     </React.Fragment>
