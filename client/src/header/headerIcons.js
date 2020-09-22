@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { ReactComponent as UserIconSVG } from 'user/user-icon.svg';
+import { ReactComponent as UserIconSVG } from 'shared/SVG/user-icon.svg';
 import { ReactComponent as CalendarIconSVG } from 'shared/SVG/calendar.svg';
 
 //Icons & styles
