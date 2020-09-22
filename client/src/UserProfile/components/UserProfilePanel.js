@@ -6,8 +6,8 @@ const UserProfilePanel = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
-  position: absolute;
+  height: 100%;
+  position: fixed;
   transform: translateY(0%);
   transition: transform 300ms;
   width: 100%;
