@@ -14,12 +14,15 @@ const LogDoughnutContainer = styled.div`
 `;
 
 /**
- * Render daily logs as doughnut graph.
+ * Render daily logs as doughnut graph
  */
 const LogDoughnut = (props) => {
-  const { log, theme } = props;
+  const { log, theme, innerFillColor = 'none' } = props;
   const { veg_count, fruit_count, protein_count, grain_count } = log;
 
+  const innerRadius = '87%';
+
+  //get log data
   const data = [
     { name: 'Vegetables', value: veg_count, fill: `${theme.colors.green}` },
     { name: 'Fruits', value: fruit_count, fill: `${theme.colors.pink}` },
@@ -29,6 +32,9 @@ const LogDoughnut = (props) => {
 
   const total_count = veg_count + fruit_count + protein_count + grain_count;
 
+  const data01 = [{ name: 'test', value: 100 }];
+
+  //don't return a log doughnut if there are no values
   if (total_count === 0) return <span>{props.children}</span>;
 
   return (
@@ -36,10 +42,21 @@ const LogDoughnut = (props) => {
       <ResponsiveContainer>
         <PieChart>
           <Pie
+            data={data01}
+            dataKey="value"
+            isAnimationActive={false}
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            outerRadius={innerRadius}
+            fill={innerFillColor}
+            stroke="none"
+          />
+          <Pie
             data={data}
             dataKey="value"
             isAnimationActive={false}
-            innerRadius="87%"
+            innerRadius={innerRadius}
             outerRadius="100%"
             stroke="none"
           >
