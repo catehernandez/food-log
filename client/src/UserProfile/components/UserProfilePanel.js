@@ -4,9 +4,9 @@ const UserProfilePanel = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.lightBeige};
   display: flex;
-  flex-direction: column;
   justify-content: center;
   height: 100%;
+  overflow: scroll;
   position: fixed;
   transform: translateY(0%);
   transition: transform 300ms;

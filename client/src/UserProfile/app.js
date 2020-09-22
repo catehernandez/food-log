@@ -8,6 +8,7 @@ import Button from 'shared/Button';
 import NumericInput from 'shared/NumericInput';
 import * as sessionActions from 'session/sessionRedux';
 import UserGoalsContainer from './components/UserGoalsContainer';
+import UserProfileContainer from './components/UserProfileContainer';
 import UserProfilePanel from './components/UserProfilePanel';
 import UserProfileHeader from './components/UserProfileHeader';
 import { ReactComponent as CloseSVG } from 'shared/SVG/X.svg';
@@ -48,34 +49,37 @@ const UserProfile = (props) => {
         <CloseButton onClick={props.toggleUserProfile} />
         <LogoutButton onClick={props.logout}>Log out</LogoutButton>
       </UserProfileHeader>
-      <h3>Goals</h3>
-      <Formik
-        initialValues={{
-          vegetable_goals: user.vegetable_goals,
-          fruit_goals: user.fruit_goals,
-          protein_goals: user.protein_goals,
-          grain_goals: user.grain_goals,
-        }}
-        onSubmit={(values) => props.updateUser(values)}
-      >
-        <Form>
-          <UserGoalsContainer>
-            <label htmlFor="vegetable_goals">Vegetables</label>
-            <NumericInput name="vegetable_goals" />
 
-            <label htmlFor="fruit_goals">Fruits</label>
-            <NumericInput name="fruit_goals" />
+      <UserProfileContainer>
+        <h3>Goals</h3>
+        <Formik
+          initialValues={{
+            vegetable_goals: user.vegetable_goals,
+            fruit_goals: user.fruit_goals,
+            protein_goals: user.protein_goals,
+            grain_goals: user.grain_goals,
+          }}
+          onSubmit={(values) => props.updateUser(values)}
+        >
+          <Form>
+            <UserGoalsContainer>
+              <label htmlFor="vegetable_goals">Vegetables</label>
+              <NumericInput name="vegetable_goals" />
 
-            <label htmlFor="protein_goals">Protein</label>
-            <NumericInput name="protein_goals" />
+              <label htmlFor="fruit_goals">Fruits</label>
+              <NumericInput name="fruit_goals" />
 
-            <label htmlFor="grain_goals">Grains</label>
-            <NumericInput name="grain_goals" />
-          </UserGoalsContainer>
+              <label htmlFor="protein_goals">Protein</label>
+              <NumericInput name="protein_goals" />
 
-          <UpdateUserButton type="submit">Save changes</UpdateUserButton>
-        </Form>
-      </Formik>
+              <label htmlFor="grain_goals">Grains</label>
+              <NumericInput name="grain_goals" />
+            </UserGoalsContainer>
+
+            <UpdateUserButton type="submit">Save changes</UpdateUserButton>
+          </Form>
+        </Formik>
+      </UserProfileContainer>
     </UserProfilePanel>
   );
 };
