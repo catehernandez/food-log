@@ -32,9 +32,13 @@ const MonthContainer = styled.div`
 `;
 
 const Month = styled.span`
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   padding: 0 0.3rem;
   font-weight: ${({ theme }) => theme.fontWeights.regular};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    font-size: 1.5rem;
+  }
 `;
 
 //for arrows to toggle month
