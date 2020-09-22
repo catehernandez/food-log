@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 
-import CurrentDateMarker from '../components/CurrentDateMarker';
 import DateCell from '../components/DateCell';
 import LogDoughnut from 'log/components/LogDoughnut';
 
@@ -27,7 +26,9 @@ const formatDatesWithEvents = (month, logEvents) => {
     if (isCurrentMonth && date === today) {
       dates.push(
         <DateCell key={date}>
-          <CurrentDateMarker>{date}</CurrentDateMarker>
+          <LogDoughnut log={currentLog} innerFillColor="hsla(42,20%,50%,0.3)">
+            {date}
+          </LogDoughnut>
         </DateCell>
       );
       i++;
