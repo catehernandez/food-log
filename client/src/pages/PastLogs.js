@@ -2,22 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
 
 import Calendar from 'calendar/App';
 import LogErrMsg from 'log/LogErrMsg';
+import SiteTitle from 'header/SiteTitle';
 import { ReactComponent as RightArrowSVG } from 'shared/SVG/right-arrow.svg';
 import { ReactComponent as LeftArrowSVG } from 'shared/SVG/left-arrow.svg';
-import { ReactComponent as BackArrowSVG } from 'shared/SVG/arrow.svg';
 
-const BackArrow = styled(BackArrowSVG)`
-  cursor: pointer;
-  left: 1.5rem;
-  margin-bottom: 1rem;
-  position: relative;
-  stroke-width: 0.5px;
-  top: 1.5rem;
-  width: 2.5rem;
+const PastLogsHeader = styled.header`
+  margin: 0.5rem auto;
+  width: min-content;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    margin: 1.75rem auto;
+  }
 `;
 
 /** styles for month & arrows to toggle month */
@@ -95,9 +93,9 @@ const PastLogs = () => {
 
   return (
     <React.Fragment>
-      <Link to="/">
-        <BackArrow />
-      </Link>
+      <PastLogsHeader>
+        <SiteTitle />
+      </PastLogsHeader>
 
       <MonthContainer>
         <Month>{currentMonth.format('MMMM YYYY')}</Month>
