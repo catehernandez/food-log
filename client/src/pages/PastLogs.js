@@ -48,6 +48,10 @@ const arrowStyle = css`
   padding: 0 0.5rem;
   stroke: ${({ theme }) => theme.colors.darkBrown};
   stroke-width: 3px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    stroke-width: 4px;
+  }
 `;
 
 const LeftArrowIcon = styled(LeftArrowSVG)`
