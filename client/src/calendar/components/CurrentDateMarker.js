@@ -12,8 +12,8 @@ const CurrentDateMarker = styled.span`
   width: 2rem;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
-    height: 3.5rem;
-    width: 3.5rem;
+    height: 3.25rem;
+    width: 3.25rem;
   }
 `;
 
