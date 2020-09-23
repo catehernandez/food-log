@@ -2,11 +2,11 @@ import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
-import CalendarBorder from './components/CalendarBorder';
-import createCalendarHeader from './util/createCalendarHeader';
-import formatCalendarWeeks from './util/formatCalendarWeeks';
-import formatDatesInMonth from './util/formatDatesInMonth';
-import formatDatesWithEvents from './util/formatDatesWithEvents';
+import CalendarBorder from './CalendarBorder';
+import createCalendarHeader from '../util/createCalendarHeader';
+import formatCalendarWeeks from '../util/formatCalendarWeeks';
+import formatDatesInMonth from '../util/formatDatesInMonth';
+import formatDatesWithEvents from '../util/formatDatesWithEvents';
 
 /**
  * Coordinates other function calls to populate and format the body of the calendar.
