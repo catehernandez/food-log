@@ -9,7 +9,7 @@ import { ReactComponent as RightArrowSVG } from 'shared/SVG/right-arrow.svg';
 import { ReactComponent as LeftArrowSVG } from 'shared/SVG/left-arrow.svg';
 
 /** styles for month & arrows to toggle month */
-const MonthContainer = styled.div`
+const CalendarHeader = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -91,7 +91,7 @@ const App = () => {
 
   return (
     <React.Fragment>
-      <MonthContainer>
+      <CalendarHeader>
         <Month>{currentMonth.format('MMMM YYYY')}</Month>
         <span>
           <LeftArrowIcon
@@ -101,7 +101,7 @@ const App = () => {
             onClick={() => setMonth(moment(currentMonth).add(1, 'month'))}
           />
         </span>
-      </MonthContainer>
+      </CalendarHeader>
 
       <CalendarBody month={currentMonth} logs={pastLogs} />
     </React.Fragment>
