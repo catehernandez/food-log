@@ -21,7 +21,7 @@ const formatDatesWithEvents = (month, logEvents) => {
 
   let i = 0;
   let currentLog = logEvents[i];
-  let currentLogDate = new Date(currentLog.log_date).getDate();
+  let currentLogDate = new Date(currentLog.log_date).getUTCDate();
 
   for (let date = 1; date <= month.daysInMonth(); date++) {
     if (isCurrentMonth && date === today) {
@@ -48,7 +48,7 @@ const formatDatesWithEvents = (month, logEvents) => {
     //update logs index
     if (i < logEvents.length) {
       currentLog = logEvents[i];
-      currentLogDate = new Date(currentLog.log_date).getDate();
+      currentLogDate = new Date(currentLog.log_date).getUTCDate();
     }
   }
 
