@@ -6,7 +6,7 @@ import CalendarHeaderCell from '../components/CalendarHeaderCell';
 /**
  * Generate styled calendar header.
  */
-const createCalendarHeader = () => {
+const generateWeekdays = () => {
   const weekdayshort = moment.weekdaysShort();
 
   const weekdays = weekdayshort.map((day) => (
@@ -20,4 +20,4 @@ const createCalendarHeader = () => {
   );
 };
 
-export default createCalendarHeader;
+export default generateWeekdays;
