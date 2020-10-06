@@ -1,63 +1,111 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import moment from 'moment';
-import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
 
-import CalendarBorder from './components/CalendarBorder';
-import createCalendarHeader from './util/createCalendarHeader';
-import formatCalendarWeeks from './util/formatCalendarWeeks';
-import formatDatesInMonth from './util/formatDatesInMonth';
-import formatDatesWithEvents from './util/formatDatesWithEvents';
+import CalendarBody from './components/CalendarBody';
+import LogErrMsg from 'log/LogErrMsg';
+import { ReactComponent as RightArrowSVG } from 'shared/SVG/right-arrow.svg';
+import { ReactComponent as LeftArrowSVG } from 'shared/SVG/left-arrow.svg';
 
-/**
- * Coordinates other function calls to populate and format the body of the calendar.
- *
- * @param {string}     month    The current month to be displayed
- * @param {Object[]}   logs     An array of log objects for the given month.
- */
-const createCalendarBody = (month, logEvents) => {
-  //determine blank days needded for formatting
-  const firstWeekDay = moment(month).startOf('month').format('d');
+/** styles for month & arrows to toggle month */
+const CalendarHeader = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 1rem auto;
+  min-width: 375px;
 
-  //Create blank cells at beginning of month for formatting
-  let blanks = [];
-  for (let i = 0; i < firstWeekDay; i++) {
-    blanks.push(<td key={`blank${i}`}>{''}</td>);
+  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    width: 70%;
   }
+`;
 
-  //format actual dates
-  const areLogsInMonth = logEvents.length > 0;
-  const dates = areLogsInMonth
-    ? formatDatesWithEvents(month, logEvents)
-    : formatDatesInMonth(month);
-  const totalCells = [...blanks, ...dates];
+const Month = styled.span`
+  font-size: 1.25rem;
+  padding: 0 0.3rem;
+  font-weight: ${({ theme }) => theme.fontWeights.regular};
 
-  const weeksOfMonth = formatCalendarWeeks(totalCells);
+  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    font-size: 1.5rem;
+  }
+`;
 
-  return <tbody>{weeksOfMonth}</tbody>;
+//for arrows to toggle month
+const arrowStyle = css`
+  cursor: pointer;
+  height: 1.2rem;
+  padding: 0 0.5rem;
+  stroke: ${({ theme }) => theme.colors.darkBrown};
+  stroke-width: 3px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
+    stroke-width: 4px;
+  }
+`;
+
+const LeftArrowIcon = styled(LeftArrowSVG)`
+  ${arrowStyle}
+`;
+
+const RightArrowIcon = styled(RightArrowSVG)`
+  ${arrowStyle}
+`;
+
+const getPastLogs = async (month, year) => {
+  try {
+    const res = await axios.get(`/user/logs/${year}/${month}`);
+
+    return res.data;
+  } catch {
+    throw Error;
+  }
 };
 
-/**
- * Creates a calendar for the given month and populates with pastLog events, if given.
- */
-const Calendar = ({ month, logs }) => {
-  const calendarHeader = createCalendarHeader();
-  const calendarCells = createCalendarBody(month, logs);
+const App = () => {
+  const [currentMonth, setMonth] = useState(moment());
+  const [isError, setIsError] = useState(false);
+  const [pastLogs, setPastLogs] = useState([]);
+
+  //get past logs
+  useEffect(() => {
+    const fetchPastLogs = async () => {
+      const month = currentMonth.format('MM');
+      const year = currentMonth.format('YYYY');
+
+      try {
+        const results = await getPastLogs(month, year);
+
+        setPastLogs(results);
+      } catch {
+        setIsError(true);
+      }
+    };
+
+    fetchPastLogs();
+  }, [currentMonth]);
+
+  if (isError) {
+    return <LogErrMsg />;
+  }
 
   return (
     <React.Fragment>
-      <CalendarBorder>
-        {calendarHeader}
-        {calendarCells}
-      </CalendarBorder>
+      <CalendarHeader>
+        <Month>{currentMonth.format('MMMM YYYY')}</Month>
+        <span>
+          <LeftArrowIcon
+            onClick={() => setMonth(moment(currentMonth).subtract(1, 'month'))}
+          />
+          <RightArrowIcon
+            onClick={() => setMonth(moment(currentMonth).add(1, 'month'))}
+          />
+        </span>
+      </CalendarHeader>
+
+      <CalendarBody month={currentMonth} logs={pastLogs} />
     </React.Fragment>
   );
 };
 
-Calendar.propTypes = {
-  /** A moment() object */
-  month: PropTypes.object.isRequired,
-  /** An array of log objects */
-  pastLogs: PropTypes.array,
-};
-
-export default Calendar;
+export default App;
