@@ -7,11 +7,13 @@ import { ServingsLabel, ServingsWrapper } from './Servings';
 
 const LogBox = styled(Box)`
   left: 50%;
-  top: 17%;
-  transform: translate(-50%, 17%);
+  top: 15%;
+  transform: translate(-50%, 15%);
   width: 340px;
 
   @media (min-width: ${(props) => props.theme.breakpoints.small}) {
+    top: 17%;
+    transform: translate(-50%, 17%);
     width: 400px;
   }
 `;
@@ -19,14 +21,19 @@ const LogBox = styled(Box)`
 const LogDate = styled.div`
   background-color: ${({ theme }) => theme.colors.darkBeige};
   border-radius: 12px 12px 0px 0px;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   padding: 0.9rem;
   text-align: center;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.small}) {
+    font-size: 1.125rem;
+  }
 `;
 
 const ServingsContainer = styled.div`
   display: grid;
-  gap: 1.5rem 1rem;
+  font-size: 1.125rem;
+  gap: 1.25rem 0.75rem;
   grid-template-columns: repeat(2, auto);
   max-height: 230px;
   margin: 2.25rem auto;
@@ -43,6 +50,8 @@ const ServingsContainer = styled.div`
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.small}) {
+    gap: 1.5rem 1rem;
+    font-size: 1rem;
     margin: 2.5rem auto 2rem;
   }
 `;
