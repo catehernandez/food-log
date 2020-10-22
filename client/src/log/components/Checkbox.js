@@ -28,12 +28,17 @@ const StyledCheckbox = styled.div`
   border-radius: 100%;
   cursor: ${({ readOnly }) => (readOnly ? 'auto' : 'pointer')};
   display: inline-block;
-  height: 18px;
+  height: 1.375rem;
   transition: all 150ms;
-  width: 18px;
+  width: 1.375rem;
 
   ${StyledCheckFill} {
     visibility: ${({ checked }) => (checked ? 'visible' : 'hidden')};
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.small}) {
+    height: 1.25rem;
+    width: 1.25rem;
   }
 `;
 
