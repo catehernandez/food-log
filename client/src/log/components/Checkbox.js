@@ -17,14 +17,12 @@ const StyledCheckFill = styled.div`
   height: inherit;
   position: relative;
   width: inherit;
-  /* Translate -1% makes it appear actually centered--some strange visual trick */
-  transform: scale(0.85) translate(0%, -1%);
+  transform: scale(0.85);
 `;
 
 // Styled checkbox to replace the native component.
 const StyledCheckbox = styled.div`
-  border: ${({ checked }) => (checked ? '1px' : '1.5px')} solid
-    ${({ color, theme }) => theme.colors[color]};
+  border: 1.375px solid ${({ color, theme }) => theme.colors[color]};
   border-radius: 100%;
   cursor: ${({ readOnly }) => (readOnly ? 'auto' : 'pointer')};
   display: inline-block;
