@@ -5,11 +5,11 @@ const CurrentDateMarker = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 2rem;
+  height: 2.5rem;
   background-color: ${({ theme }) => theme.colors.darkBeige};
   border-radius: 100%;
   margin: auto;
-  width: 2rem;
+  width: 2.5rem;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
     height: 3.25rem;
