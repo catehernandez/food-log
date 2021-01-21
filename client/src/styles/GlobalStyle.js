@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     margin: 0;
     overflow-x: hidden;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
       overflow-y: hidden;
@@ -25,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
     font-family: inherit;
     font-weight: ${({ theme }) => theme.fontWeights.regular};
+    -webkit-tap-highlight-color:#ccc;
   } 
 `;
 

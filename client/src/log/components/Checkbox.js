@@ -17,23 +17,26 @@ const StyledCheckFill = styled.div`
   height: inherit;
   position: relative;
   width: inherit;
-  /* Translate -1% makes it appear actually centered--some strange visual trick */
-  transform: scale(0.85) translate(0%, -1%);
+  transform: scale(0.85);
 `;
 
 // Styled checkbox to replace the native component.
 const StyledCheckbox = styled.div`
-  border: ${({ checked }) => (checked ? '1px' : '1.5px')} solid
-    ${({ color, theme }) => theme.colors[color]};
+  border: 1.375px solid ${({ color, theme }) => theme.colors[color]};
   border-radius: 100%;
   cursor: ${({ readOnly }) => (readOnly ? 'auto' : 'pointer')};
   display: inline-block;
-  height: 18px;
+  height: 1.375rem;
   transition: all 150ms;
-  width: 18px;
+  width: 1.375rem;
 
   ${StyledCheckFill} {
     visibility: ${({ checked }) => (checked ? 'visible' : 'hidden')};
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.small}) {
+    height: 1.25rem;
+    width: 1.25rem;
   }
 `;
 

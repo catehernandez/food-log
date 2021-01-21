@@ -5,11 +5,11 @@ import { Label, PieChart, Pie, ResponsiveContainer } from 'recharts';
 import { withTheme } from 'styled-components';
 
 const LogDoughnutContainer = styled.div`
-  height: 44px;
+  height: 3.5rem;
   width: 100%;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
-    height: 64px;
+    height: 4rem;
   }
 `;
 
