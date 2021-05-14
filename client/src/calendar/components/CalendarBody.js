@@ -9,54 +9,39 @@ import formatDatesInMonth from '../util/formatDatesInMonth';
 import formatDatesWithEvents from '../util/formatDatesWithEvents';
 
 /**
- * Coordinates other function calls to populate and format the body of the calendar.
- *
- * @param {string}     month    The current month to be displayed
- * @param {Object[]}   logs     An array of log objects for the given month.
+ * Creates a calendar for the given month and populates with pastLog events, if given.
  */
-const createCalendarBody = (month, logEvents) => {
-  //determine blank days needded for formatting
-  const firstWeekDay = moment(month).startOf('month').format('d');
-
+const CalendarBody = ({ month, logs }) => {
   //Create blank cells at beginning of month for formatting
+  const firstWeekDay = moment(month).startOf('month').format('d');
   let blanks = [];
+
   for (let i = 0; i < firstWeekDay; i++) {
     blanks.push(<td key={`blank${i}`}>{''}</td>);
   }
 
   //format actual dates
-  const areLogsInMonth = logEvents.length > 0;
+  const areLogsInMonth = logs.length > 0;
   const dates = areLogsInMonth
-    ? formatDatesWithEvents(month, logEvents)
+    ? formatDatesWithEvents(month, logs)
     : formatDatesInMonth(month);
   const totalCells = [...blanks, ...dates];
 
   const weeksOfMonth = formatCalendarWeeks(totalCells);
 
-  return <tbody>{weeksOfMonth}</tbody>;
-};
-
-/**
- * Creates a calendar for the given month and populates with pastLog events, if given.
- */
-const CalendarBody = ({ month, logs }) => {
-  const calendarCells = createCalendarBody(month, logs);
-
   return (
-    <React.Fragment>
-      <CalendarTable>
-        <WeekdaysHeader />
-        {calendarCells}
-      </CalendarTable>
-    </React.Fragment>
+    <CalendarTable>
+      <WeekdaysHeader />
+      <tbody>{weeksOfMonth}</tbody>
+    </CalendarTable>
   );
 };
 
 CalendarBody.propTypes = {
-  /** A moment() object */
+  /** A moment() object representing the month to be displayed */
   month: PropTypes.object.isRequired,
-  /** An array of log objects */
-  pastLogs: PropTypes.array,
+  /** An array of log objects for the given month */
+  logs: PropTypes.array,
 };
 
 export default CalendarBody;
