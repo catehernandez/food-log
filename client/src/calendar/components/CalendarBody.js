@@ -3,10 +3,10 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import CalendarTable from './CalendarTable';
+import WeekdaysHeader from 'calendar/components/WeekdaysHeader';
 import formatCalendarWeeks from '../util/formatCalendarWeeks';
 import formatDatesInMonth from '../util/formatDatesInMonth';
 import formatDatesWithEvents from '../util/formatDatesWithEvents';
-import generateWeekdays from 'calendar/util/generateWeekdays';
 
 /**
  * Coordinates other function calls to populate and format the body of the calendar.
@@ -40,13 +40,12 @@ const createCalendarBody = (month, logEvents) => {
  * Creates a calendar for the given month and populates with pastLog events, if given.
  */
 const CalendarBody = ({ month, logs }) => {
-  const weekdays = generateWeekdays();
   const calendarCells = createCalendarBody(month, logs);
 
   return (
     <React.Fragment>
       <CalendarTable>
-        {weekdays}
+        <WeekdaysHeader />
         {calendarCells}
       </CalendarTable>
     </React.Fragment>
