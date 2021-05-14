@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
-import CalendarBorder from './CalendarBorder';
+import CalendarTable from './CalendarTable';
 import formatCalendarWeeks from '../util/formatCalendarWeeks';
 import formatDatesInMonth from '../util/formatDatesInMonth';
 import formatDatesWithEvents from '../util/formatDatesWithEvents';
@@ -39,25 +39,25 @@ const createCalendarBody = (month, logEvents) => {
 /**
  * Creates a calendar for the given month and populates with pastLog events, if given.
  */
-const Calendar = ({ month, logs }) => {
+const CalendarBody = ({ month, logs }) => {
   const weekdays = generateWeekdays();
   const calendarCells = createCalendarBody(month, logs);
 
   return (
     <React.Fragment>
-      <CalendarBorder>
+      <CalendarTable>
         {weekdays}
         {calendarCells}
-      </CalendarBorder>
+      </CalendarTable>
     </React.Fragment>
   );
 };
 
-Calendar.propTypes = {
+CalendarBody.propTypes = {
   /** A moment() object */
   month: PropTypes.object.isRequired,
   /** An array of log objects */
   pastLogs: PropTypes.array,
 };
 
-export default Calendar;
+export default CalendarBody;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CalendarBorder = styled.table`
+const CalendarTable = styled.table`
   border-spacing: 0px;
   table-layout: fixed;
   width: 100%;
@@ -21,4 +21,4 @@ const CalendarBorder = styled.table`
   }
 `;
 
-export default CalendarBorder;
+export default CalendarTable;
